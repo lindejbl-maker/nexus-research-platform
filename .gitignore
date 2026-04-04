@@ -17,6 +17,9 @@ npm-debug.log*
 .env.local
 .env.production
 
+# Local API key config — NEVER commit this
+js/config.js
+
 # Node (if ever added)
 node_modules/
 
