@@ -122,7 +122,48 @@ const PAGE_NAMES = {
   'teamsettings':      'Team Settings'
 };
 
+// ═══ HUB NAV ══════════════════════════════════════════════════════════════════
+const HUB_MAP = {
+  search: 'hub-discover', trendforecast: 'hub-discover', crossfield: 'hub-discover', alerts: 'hub-discover',
+  contradiction: 'hub-analyse', compare: 'hub-analyse', deepdiver: 'hub-analyse',
+  hypothesis: 'hub-create', litreview: 'hub-create', experimentblueprint: 'hub-create', grantwriter: 'hub-create',
+  peerreview: 'hub-write', plainlang: 'hub-write',
+  projects: 'hub-library', saved: 'hub-library', citations: 'hub-library'
+};
+
+function toggleHub(hubId) {
+  const hub = document.getElementById(hubId);
+  if (!hub) return;
+  const isOpen = hub.classList.toggle('open');
+  const btn = hub.querySelector('.hub-header');
+  if (btn) btn.setAttribute('aria-expanded', isOpen);
+  const openHubs = [...document.querySelectorAll('.nav-hub.open')].map(h => h.id);
+  localStorage.setItem('nexus_open_hubs', JSON.stringify(openHubs));
+}
+
+function openHubForPage(pageId) {
+  const hubId = HUB_MAP[pageId];
+  if (!hubId) return;
+  const hub = document.getElementById(hubId);
+  if (hub && !hub.classList.contains('open')) {
+    hub.classList.add('open');
+    const btn = hub.querySelector('.hub-header');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    const openHubs = [...document.querySelectorAll('.nav-hub.open')].map(h => h.id);
+    localStorage.setItem('nexus_open_hubs', JSON.stringify(openHubs));
+  }
+}
+
+function restoreOpenHubs() {
+  const saved = JSON.parse(localStorage.getItem('nexus_open_hubs') || '[]');
+  saved.forEach(id => {
+    const hub = document.getElementById(id);
+    if (hub) { hub.classList.add('open'); const btn = hub.querySelector('.hub-header'); if (btn) btn.setAttribute('aria-expanded', 'true'); }
+  });
+}
+
 function showPage(pageId, linkEl, persist = true) {
+
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const page = document.getElementById(`page-${pageId}`);
@@ -132,6 +173,8 @@ function showPage(pageId, linkEl, persist = true) {
   document.getElementById('sidebar')?.classList.remove('open');
   document.getElementById('sidebar-overlay')?.classList.remove('open');
   document.getElementById('main-content')?.scrollTo(0, 0);
+  // Auto-open the hub containing this page
+  openHubForPage(pageId);
 
   // Update top bar breadcrumb
   const tbName = document.getElementById('tb-page-name');
@@ -1402,3 +1445,6 @@ function copyTextContent(text) {
     .then(() => showToast('Copied to clipboard', 'success'))
     .catch(() => showToast('Could not access clipboard', 'error'));
 }
+
+// Restore hub open states on load
+document.addEventListener('DOMContentLoaded', restoreOpenHubs);
