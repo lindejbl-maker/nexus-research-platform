@@ -1,6 +1,10 @@
 // ─── CONFIGURATION ────────────────────────────────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyDMC2Td44-UKcTVCAvZzNNrEUQQ0jLc6Ow';
+// API key is loaded from js/config.js (gitignored). See js/config.example.js.
+const GEMINI_API_KEY = (typeof NEXUS_CONFIG !== 'undefined' && NEXUS_CONFIG.GEMINI_API_KEY)
+  ? NEXUS_CONFIG.GEMINI_API_KEY
+  : 'YOUR_GEMINI_API_KEY';
 const GEMINI_MODEL = 'gemini-2.5-flash';
+
 const GEMINI_BASE = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 const GEMINI_EMBED_BASE = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${GEMINI_API_KEY}`;
 // ─────────────────────────────────────────────────────────────────────────────
