@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Nexus</title>
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate" class="gate-overlay">
+  <div class="gate-card">
+    <div class="gate-logo">NEX<span>US</span></div>
+    <h1 class="gate-title">Admin Access</h1>
+    <p class="gate-sub">This area is restricted to platform administrators only.</p>
+    <div id="gate-error" class="gate-error" style="display:none;"></div>
+    <input type="password" id="gate-password" class="gate-input" placeholder="Enter admin password" autocomplete="off">
+    <button class="gate-btn" onclick="checkPassword()" id="gate-btn">Continue →</button>
+    <a href="dashboard.html" class="gate-back">← Back to dashboard</a>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin-app" style="display:none;">
+
+  <header class="admin-header">
+    <div class="admin-logo">NEX<span>US</span> <span class="admin-label">ADMIN</span></div>
+    <div class="admin-header-right">
+      <span class="admin-time" id="admin-time"></span>
+      <a href="dashboard.html" class="admin-back-link">← User Dashboard</a>
+      <button class="admin-signout" onclick="document.getElementById('admin-app').style.display='none';document.getElementById('gate').style.display='flex';">Lock</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <!-- STATS ROW -->
+    <section class="admin-section">
+      <div class="admin-stats-grid" id="admin-stats-grid"></div>
+    </section>
+
+    <!-- FEATURE USAGE + COST -->
+    <div class="admin-two-col">
+
+      <section class="admin-card">
+        <div class="admin-card-title">Feature Usage</div>
+        <div id="admin-feature-usage"></div>
+      </section>
+
+      <section class="admin-card">
+        <div class="admin-card-title">AI Cost Breakdown</div>
+        <div id="admin-cost-breakdown"></div>
+      </section>
+
+    </div>
+
+    <!-- RECENT ACTIVITY + ALERTS -->
+    <div class="admin-two-col">
+
+      <section class="admin-card">
+        <div class="admin-card-title">Recent Activity</div>
+        <div id="admin-activity"></div>
+      </section>
+
+      <section class="admin-card">
+        <div class="admin-card-title">Research Alerts</div>
+        <div id="admin-alerts"></div>
+      </section>
+
+    </div>
+
+    <!-- DATA EXPORT -->
+    <section class="admin-card">
+      <div class="admin-card-title">Data Export</div>
+      <div class="admin-export-row">
+        <button class="admin-export-btn" onclick="exportData('papers')">Export Saved Papers (JSON)</button>
+        <button class="admin-export-btn" onclick="exportData('projects')">Export Projects (JSON)</button>
+        <button class="admin-export-btn" onclick="exportData('costs')">Export API Cost Log (JSON)</button>
+        <button class="admin-export-btn" onclick="exportData('activity')">Export Activity Log (JSON)</button>
+        <button class="admin-export-btn danger" onclick="confirmReset()">⚠ Reset All User Data</button>
+      </div>
+    </section>
+
+    <!-- SUPABASE SETUP GUIDE -->
+    <section class="admin-card">
+      <div class="admin-card-title">Configuration Status</div>
+      <div class="config-grid" id="config-grid"></div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../js/admin.js"></script>
+</body>
+</html>

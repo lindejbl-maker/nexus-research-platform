@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Successful — Nexus</title>
+<link rel="stylesheet" href="../css/landing.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  .success-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
+  .success-card { max-width: 520px; width: 100%; text-align: center; }
+  .success-icon { width: 72px; height: 72px; border-radius: 50%; background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+  .success-icon svg { color: #34D399; }
+  .success-plan-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,140,234,0.1); border: 1px solid rgba(79,140,234,0.25); border-radius: 100px; padding: 5px 16px; font-size: 12px; font-family: var(--font-mono); color: var(--blue); font-weight: 600; letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+  .success-title { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); margin-bottom: 0.75rem; }
+  .success-sub { color: var(--text2); font-size: 15px; line-height: 1.7; margin-bottom: 2.5rem; }
+  .success-features { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; text-align: left; }
+  .sf-title { font-size: 12px; font-weight: 700; font-family: var(--font-mono); color: var(--muted); letter-spacing: 0.08em; margin-bottom: 12px; }
+  .sf-list { display: flex; flex-direction: column; gap: 8px; }
+  .sf-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text2); }
+  .sf-check { color: #34D399; flex-shrink: 0; }
+  .success-actions { display: flex; flex-direction: column; gap: 10px; }
+  .btn-success-primary { display: block; padding: 14px; background: linear-gradient(135deg,var(--blue),var(--indigo)); color: #FFF; border-radius: 10px; font-weight: 600; font-size: 15px; text-decoration: none; transition: all 0.2s; }
+  .btn-success-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-success-ghost { display: block; padding: 12px; background: transparent; color: var(--text2); border: 1px solid var(--border2); border-radius: 10px; font-size: 14px; text-decoration: none; transition: all 0.2s; }
+  .btn-success-ghost:hover { border-color: var(--blue); color: var(--blue); }
+  .success-email-note { font-size: 12px; color: var(--muted); margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+<div class="success-wrap">
+  <div class="success-card">
+
+    <div class="success-icon">
+      <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </div>
+
+    <div class="success-plan-badge">
+      <span>●</span> RESEARCHER PLAN ACTIVE
+    </div>
+
+    <h1 class="success-title">You're unlocked.</h1>
+    <p class="success-sub">Your payment was successful. Your Researcher plan is now active — no limits, all features, cancel anytime.</p>
+
+    <div class="success-features">
+      <div class="sf-title">WHAT YOU NOW HAVE ACCESS TO</div>
+      <div class="sf-list">
+        <div class="sf-item"><svg class="sf-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Unlimited paper searches</div>
+        <div class="sf-item"><svg class="sf-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Unlimited hypothesis generation</div>
+        <div class="sf-item"><svg class="sf-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full literature review generator</div>
+        <div class="sf-item"><svg class="sf-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Cross-Field Discovery Engine</div>
+        <div class="sf-item"><svg class="sf-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Paper comparison (up to 10 papers)</div>
+        <div class="sf-item"><svg class="sf-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>PDF & DOCX export</div>
+        <div class="sf-item"><svg class="sf-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Unlimited projects & saved papers</div>
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <a href="dashboard.html" class="btn-success-primary">Go to your dashboard →</a>
+      <a href="../index.html#pricing" class="btn-success-ghost">View billing & plan details</a>
+    </div>
+
+    <div class="success-email-note">A receipt has been sent to your email address.</div>
+  </div>
+</div>
+</body>
+</html>
