@@ -1541,3 +1541,50 @@ a { text-decoration: none; color: inherit; }
   background: linear-gradient(135deg, rgba(139,92,246,0.07), rgba(139,92,246,0.03)) !important;
   box-shadow: 0 0 0 1px rgba(139,92,246,0.15);
 }
+
+/* ─ D3 GAP MAP — NEW UI ELEMENTS ────────────────────────────────────────────── */
+
+/* Zoom control buttons (top-right of the map wrap) */
+.gm-controls {
+  position: absolute; top: 10px; right: 10px; z-index: 10;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.gm-ctrl-btn {
+  width: 28px; height: 28px; border-radius: 6px; font-size: 14px; font-weight: 700;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text2); cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center; line-height: 1;
+}
+.gm-ctrl-btn:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+
+/* D3 legend (replaces the old legend below the canvas) */
+.gm-legend-d3 {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-top: 10px; padding: 9px 14px;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-sm);
+  font-size: 11px; font-family: var(--font-mono);
+}
+.gml-item { display: flex; align-items: center; gap: 5px; color: var(--cl, #8898B8); }
+.gml-gap  { color: #22D3EE !important; }
+.gml-hint { margin-left: auto; color: var(--muted); font-size: 10.5px; }
+
+/* HTML Tooltip */
+.gm-tooltip {
+  position: absolute; z-index: 50;
+  background: rgba(10,14,28,0.95); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 10px 14px; min-width: 160px; max-width: 240px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+  pointer-events: none; font-size: 12px;
+}
+.gmt-title { font-weight: 700; font-size: 13px; margin-bottom: 3px; }
+.gmt-sub   { color: var(--text2); font-size: 11px; margin-bottom: 6px; }
+.gmt-action {
+  font-size: 11px; font-weight: 600; color: #22D3EE;
+  background: rgba(34,211,238,0.08); border-radius: 4px; padding: 3px 7px; margin-bottom: 4px;
+}
+.gmt-hint { font-size: 10px; color: var(--text2); }
+.gmt-link { color: #8B5CF6; text-decoration: none; }
+.gmt-link:hover { text-decoration: underline; }
+
+/* D3 SVG label text */
+.gm-label { pointer-events: none; }
