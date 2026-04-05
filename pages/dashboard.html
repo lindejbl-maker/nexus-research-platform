@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Nexus</title>
-<link rel="stylesheet" href="../css/dashboard.css?v=6">
+<link rel="stylesheet" href="../css/dashboard.css?v=7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
@@ -262,6 +262,11 @@
       <span class="tb-page-name" id="tb-page-name">Dashboard</span>
     </div>
     <div class="tb-right">
+      <!-- Plain Language Toggle -->
+      <button class="pl-toggle" id="pl-toggle-btn" onclick="PlainLang.toggle()" title="Toggle Plain Language Mode — simplify all AI output">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="pl-toggle-label">Plain</span>
+      </button>
       <div class="tb-status-pill">
         <div class="tb-online-dot"></div>
         <span id="tb-user-label">Researcher</span>

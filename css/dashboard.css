@@ -1393,3 +1393,42 @@ a { text-decoration: none; color: inherit; }
 .role-card-emoji { font-size: 26px; }
 .role-card-label { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; }
 .role-card-desc { font-size: 10px; color: var(--text2); line-height: 1.4; }
+
+/* ─ PLAIN LANGUAGE TOGGLE (top bar) ────────────────────────────────────────── */
+.pl-toggle {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 11px; border-radius: 100px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text2); font-size: 11px; font-weight: 600;
+  font-family: var(--font-mono); letter-spacing: 0.04em;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.pl-toggle:hover { border-color: rgba(139,92,246,0.4); color: var(--text); }
+.pl-toggle svg { transition: stroke 0.2s; }
+
+/* ON state — vivid purple pill */
+.pl-toggle--on {
+  background: rgba(139,92,246,0.18);
+  border-color: rgba(139,92,246,0.5);
+  color: #C4B5FD;
+  box-shadow: 0 0 10px rgba(139,92,246,0.2);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+.pl-toggle--on .pl-toggle-label::before {
+  content: '✓ ';
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(139,92,246,0.2); }
+  50%       { box-shadow: 0 0 16px rgba(139,92,246,0.4); }
+}
+
+/* Plain Language output indicator — shown on result cards when mode is ON */
+.pl-active-notice {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; font-family: var(--font-mono);
+  color: #C4B5FD; background: rgba(139,92,246,0.1);
+  border: 1px solid rgba(139,92,246,0.2); border-radius: 100px;
+  padding: 2px 9px; margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}

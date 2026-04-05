@@ -26,23 +26,84 @@ function logApiCost(feature, inputText, outputText) {
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─── PLAIN LANGUAGE MODULE ────────────────────────────────────────────────────
+// A global toggle that intercepts every gemini.generate() call.
+// When ON: appends plain-English instructions to the system prompt so ALL tools
+// simplify their output automatically — no per-tool changes required.
+// ──────────────────────────────────────────────────────────────────────────────
+const PlainLang = (() => {
+  const KEY = 'nexus_plain_lang';
+  const INSTRUCTION = `
+\n\n---\nPLAIN LANGUAGE MODE IS ACTIVE. You MUST follow these rules for this response:
+1. Write as if explaining to a smart 16-year-old with no specialist knowledge.
+2. Replace ALL jargon and technical terms with plain English equivalents. If you must use a technical term, immediately explain it in parentheses.
+3. Use short sentences (max 20 words each). Break long ideas into bullet points.
+4. Avoid Latin phrases, acronyms (spell them out), and passive voice.
+5. Start with a one-sentence plain English summary of the key finding or answer.
+6. End with "In plain terms:" followed by a 1-2 sentence takeaway a non-expert can act on.
+---`;
+
+  function isOn() {
+    return localStorage.getItem(KEY) === 'on';
+  }
+
+  function toggle() {
+    const next = isOn() ? 'off' : 'on';
+    localStorage.setItem(KEY, next);
+    _updateUI(next === 'on');
+    if (typeof showToast === 'function') {
+      showToast(
+        next === 'on'
+          ? '💬 Plain Language ON — all AI output will be simplified'
+          : '🔬 Plain Language OFF — technical mode restored',
+        'info'
+      );
+    }
+  }
+
+  function _updateUI(active) {
+    const btn = document.getElementById('pl-toggle-btn');
+    if (!btn) return;
+    btn.classList.toggle('pl-toggle--on', active);
+    btn.title = active
+      ? 'Plain Language is ON — click to switch back to technical mode'
+      : 'Toggle Plain Language Mode — simplify all AI output';
+  }
+
+  function init() {
+    _updateUI(isOn());
+  }
+
+  // Returns the instruction to append to systemPrompt when mode is ON
+  function getInstruction() {
+    return isOn() ? INSTRUCTION : '';
+  }
+
+  return { isOn, toggle, init, getInstruction };
+})();
+// ──────────────────────────────────────────────────────────────────────────────
+
 const gemini = {
   async generate(prompt, systemPrompt = '', temperature = 0.7, feature = 'general') {
     if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
       throw new Error('Gemini API key not configured. Add your key to js/gemini.js');
     }
+    // ── Plain Language Mode intercept ─────────────────────────────────────────
+    const plainInstr = PlainLang.getInstruction();
+    const effectiveSystem = plainInstr ? (systemPrompt + plainInstr) : systemPrompt;
+    // ─────────────────────────────────────────────────────────────────────────
     const body = {
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       generationConfig: { temperature, maxOutputTokens: 4096 }
     };
-    if (systemPrompt) body.systemInstruction = { parts: [{ text: systemPrompt }] };
+    if (effectiveSystem) body.systemInstruction = { parts: [{ text: effectiveSystem }] };
     const res = await fetch(GEMINI_BASE, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
     });
     if (!res.ok) { const err = await res.json(); throw new Error(err.error?.message || `Gemini API error (${res.status})`); }
     const data = await res.json();
     const output = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    logApiCost(feature, prompt + systemPrompt, output);
+    logApiCost(feature, prompt + effectiveSystem, output);
     return output;
   },
 

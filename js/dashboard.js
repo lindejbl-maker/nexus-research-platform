@@ -84,6 +84,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     NexusRole.promptIfNew();
     renderRoleQuickActions();
   }
+
+  // Init plain language toggle state from localStorage
+  if (typeof PlainLang !== 'undefined') PlainLang.init();
 });
 
 function initUser(user) {
