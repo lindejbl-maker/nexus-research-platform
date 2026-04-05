@@ -90,10 +90,9 @@ a { text-decoration: none; color: inherit; }
 .nav-hub.open .hub-chevron { transform: rotate(180deg); opacity: 0.8; }
 .hub-children { max-height: 0; overflow: hidden; transition: max-height 0.26s cubic-bezier(0.4,0,0.2,1); }
 .nav-hub.open .hub-children { max-height: 500px; }
-.hub-children .nav-item { padding-left: 14px; font-size: 12.5px; flex-wrap: nowrap; overflow: hidden; }
+.hub-children .nav-item { padding-left: 14px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hub-children .nav-item > svg { flex-shrink: 0; }
-.hub-children .nav-item > .nav-badge { flex-shrink: 0; }
-.hub-children .nav-item > :not(svg):not(.nav-badge) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; flex: 1; }
+.hub-children .nav-item > .nav-badge { flex-shrink: 0; margin-left: auto; }
 
 /* ─ SIDEBAR BOTTOM ───────────────── */
 .sidebar-bottom { padding: 0.85rem; border-top: 1px solid var(--border); position: relative; z-index: 1; }
@@ -1310,3 +1309,87 @@ a { text-decoration: none; color: inherit; }
 .tb-breadcrumb { flex: 1; min-width: 0; overflow: hidden; }
 .tb-page-name  { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
 .tb-right      { flex-shrink: 0; }
+
+/* ─ CITATION VERIFICATION BADGES ──────────────────────────────────────────── */
+.cite-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 10px; font-weight: 700; font-family: var(--font-mono);
+  letter-spacing: 0.05em; padding: 1px 8px; border-radius: 100px;
+  margin-left: 6px; text-decoration: none; vertical-align: middle;
+  cursor: default; transition: opacity 0.15s;
+  animation: fadeIn 0.3s ease;
+}
+.cite-badge--verified {
+  background: rgba(52,211,153,0.12); color: #34D399;
+  border: 1px solid rgba(52,211,153,0.3);
+}
+.cite-badge--verified[href] { cursor: pointer; }
+.cite-badge--verified[href]:hover { background: rgba(52,211,153,0.22); opacity: 0.9; }
+.cite-badge--unverified {
+  background: rgba(245,158,11,0.1); color: #F59E0B;
+  border: 1px solid rgba(245,158,11,0.25);
+}
+.cite-summary {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 18px; padding: 10px 14px;
+  background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.15);
+  border-radius: 8px; font-size: 12px;
+}
+.cite-summary svg { color: var(--text2); flex-shrink: 0; }
+.cite-summary-sub { color: var(--text2); font-size: 11px; margin-left: auto; font-family: var(--font-mono); }
+
+/* ─ ROLE BADGE (top bar) ────────────────────────────────────────────────────── */
+.role-badge {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 100px;
+  background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2);
+  cursor: pointer; transition: all 0.2s; font-size: 11px;
+  color: var(--text2); font-family: var(--font-mono); letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.role-badge:hover { background: rgba(139,92,246,0.2); color: var(--text); }
+.role-badge-emoji { font-size: 13px; }
+.role-badge-label { font-weight: 600; }
+
+/* ─ ROLE PICKER MODAL ──────────────────────────────────────────────────────── */
+.role-picker-overlay {
+  position: fixed; inset: 0; z-index: 1200;
+  background: rgba(8,8,20,0.85); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.role-picker-overlay.open { opacity: 1; pointer-events: all; }
+.role-picker-modal {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; padding: 32px; width: min(760px, 94vw);
+  max-height: 88vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  animation: slideUp 0.25s ease;
+}
+.role-picker-header { text-align: center; margin-bottom: 28px; }
+.role-picker-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.role-picker-sub { font-size: 13px; color: var(--text2); }
+.role-picker-footer { display: flex; justify-content: center; margin-top: 20px; }
+
+/* ─ ROLE GRID (picker modal + dashboard quick-change) ──────────────────────── */
+.role-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px;
+}
+.role-card {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 18px 12px; border-radius: 14px; cursor: pointer; text-align: center;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  transition: all 0.18s; position: relative; overflow: hidden;
+}
+.role-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at top, color-mix(in srgb, var(--role-color) 15%, transparent), transparent 70%);
+  opacity: 0; transition: opacity 0.2s;
+}
+.role-card:hover { border-color: var(--role-color); transform: translateY(-2px); }
+.role-card:hover::before { opacity: 1; }
+.role-card--active { border-color: var(--role-color); background: color-mix(in srgb, var(--role-color) 10%, transparent); }
+.role-card--active::before { opacity: 1; }
+.role-card-emoji { font-size: 26px; }
+.role-card-label { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.role-card-desc { font-size: 10px; color: var(--text2); line-height: 1.4; }

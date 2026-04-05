@@ -78,6 +78,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Apply profile personalisation on load
   updateProfileUI();
+
+  // Apply role system — show picker for first-time users, filter sidebar for all
+  if (typeof NexusRole !== 'undefined') {
+    NexusRole.promptIfNew();
+    renderRoleQuickActions();
+  }
 });
 
 function initUser(user) {
@@ -128,7 +134,9 @@ const HUB_MAP = {
   contradiction: 'hub-analyse', compare: 'hub-analyse', deepdiver: 'hub-analyse',
   hypothesis: 'hub-create', litreview: 'hub-create', experimentblueprint: 'hub-create', grantwriter: 'hub-create',
   peerreview: 'hub-write', plainlang: 'hub-write',
-  projects: 'hub-library', saved: 'hub-library', citations: 'hub-library'
+  projects: 'hub-library', saved: 'hub-library', citations: 'hub-library',
+  teamhub: 'hub-team', teammembers: 'hub-team', teamlibrary: 'hub-team',
+  teamprojects: 'hub-team', teamhypotheses: 'hub-team', teamsettings: 'hub-team'
 };
 
 function toggleHub(hubId) {
@@ -358,6 +366,26 @@ async function updateUsageBar() {
 function loadDashboard() {
   document.getElementById('dash-papers').textContent   = savedPapers.length;
   document.getElementById('dash-projects').textContent = projects.length;
+  renderRoleQuickActions();
+}
+
+function renderRoleQuickActions() {
+  if (typeof NexusRole === 'undefined') return;
+  const actions = NexusRole.getQuickActions();
+  const tagline = NexusRole.getTagline();
+  const container = document.getElementById('quick-actions-container');
+  const taglineEl = document.getElementById('role-tagline');
+
+  if (taglineEl && tagline) taglineEl.textContent = tagline;
+
+  if (!container) return;
+  container.innerHTML = actions.map(a => {
+    const nav = `document.getElementById('nav-${a.page}')`;
+    const onclick = a.page === 'projects'
+      ? `openProjectModal()`
+      : `showPage('${a.page}', ${nav})`;
+    return `<button class="qa-btn" onclick="${onclick}">${a.icon} ${a.label}</button>`;
+  }).join('');
 }
 
 // ═══ ACTIVITY LOG ═════════════════════════════════════════════════════════════
@@ -703,6 +731,11 @@ async function generateHypotheses() {
       </div>`;
     }).join('') + AI_DISCLAIMER;
 
+    // ── Citation Verification on hypothesis rationale (non-blocking) ──────────
+    if (typeof CitationVerifier !== 'undefined') {
+      setTimeout(() => CitationVerifier.scanAndBadge(results), 300);
+    }
+
     // Phase 4 — Build Research Gap Map (Item 4: real citation data preferred)
     const tabsEl = document.getElementById('hyp-tabs');
     if (tabsEl) tabsEl.style.display = 'flex';
@@ -794,6 +827,10 @@ async function generateLitReview() {
         <div class="lit-body" id="lit-output">${formatted}</div>
       </div>
       ${AI_DISCLAIMER}`;
+    // ── Citation Verification (non-blocking) ──────────────────────────────────
+    if (typeof CitationVerifier !== 'undefined') {
+      setTimeout(() => CitationVerifier.scanAndBadge(document.getElementById('lit-output')), 300);
+    }
   } catch (err) {
     status.innerHTML = `<span style="color:var(--error)">⚠ ${escHtml(err.message)}</span>`;
     showToast(err.message, 'error');

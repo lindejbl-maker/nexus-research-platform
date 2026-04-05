@@ -78,3 +78,30 @@ a { text-decoration: none; color: inherit; }
 .pw-strength-fill { height: 100%; border-radius: 100px; transition: width 0.3s ease, background 0.3s ease; width: 0%; }
 
 @media (max-width: 768px) { .auth-layout { grid-template-columns: 1fr; } .auth-left { display: none; } .auth-right { padding: 1.75rem; align-items: flex-start; padding-top: 3.5rem; } .form-row { grid-template-columns: 1fr; } }
+
+/* ─ ROLE STEP (signup step 2) ──────────────────────────────────────────────── */
+.role-step-header { text-align: center; margin-bottom: 28px; }
+.role-step-emoji { font-size: 36px; margin-bottom: 8px; }
+.role-step-header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.role-step-skip { text-align: center; margin-top: 16px; font-size: 12px; color: var(--text2, #8898B8); }
+.role-step-skip a { color: inherit; text-decoration: underline; }
+
+.role-grid-signup {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 10px;
+}
+.role-card-signup {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 16px 10px; border-radius: 12px; cursor: pointer; text-align: center;
+  background: rgba(255,255,255,0.03); border: 2px solid rgba(255,255,255,0.07);
+  transition: all 0.18s; position: relative; overflow: hidden;
+  font-family: inherit; color: inherit;
+}
+.role-card-signup:hover,
+.role-card-signup.selected {
+  border-color: var(--role-color, #8B5CF6);
+  background: color-mix(in srgb, var(--role-color, #8B5CF6) 12%, transparent);
+  transform: translateY(-2px);
+}
+.role-card-signup .role-card-emoji { font-size: 22px; pointer-events: none; }
+.role-card-signup .role-card-label { font-size: 11px; font-weight: 700; color: #E2E8F0; pointer-events: none; }
+.role-card-signup .role-card-desc { font-size: 10px; color: #8898B8; line-height: 1.4; pointer-events: none; }

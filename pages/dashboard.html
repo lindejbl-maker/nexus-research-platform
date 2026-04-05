@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard — Nexus</title>
-<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/dashboard.css?v=6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
@@ -47,7 +47,7 @@
         </a>
         <a href="#" class="nav-item" data-page="crossfield" id="nav-crossfield" onclick="showPage('crossfield',this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          Cross-Field Discovery<span class="nav-badge">AI</span>
+          Cross-Field Discovery <span class="nav-badge">AI</span>
         </a>
         <a href="#" class="nav-item" data-page="alerts" id="nav-alerts" onclick="showPage('alerts',this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
@@ -161,31 +161,43 @@
       <div class="sidebar-team-label">ACTIVE WORKSPACE</div>
       <div class="sidebar-team-name-text" id="sidebar-team-name"></div>
     </div>
-    <div class="nav-section-label" style="margin-top:1.25rem;">TEAM</div>
-    <a href="#" class="nav-item" data-page="teamhub" id="nav-teamhub" onclick="showPage('teamhub',this);TeamManager.renderTeamHub()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      Team Workspace
-    </a>
-    <a href="#" class="nav-item" data-page="teammembers" id="nav-teammembers" onclick="showPage('teammembers',this);TeamManager.renderMemberList()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      Members
-    </a>
-    <a href="#" class="nav-item" data-page="teamlibrary" id="nav-teamlibrary" onclick="showPage('teamlibrary',this);TeamManager.renderSharedLibrary()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-      Shared Library
-    </a>
-    <a href="#" class="nav-item" data-page="teamprojects" id="nav-teamprojects" onclick="showPage('teamprojects',this);TeamManager.renderSharedProjects()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      Shared Projects
-    </a>
-    <a href="#" class="nav-item" data-page="teamhypotheses" id="nav-teamhypotheses" onclick="showPage('teamhypotheses',this);TeamManager.renderSharedHypotheses()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
-      Team Hypotheses
-    </a>
-    <a href="#" class="nav-item" data-page="teamsettings" id="nav-teamsettings" onclick="showPage('teamsettings',this);TeamManager.renderTeamSettings()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      Team Settings
-    </a>
+
+    <!-- HUB: Team -->
+    <div class="nav-hub" id="hub-team">
+      <button class="hub-header" onclick="toggleHub('hub-team')" aria-expanded="false">
+        <div class="hub-left">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="hub-label">TEAM</span>
+        </div>
+        <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="hub-children">
+        <a href="#" class="nav-item" data-page="teamhub" id="nav-teamhub" onclick="showPage('teamhub',this);TeamManager.renderTeamHub()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Workspace
+        </a>
+        <a href="#" class="nav-item" data-page="teammembers" id="nav-teammembers" onclick="showPage('teammembers',this);TeamManager.renderMemberList()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Members
+        </a>
+        <a href="#" class="nav-item" data-page="teamlibrary" id="nav-teamlibrary" onclick="showPage('teamlibrary',this);TeamManager.renderSharedLibrary()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Shared Library
+        </a>
+        <a href="#" class="nav-item" data-page="teamprojects" id="nav-teamprojects" onclick="showPage('teamprojects',this);TeamManager.renderSharedProjects()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          Shared Projects
+        </a>
+        <a href="#" class="nav-item" data-page="teamhypotheses" id="nav-teamhypotheses" onclick="showPage('teamhypotheses',this);TeamManager.renderSharedHypotheses()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+          Team Hypotheses
+        </a>
+        <a href="#" class="nav-item" data-page="teamsettings" id="nav-teamsettings" onclick="showPage('teamsettings',this);TeamManager.renderTeamSettings()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+      </div>
+    </div>
 
     <!-- Analytics & Account -->
     <div class="nav-section-label" style="margin-top:1.25rem;">ANALYTICS</div>
@@ -263,7 +275,7 @@
     <div class="page-header">
       <div>
         <h1 class="page-title">Good <span id="time-greeting">morning</span>, <span id="greeting-name">Researcher</span></h1>
-        <p class="page-sub">Here's your research workspace.</p>
+        <p class="page-sub" id="role-tagline">Here's your research workspace.</p>
       </div>
       <button class="btn-accent" id="new-hypothesis-btn" onclick="showPage('hypothesis', document.getElementById('nav-hypothesis'))">+ New Hypothesis</button>
     </div>
@@ -276,23 +288,24 @@
     <div class="dash-grid">
       <div class="dash-card">
         <div class="dc-header"><div class="dc-title">Quick Actions</div></div>
-        <div class="quick-actions">
-          <button class="qa-btn" id="qa-search" onclick="showPage('search', document.getElementById('nav-search'))">
+        <div class="quick-actions" id="quick-actions-container">
+          <!-- Populated by renderRoleQuickActions() in role-system integration -->
+          <button class="qa-btn" onclick="showPage('search', document.getElementById('nav-search'))">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search Papers
           </button>
-          <button class="qa-btn" id="qa-hypothesis" onclick="showPage('hypothesis', document.getElementById('nav-hypothesis'))">
+          <button class="qa-btn" onclick="showPage('hypothesis', document.getElementById('nav-hypothesis'))">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>Generate Hypothesis
           </button>
-          <button class="qa-btn" id="qa-crossfield" onclick="showPage('crossfield', document.getElementById('nav-crossfield'))">
+          <button class="qa-btn" onclick="showPage('crossfield', document.getElementById('nav-crossfield'))">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Cross-Field Discovery
           </button>
-          <button class="qa-btn" id="qa-compare" onclick="showPage('compare', document.getElementById('nav-compare'))">
+          <button class="qa-btn" onclick="showPage('compare', document.getElementById('nav-compare'))">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/></svg>Compare Papers
           </button>
-          <button class="qa-btn" id="qa-litreview" onclick="showPage('litreview', document.getElementById('nav-litreview'))">
+          <button class="qa-btn" onclick="showPage('litreview', document.getElementById('nav-litreview'))">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Literature Review
           </button>
-          <button class="qa-btn" id="qa-project" onclick="openProjectModal()">
+          <button class="qa-btn" onclick="openProjectModal()">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>New Project
           </button>
         </div>
@@ -1328,6 +1341,8 @@
 <script src="../js/cross-domain-db.js"></script>
 <script src="../js/benchmark.js"></script>
 <script src="../js/config.js"></script>
+<script src="../js/role-system.js"></script>
+<script src="../js/citation-verifier.js"></script>
 <script src="../js/gemini.js"></script>
 <script src="../js/deep-diver.js"></script>
 <script src="../js/peer-review.js"></script>

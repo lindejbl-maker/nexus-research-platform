@@ -92,10 +92,22 @@
 
       <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
     </div>
+
+    <!-- Step 2: Role Selection (shown after successful signup) -->
+    <div class="auth-card" id="role-step" style="display:none;">
+      <div class="role-step-header">
+        <div class="role-step-emoji">🎯</div>
+        <h1>Who are you?</h1>
+        <p class="auth-sub">Nexus adapts to your role — different tools, different language, same powerful AI.</p>
+      </div>
+      <div class="role-grid-signup" id="role-grid-signup"></div>
+      <p class="role-step-skip"><a href="dashboard.html" onclick="NexusRole.set('researcher')">Skip — I'll set this later</a></p>
+    </div>
   </div>
 </div>
 
 <script src="../js/supabase-client.js"></script>
+<script src="../js/role-system.js"></script>
 <script src="../js/auth.js"></script>
 <script>
   // Init password strength bar
@@ -131,9 +143,10 @@
         }
       );
       if (result.error) throw result.error;
-      successMsg.textContent = '✓ Account created! Check your email to verify, then sign in.';
-      successMsg.style.display = 'block';
-      setTimeout(() => window.location.href = 'login.html', 3000);
+
+      // Step 2: show role picker instead of redirecting immediately
+      document.getElementById('signup-form').closest('.auth-card').style.display = 'none';
+      showRoleStep();
     } catch (err) {
       errorMsg.textContent = err.message || 'Something went wrong. Please try again.';
       errorMsg.style.display = 'block';
@@ -142,6 +155,26 @@
       btn.disabled = false;
     }
   });
+
+  function showRoleStep() {
+    document.getElementById('role-step').style.display = '';
+    const grid = document.getElementById('role-grid-signup');
+    grid.innerHTML = ROLE_DEFINITIONS.map(r => `
+      <button class="role-card-signup"
+        onclick="selectSignupRole('${r.id}')"
+        style="--role-color:${r.color}">
+        <span class="role-card-emoji">${r.emoji}</span>
+        <div class="role-card-label">${r.label}</div>
+        <div class="role-card-desc">${r.description}</div>
+      </button>`).join('');
+  }
+
+  function selectSignupRole(roleId) {
+    NexusRole.set(roleId);
+    document.querySelectorAll('.role-card-signup').forEach(c => c.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    setTimeout(() => window.location.href = 'dashboard.html', 600);
+  }
 </script>
 </body>
 </html>
