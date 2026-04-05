@@ -64,7 +64,10 @@ function renderContradictions(analysis, topic, paperCount) {
       <div class="cd-consensus-bar-wrap">
         <div class="cd-consensus-bar" style="width:${analysis.overallConsensus}%"></div>
       </div>
-      <div class="cd-consensus-pct">${analysis.overallConsensus}%</div>
+      <div class="cd-overview-row">
+        <div class="cd-consensus-pct">${analysis.overallConsensus}%</div>
+        ${typeof ConfidenceBadge !== 'undefined' ? ConfidenceBadge.fromConsensus(analysis.overallConsensus) : ''}
+      </div>
       <div class="cd-overview-note">${escHtml(analysis.overallNote || '')}</div>
     </div>` : '';
 
@@ -77,9 +80,11 @@ function renderContradictions(analysis, topic, paperCount) {
         <div class="cd-card-header">
           <div class="cd-card-num">${String(i + 1).padStart(2, '0')}</div>
           <div class="cd-card-title">${escHtml(c.claim || 'Contested claim')}</div>
-          <span class="cd-severity ${severity}">${c.severity || 'medium'} conflict</span>
+          <div class="cd-card-badges">
+            ${typeof ConfidenceBadge !== 'undefined' ? ConfidenceBadge.fromSeverity(c.severity) : ''}
+            <span class="cd-severity ${severity}">${c.severity || 'medium'} conflict</span>
+          </div>
         </div>
-
         <div class="cd-sides">
           <div class="cd-side cd-side-a">
             <div class="cd-side-label">

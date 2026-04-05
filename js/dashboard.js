@@ -714,6 +714,10 @@ async function generateHypotheses() {
       const ragBadge   = h._ragGrounded
         ? `<span class="rag-badge" title="Generated from ${field || 'topic'} papers retrieved live from Semantic Scholar">&#128196; Live grounded</span>`
         : '';
+      // ── Confidence Badge ──────────────────────────────────────────────────
+      const confBadge = (typeof ConfidenceBadge !== 'undefined' && h.confidence_level)
+        ? ConfidenceBadge.render(h.confidence_level, h.evidence_count ?? null)
+        : '';
       return `
       <div class="hyp-card${isExplored ? ' hyp-card--explored' : ''}" style="animation-delay:${idx * 0.1}s">
         <div class="hyp-card-top">
@@ -721,6 +725,7 @@ async function generateHypotheses() {
           ${renderVerifiedBadge(vr)}
         </div>
         <div class="hyp-title">${escHtml(h.title)}</div>
+        ${confBadge ? `<div class="hyp-conf-row">${confBadge}${ragBadge}</div>` : ragBadge}
         <div class="hyp-body">${escHtml(h.hypothesis)}</div>
         <div class="hyp-body"><strong style="color:var(--text)">Why this gap exists:</strong> ${escHtml(h.rationale)}</div>
         ${h.experiment_hint ? `<div class="hyp-body"><strong style="color:var(--text)">How to test it:</strong> ${escHtml(h.experiment_hint)}</div>` : ''}

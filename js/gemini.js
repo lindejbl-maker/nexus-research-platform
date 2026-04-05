@@ -83,6 +83,49 @@ const PlainLang = (() => {
 })();
 // ──────────────────────────────────────────────────────────────────────────────
 
+// ─── CONFIDENCE BADGE MODULE ──────────────────────────────────────────────────
+// Renders trust-signal badges on AI output cards.
+// No API calls — purely derived from the AI's self-reported confidence field.
+//
+//  Levels:  Supported · Contested · Emerging · No Evidence
+//  Usage:   ConfidenceBadge.render('Emerging', 3)
+//           ConfidenceBadge.renderFromText(rawText)  ← strips inline tags
+// ──────────────────────────────────────────────────────────────────────────────
+const ConfidenceBadge = (() => {
+  const LEVELS = {
+    'Supported':    { emoji: '🟢', cls: 'conf-supported',  tip: 'Multiple papers back this claim area — well-supported in the literature' },
+    'Contested':    { emoji: '🟡', cls: 'conf-contested',  tip: 'Papers exist on both sides — treat findings carefully and cross-check' },
+    'Emerging':     { emoji: '🔴', cls: 'conf-emerging',   tip: 'Limited papers on this — speculative and early-stage; needs replication' },
+    'No Evidence':  { emoji: '⬜', cls: 'conf-none',       tip: 'Almost no published evidence — this is a genuine frontier hypothesis' },
+  };
+
+  // Main render — takes the structured fields from hypothesis JSON
+  function render(level, evidenceCount) {
+    const cfg = LEVELS[level] || LEVELS['Emerging'];
+    const countStr = typeof evidenceCount === 'number'
+      ? ` · ~${evidenceCount} paper${evidenceCount !== 1 ? 's' : ''}`
+      : '';
+    return `<span class="conf-badge ${cfg.cls}" title="${cfg.tip}${countStr}">${cfg.emoji} ${level}${countStr}</span>`;
+  }
+
+  // Derive confidence from the Contradiction Detector's overallConsensus score
+  function fromConsensus(consensusScore) {
+    if (consensusScore >= 75) return render('Supported',   null);
+    if (consensusScore >= 50) return render('Contested',   null);
+    if (consensusScore >= 25) return render('Emerging',    null);
+    return render('No Evidence', null);
+  }
+
+  // Derive confidence for individual contradiction cards from severity
+  function fromSeverity(severity) {
+    const map = { high: 'Contested', medium: 'Contested', low: 'Supported' };
+    return render(map[severity] || 'Emerging', null);
+  }
+
+  return { render, fromConsensus, fromSeverity, LEVELS };
+})();
+// ──────────────────────────────────────────────────────────────────────────────
+
 const gemini = {
   async generate(prompt, systemPrompt = '', temperature = 0.7, feature = 'general') {
     if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
@@ -133,7 +176,7 @@ const gemini = {
   async generateHypotheses(topic, field = '', count = 3, profileContext = '') {
     const ragContext = await this.buildRagContext(topic, field, 20);
     const system = `You are a world-class scientific researcher specialising in identifying untested research gaps. You always respond with valid JSON only — no markdown fences, no preamble, no explanation.`;
-    const prompt = `${profileContext}${ragContext}Research topic: "${topic}"\n${field ? `Research field: ${field}` : ''}\n\nAnalyse the real papers in the CURRENT LITERATURE CONTEXT above (if provided), then identify ${count} genuinely novel, testable hypotheses representing gaps that NONE of those papers have addressed. Tailor hypotheses to the researcher context if provided.\n\nReturn a JSON array where each item has exactly these fields:\n- "id": number (1-based)\n- "title": string (max 10 words, catchy and specific)\n- "hypothesis": string (a clear 2-3 sentence testable statement)\n- "rationale": string (2-3 sentences explaining why this gap exists in the current literature)\n- "novelty_score": number (integer 70–99)\n- "gap_type": string (one of: "untested combination", "missing population", "unexplored mechanism", "methodology gap", "cross-disciplinary gap")\n- "experiment_hint": string (one concrete sentence on how to test this)\n- "grounded": boolean (true if you can point to specific papers above that confirm this gap exists)\n\nReturn ONLY the JSON array.`;
+    const prompt = `${profileContext}${ragContext}Research topic: "${topic}"\n${field ? `Research field: ${field}` : ''}\n\nAnalyse the real papers in the CURRENT LITERATURE CONTEXT above (if provided), then identify ${count} genuinely novel, testable hypotheses representing gaps that NONE of those papers have addressed. Tailor hypotheses to the researcher context if provided.\n\nReturn a JSON array where each item has exactly these fields:\n- "id": number (1-based)\n- "title": string (max 10 words, catchy and specific)\n- "hypothesis": string (a clear 2-3 sentence testable statement)\n- "rationale": string (2-3 sentences explaining why this gap exists in the current literature)\n- "novelty_score": number (integer 70–99)\n- "gap_type": string (one of: "untested combination", "missing population", "unexplored mechanism", "methodology gap", "cross-disciplinary gap")\n- "experiment_hint": string (one concrete sentence on how to test this)\n- "grounded": boolean (true if you can point to specific papers above that confirm this gap exists)\n- "confidence_level": string (one of: "Supported", "Contested", "Emerging", "No Evidence") — how well-supported the underlying claim area is in the current literature\n- "evidence_count": number (your best estimate of how many papers in the literature address this specific claim area; use 0 if truly novel)\n\nReturn ONLY the JSON array.`;
     const raw = await this.generate(prompt, system, 0.75, 'hypothesis');
     const parsed = JSON.parse(raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim());
     // Tag each hypothesis with whether it was RAG-grounded

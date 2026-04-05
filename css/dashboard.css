@@ -1432,3 +1432,48 @@ a { text-decoration: none; color: inherit; }
   padding: 2px 9px; margin-bottom: 10px;
   letter-spacing: 0.04em;
 }
+
+/* ─ CONFIDENCE SCORING BADGES ──────────────────────────────────────────────── */
+.conf-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 700; font-family: var(--font-mono);
+  letter-spacing: 0.04em; padding: 2px 10px; border-radius: 100px;
+  white-space: nowrap; cursor: default; vertical-align: middle;
+  animation: fadeIn 0.3s ease;
+}
+/* 🟢 Supported */
+.conf-supported {
+  background: rgba(52,211,153,0.1); color: #34D399;
+  border: 1px solid rgba(52,211,153,0.25);
+}
+/* 🟡 Contested */
+.conf-contested {
+  background: rgba(251,191,36,0.1); color: #FBBF24;
+  border: 1px solid rgba(251,191,36,0.25);
+}
+/* 🔴 Emerging */
+.conf-emerging {
+  background: rgba(248,113,113,0.1); color: #F87171;
+  border: 1px solid rgba(248,113,113,0.25);
+}
+/* ⬜ No Evidence */
+.conf-none {
+  background: rgba(148,163,184,0.08); color: #94A3B8;
+  border: 1px solid rgba(148,163,184,0.15);
+}
+
+/* Row layout for confidence + rag badge under hypothesis title */
+.hyp-conf-row {
+  display: flex; align-items: center; gap: 8px;
+  margin: 4px 0 10px; flex-wrap: wrap;
+}
+
+/* cd-overview layout with badge beside % */
+.cd-overview-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 6px;
+}
+/* Group confidence + severity side by side on contradiction cards */
+.cd-card-badges {
+  display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+}
