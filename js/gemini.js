@@ -134,9 +134,12 @@ const gemini = {
     // ── Plain Language Mode intercept ─────────────────────────────────────────
     const plainInstr = PlainLang.getInstruction();
     const effectiveSystem = plainInstr ? (systemPrompt + plainInstr) : systemPrompt;
+    // ── Research Memory intercept — prepend project context to user prompt ─────
+    const memCtx = (typeof ResearchMemory !== 'undefined') ? ResearchMemory.getContext() : '';
+    const effectivePrompt = memCtx ? (memCtx + prompt) : prompt;
     // ─────────────────────────────────────────────────────────────────────────
     const body = {
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      contents: [{ role: 'user', parts: [{ text: effectivePrompt }] }],
       generationConfig: { temperature, maxOutputTokens: 4096 }
     };
     if (effectiveSystem) body.systemInstruction = { parts: [{ text: effectiveSystem }] };
@@ -146,7 +149,7 @@ const gemini = {
     if (!res.ok) { const err = await res.json(); throw new Error(err.error?.message || `Gemini API error (${res.status})`); }
     const data = await res.json();
     const output = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    logApiCost(feature, prompt + effectiveSystem, output);
+    logApiCost(feature, effectivePrompt + effectiveSystem, output);
     return output;
   },
 

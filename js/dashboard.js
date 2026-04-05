@@ -87,6 +87,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Init plain language toggle state from localStorage
   if (typeof PlainLang !== 'undefined') PlainLang.init();
+
+  // Init research memory — restore active project, show banner, update sidebar
+  if (typeof ResearchMemory !== 'undefined') ResearchMemory.init();
 });
 
 function initUser(user) {
@@ -662,6 +665,8 @@ async function generateHypotheses() {
     let hypotheses = await gemini.generateHypotheses(input, field, count, profileCtx);
     await nexusUsage.logAction(currentUser?.id || 'dev', 'hypothesis');
     updateUsageBar();
+    // Log topic + increment counter in Research Memory
+    if (typeof ResearchMemory !== 'undefined') { ResearchMemory.addTopic(input); ResearchMemory.increment('hypothesis'); }
 
     // Phase 2 — Verify each hypothesis against Semantic Scholar
     const verified = [];
@@ -1197,8 +1202,11 @@ function renderProjects() {
   const container = document.getElementById('projects-grid');
   if (!projects.length) { container.innerHTML = '<div class="empty-state">No projects yet. Create your first project to organise your research.</div>'; return; }
   const sorted = [...projects].sort((a, b) => b.createdAt - a.createdAt);
-  container.innerHTML = sorted.map(p => `
-    <div class="project-card">
+  const activeId = (typeof ResearchMemory !== 'undefined') ? ResearchMemory.getActive()?.id : null;
+  container.innerHTML = sorted.map(p => {
+    const isActive = p.id === activeId;
+    return `
+    <div class="project-card${isActive ? ' project-card--active' : ''}">
       <button class="proj-delete" onclick="event.stopPropagation();deleteProject(${p.id})" title="Delete project">✕</button>
       <div class="proj-name">${escHtml(p.name)}</div>
       <div class="proj-field">${escHtml(p.field)}</div>
@@ -1207,7 +1215,24 @@ function renderProjects() {
         <div class="proj-stat"><span>${p.hypotheses}</span> hypotheses</div>
       </div>
       <div class="proj-date">Created ${timeAgo(p.createdAt)}</div>
-    </div>`).join('');
+      <button class="proj-activate-btn${isActive ? ' proj-activate-btn--on' : ''}" onclick="event.stopPropagation();setActiveProject(${p.id})" title="${isActive ? 'Deactivate Research Memory' : 'Set as active project — AI will remember your context'}">
+        ${isActive ? '🧠 Memory On' : '⚡ Set Active'}
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function setActiveProject(projectId) {
+  if (typeof ResearchMemory === 'undefined') return;
+  const active = ResearchMemory.getActive();
+  if (active && active.id === projectId) {
+    // Toggle off
+    ResearchMemory.clearActive();
+  } else {
+    const project = projects.find(p => p.id === projectId);
+    if (project) ResearchMemory.setActive(project);
+  }
+  renderProjects();
 }
 
 // ═══ RESEARCH ALERTS ═════════════════════════════════════════════════════════

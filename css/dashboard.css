@@ -1477,3 +1477,67 @@ a { text-decoration: none; color: inherit; }
 .cd-card-badges {
   display: flex; align-items: center; gap: 6px; flex-shrink: 0;
 }
+
+/* ─ RESEARCH MEMORY BANNER ──────────────────────────────────────────────────── */
+.memory-banner {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  padding: 6px 20px; font-size: 11px; font-family: var(--font-mono);
+  background: rgba(139,92,246,0.07); border-bottom: 1px solid rgba(139,92,246,0.15);
+  color: var(--text2); animation: slideDown 0.25s ease;
+}
+@keyframes slideDown { from { opacity:0; transform:translateY(-8px);} to {opacity:1;transform:translateY(0);} }
+.mem-icon { opacity: 0.6; flex-shrink: 0; }
+.mem-label { font-weight: 700; color: #C4B5FD; text-transform: uppercase; letter-spacing: 0.06em; }
+.mem-project { color: var(--text); font-weight: 600; }
+.mem-topics { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.mem-topic {
+  padding: 1px 8px; border-radius: 100px;
+  background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.2);
+  color: #A78BFA; font-size: 10px;
+}
+.mem-topic--more { color: var(--text2); background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+.mem-add-note-btn, .mem-clear-btn {
+  padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
+  color: var(--text2); cursor: pointer; transition: all 0.15s; font-family: var(--font-mono);
+  margin-left: auto;
+}
+.mem-add-note-btn { margin-left: auto; }
+.mem-clear-btn { margin-left: 0; }
+.mem-add-note-btn:hover { background: rgba(139,92,246,0.15); color: #C4B5FD; border-color: rgba(139,92,246,0.3); }
+.mem-clear-btn:hover { background: rgba(248,113,113,0.1); color: #F87171; border-color: rgba(248,113,113,0.2); }
+.mem-note-input-row {
+  display: flex; gap: 6px; width: 100%;
+  padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 4px;
+}
+.mem-note-input {
+  flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px; padding: 4px 10px; font-size: 11px; color: var(--text); outline: none;
+  font-family: var(--font-mono);
+}
+.mem-note-input:focus { border-color: rgba(139,92,246,0.4); }
+.mem-note-save {
+  padding: 4px 12px; border-radius: 6px; font-size: 11px; font-weight: 700;
+  background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.3);
+  color: #C4B5FD; cursor: pointer; font-family: var(--font-mono);
+}
+.mem-note-save:hover { background: rgba(139,92,246,0.35); }
+
+/* ─ PROJECT CARD — Activate Button ─────────────────────────────────────────── */
+.proj-activate-btn {
+  margin-top: 10px; width: 100%; padding: 6px; border-radius: 8px; font-size: 11px;
+  font-weight: 700; font-family: var(--font-mono); cursor: pointer;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text2); transition: all 0.2s; letter-spacing: 0.02em;
+}
+.proj-activate-btn:hover { background: rgba(139,92,246,0.15); color: #C4B5FD; border-color: rgba(139,92,246,0.3); }
+.proj-activate-btn--on {
+  background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.4);
+  color: #C4B5FD; box-shadow: 0 0 12px rgba(139,92,246,0.15);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+.project-card--active {
+  border-color: rgba(139,92,246,0.4) !important;
+  background: linear-gradient(135deg, rgba(139,92,246,0.07), rgba(139,92,246,0.03)) !important;
+  box-shadow: 0 0 0 1px rgba(139,92,246,0.15);
+}
