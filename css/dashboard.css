@@ -225,6 +225,11 @@ a { text-decoration: none; color: inherit; }
 .novelty-verified.partial  { color: #F59E0B; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.22); }
 .novelty-verified.explored { color: #F87171; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.22); }
 .novelty-verified.warning  { color: var(--muted); background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
+/* Issue 1 & 4: Estimated (AI-only) novelty score — dimmer than verified */
+.novelty-score--estimated { color: var(--muted) !important; background: rgba(255,255,255,0.03) !important; border-color: var(--border) !important; font-style: italic; }
+/* Issue 5: Card-level unverified state — amber left border hint */
+.hyp-card--unverified { border-left: 2px solid rgba(245,158,11,0.35) !important; }
+
 
 /* ─ VERIFICATION EVIDENCE PANEL ──────── */
 .verification-evidence {
@@ -636,6 +641,30 @@ a { text-decoration: none; color: inherit; }
   cursor: default;
   white-space: nowrap;
 }
+/* Issue 3: Assumption-based hypothesis badge */
+.assumption-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 100px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: #F59E0B;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: help;
+  white-space: nowrap;
+}
+/* Issue 2: Training-data-only RAG badge */
+.rag-badge--training {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: var(--border) !important;
+  color: var(--muted) !important;
+}
+
 
 /* ─── Item 2: Semantic verification note ──────────────────────────────────── */
 .ver-semantic-note {
@@ -649,6 +678,21 @@ a { text-decoration: none; color: inherit; }
   margin-top: 4px;
 }
 .ver-semantic-note a { color: var(--blue); text-decoration: underline; text-decoration-color: rgba(79,140,234,0.4); }
+/* Issue 2 & 5: Verification unavailable info panel */
+.ver-unavailable { background: rgba(245,158,11,0.04); border-color: rgba(245,158,11,0.18); }
+.ver-unavailable .ver-label { color: var(--muted); gap: 8px; }
+.ver-unavailable .ver-label svg { color: #F59E0B; opacity: 1; }
+/* Source note for 0-result searches */
+.ver-source-note {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+  font-size: 10.5px;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.6;
+}
+
 
 /* ─── Item 5: Benchmark page ──────────────────────────────────────────────── */
 .bench-header {
@@ -1675,7 +1719,8 @@ a { text-decoration: none; color: inherit; }
   margin: 20px 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06);
 }
 @media (max-width: 720px) { .sc-evidence-grid { grid-template-columns: 1fr; } }
-.sc-evidence-col {}
+.sc-evidence-col { /* layout handled by parent grid */ }
+
 .sc-ev-col-header { font-size: 12px; font-weight: 700; margin-bottom: 12px; font-family: var(--font-mono); }
 .sc-evidence-item {
   display: flex; align-items: flex-start; gap: 10px;

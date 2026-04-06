@@ -628,26 +628,44 @@ async function verifyNovelty(hypothesis, statusEl, label) {
 
 function renderVerifiedBadge(result) {
   if (result.matchCount === -1) {
-    return `<span class="novelty-verified warning" title="Could not verify — ${escHtml(result.error || 'unknown error')}">&#9888; Verification unavailable</span>`;
+    // Issue 5: When verification failed, be explicit — not just a warning badge
+    return `<span class="novelty-verified warning" title="Live verification failed — ${escHtml(result.error || 'unknown error')}. Score is an AI estimate only, not based on real search results." style="cursor:help;">&#9888; Score unverified &middot; AI estimate only</span>`;
   }
   const methodLabel = result.verificationMethod === 'semantic'
     ? `Semantic similarity: ${Math.round(result.semanticSimilarity * 100)}%`
-    : `${result.recentCount} recent matching papers`;
+    : `${result.recentCount} recent matching paper${result.recentCount !== 1 ? 's' : ''}${result.recentCount === 0 ? ' found' : ' found'}`;
   if (result.verified) {
-    return `<span class="novelty-verified success" title="Verified via ${result.verificationMethod === 'semantic' ? 'embedding similarity' : 'Semantic Scholar search'} — ${methodLabel}">&#10003; Verified novel &middot; ${methodLabel}</span>`;
+    return `<span class="novelty-verified success" title="Verified via ${result.verificationMethod === 'semantic' ? 'embedding similarity' : 'Semantic Scholar search'} &#8212; ${methodLabel}">&#10003; Verified novel &middot; ${methodLabel}</span>`;
   }
   if (result.partial) {
-    return `<span class="novelty-verified partial" title="Partially explored — ${methodLabel}">&#11042; Partially explored &middot; ${methodLabel}</span>`;
+    return `<span class="novelty-verified partial" title="Partially explored &#8212; ${methodLabel}">&#11042; Partially explored &middot; ${methodLabel}</span>`;
   }
-  return `<span class="novelty-verified explored" title="Already explored — ${methodLabel}">&#10007; Already explored &middot; ${methodLabel}</span>`;
+  return `<span class="novelty-verified explored" title="Already explored &#8212; ${methodLabel}">&#10007; Already explored &middot; ${methodLabel}</span>`;
 }
 
 function renderVerificationEvidence(result) {
-  if (result.matchCount === -1 || !result.searchQuery) return '';
+  if (result.matchCount === -1 || !result.searchQuery) {
+    // Issue 2 & 5: When verification is unavailable, say so explicitly
+    if (result.matchCount === -1) {
+      return `
+        <div class="verification-evidence ver-unavailable">
+          <div class="ver-label" style="color:var(--muted)">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Score not verified against live literature. Novelty estimate is based on the AI&rsquo;s training data, not a real-time search. Treat as a starting point, not a confirmed gap.
+          </div>
+        </div>`;
+    }
+    return '';
+  }
 
   const paperLinks = result.papers.slice(0, 2).map(p =>
     `<a href="${semanticScholar.getPaperUrl(p)}" target="_blank" rel="noopener" class="ver-paper-link">"${escHtml((p.title || '').substring(0, 70))}${(p.title || '').length > 70 ? '\u2026' : ''}" (${p.year || 'n.d.'})</a>`
   ).join('');
+
+  // Issue 2: Source transparency — make clear what was searched and where 0 results means
+  const noResultsNote = (result.matchCount === 0)
+    ? `<div class="ver-source-note">&#128220; No matching papers found in Semantic Scholar for this specific claim — based on the search above, not AI training data. This supports novelty but does not prove it.</div>`
+    : '';
 
   // Item 2: Show closest semantic match if embedding was used
   const semanticNote = (result.verificationMethod === 'semantic' && result.closestPaper)
@@ -660,6 +678,7 @@ function renderVerificationEvidence(result) {
         <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         Verified via ${result.verificationMethod === 'semantic' ? '<strong>embedding similarity</strong>' : 'Semantic Scholar'} &middot; query: <em>&ldquo;${escHtml(result.searchQuery)}&rdquo;</em> &middot; ${result.matchCount} result${result.matchCount !== 1 ? 's' : ''}
       </div>
+      ${noResultsNote}
       ${semanticNote}
       ${paperLinks ? `<div class="ver-papers">${paperLinks}</div>` : ''}
     </div>`;
@@ -742,28 +761,45 @@ async function generateHypotheses() {
 
     results.innerHTML = verified.map((h, idx) => {
       const vr = h._verification || {};
-      const isExplored = vr.verified === false && !vr.partial;
-      const ragBadge   = h._ragGrounded
-        ? `<span class="rag-badge" title="Generated from ${field || 'topic'} papers retrieved live from Semantic Scholar">&#128196; Live grounded</span>`
+      const isExplored   = vr.verified === false && !vr.partial;
+      const isUnverified = vr.matchCount === -1;  // verification failed entirely
+
+      // Issue 1 & 4: Label score honestly — 'est.' when AI-only, 'verified' when live-checked
+      const scoreVal   = h.novelty_score;
+      const scoreLabel = isUnverified
+        ? `est. ${scoreVal}%`              // AI estimate only
+        : vr.verified
+          ? `verified ${scoreVal}%`        // confirmed by live search
+          : `checked ${scoreVal}%`;        // live search ran but found overlap
+
+      // Issue 3: Flag when the hypothesis is an assumption vs evidence-derived
+      const isAssumption = h.is_assumption === true;
+      const assumptionBadge = isAssumption
+        ? `<span class="assumption-badge" title="This hypothesis starts from an untested assumption, not a directly-observed pattern. The assumption is stated in the rationale.">&#9888; Assumption-based</span>`
         : '';
+
+      const ragBadge = h._ragGrounded
+        ? `<span class="rag-badge" title="Generated from ${field || 'topic'} papers retrieved live from Semantic Scholar">&#128196; Live grounded</span>`
+        : `<span class="rag-badge rag-badge--training" title="No live papers were retrieved — hypotheses are based on AI training data, not real-time literature. Treat with caution.">&#128218; Training data only</span>`;
+
       // ── Confidence Badge ──────────────────────────────────────────────────
       const confBadge = (typeof ConfidenceBadge !== 'undefined' && h.confidence_level)
         ? ConfidenceBadge.render(h.confidence_level, h.evidence_count ?? null)
         : '';
       return `
-      <div class="hyp-card${isExplored ? ' hyp-card--explored' : ''}" style="animation-delay:${idx * 0.1}s">
+      <div class="hyp-card${isExplored ? ' hyp-card--explored' : ''}${isUnverified ? ' hyp-card--unverified' : ''}" style="animation-delay:${idx * 0.1}s">
         <div class="hyp-card-top">
           <div class="hyp-num">HYPOTHESIS ${String(h.id || idx + 1).padStart(2, '0')}</div>
           ${renderVerifiedBadge(vr)}
         </div>
         <div class="hyp-title">${escHtml(h.title)}</div>
-        ${confBadge ? `<div class="hyp-conf-row">${confBadge}${ragBadge}</div>` : ragBadge}
+        ${confBadge ? `<div class="hyp-conf-row">${confBadge}${ragBadge}${assumptionBadge}</div>` : `<div class="hyp-conf-row">${ragBadge}${assumptionBadge}</div>`}
         <div class="hyp-body">${escHtml(h.hypothesis)}</div>
         <div class="hyp-body"><strong style="color:var(--text)">Why this gap exists:</strong> ${escHtml(h.rationale)}</div>
         ${h.experiment_hint ? `<div class="hyp-body"><strong style="color:var(--text)">How to test it:</strong> ${escHtml(h.experiment_hint)}</div>` : ''}
         ${renderVerificationEvidence(vr)}
         <div class="hyp-footer">
-          <span class="novelty-score">● ${h.novelty_score}% verified novelty</span>
+          <span class="novelty-score${isUnverified ? ' novelty-score--estimated' : ''}" title="${isUnverified ? 'AI estimate — not verified against live literature' : 'Calibrated from live Semantic Scholar search'}">${isUnverified ? '~ ' : '● '}${scoreLabel} novelty</span>
           <span class="gap-tag">${escHtml(h.gap_type || 'research gap')}</span>
           <button class="paper-btn" onclick="copyTextContent(${JSON.stringify(h.title + '\n\n' + h.hypothesis + '\n\n' + h.rationale)})">Copy</button>
           <button class="paper-btn" onclick="sendToPlainLang(${JSON.stringify(h.hypothesis + ' ' + h.rationale)})">→ Plain Language</button>
@@ -935,7 +971,7 @@ async function runCrossFieldDiscovery() {
       <div class="cf-card" style="animation-delay:${idx * 0.12}s">
         <div class="cf-card-header">
           <div class="cf-field-badge">${escHtml(d.source_field)}</div>
-          <div class="cf-novelty">⬡ ${d.novelty_score}% novel</div>
+          <div class="cf-novelty" title="AI estimate — not verified against live literature. Based on model training data, not a real-time search.">⬡ est. ${d.novelty_score}% novel</div>
         </div>
         <div class="cf-title">${escHtml(d.analogy_title)}</div>
         <div class="cf-section-label">What exists in ${escHtml(d.source_field)}</div>
