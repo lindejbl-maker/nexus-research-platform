@@ -81,12 +81,12 @@ const ROLE_CONFIGS = {
     welcomeVerb: 'research',
     tone: 'technical',
     quickActions: [
-      { label: 'Search Papers',       page: 'search',     icon: '🔍' },
-      { label: 'Generate Hypothesis', page: 'hypothesis', icon: '💡' },
+      { label: 'Search Papers',       page: 'search',        icon: '🔍' },
+      { label: 'Generate Hypothesis', page: 'hypothesis',    icon: '💡' },
+      { label: 'Settled Science?',    page: 'sciencechecker',icon: '✅' },
       { label: 'Contradiction Check', page: 'contradiction', icon: '⚔️' },
-      { label: 'Literature Review',   page: 'litreview',  icon: '📄' },
-      { label: 'Gap Map',             page: 'hypothesis', icon: '🗺️' },
-      { label: 'Grant Writer',        page: 'grantwriter',icon: '💰' }
+      { label: 'Literature Review',   page: 'litreview',     icon: '📄' },
+      { label: 'Grant Writer',        page: 'grantwriter',   icon: '💰' }
     ],
     tagline: "Your AI-powered research co-pilot."
   },
@@ -106,15 +106,16 @@ const ROLE_CONFIGS = {
     tagline: "Understand any topic. Ace your research."
   },
   patient: {
-    hiddenHubs: ['hub-analyse', 'hub-create', 'hub-team'],
-    hiddenItems: ['nav-trendforecast', 'nav-crossfield', 'nav-peerreview'],
+    hiddenHubs: ['hub-create', 'hub-team'],
+    hiddenItems: ['nav-trendforecast', 'nav-crossfield', 'nav-peerreview', 'nav-contradiction', 'nav-compare', 'nav-deepdiver'],
     welcomeVerb: 'understand',
     tone: 'plain',
     quickActions: [
-      { label: 'Search Medical Papers', page: 'search',   icon: '🔍' },
-      { label: 'Plain English Explainer', page: 'plainlang', icon: '💬' },
-      { label: 'Research Alerts',       page: 'alerts',   icon: '🔔' },
-      { label: 'Saved Papers',          page: 'saved',    icon: '🔖' }
+      { label: 'Search Medical Papers',  page: 'search',        icon: '🔍' },
+      { label: 'Is This Settled Science?', page: 'sciencechecker', icon: '✅' },
+      { label: 'Plain English Explainer', page: 'plainlang',    icon: '💬' },
+      { label: 'Research Alerts',        page: 'alerts',        icon: '🔔' },
+      { label: 'Saved Papers',           page: 'saved',         icon: '🔖' }
     ],
     tagline: "What does science actually say about your condition?"
   },
@@ -139,10 +140,11 @@ const ROLE_CONFIGS = {
     welcomeVerb: 'verify',
     tone: 'plain',
     quickActions: [
-      { label: 'Search Papers',         page: 'search',        icon: '🔍' },
-      { label: 'Contradiction Detector',page: 'contradiction', icon: '⚔️' },
-      { label: 'Cross-Field Discovery', page: 'crossfield',    icon: '🔗' },
-      { label: 'Saved Papers',          page: 'saved',         icon: '🔖' }
+      { label: 'Is This Settled Science?', page: 'sciencechecker', icon: '✅' },
+      { label: 'Contradiction Detector', page: 'contradiction', icon: '⚔️' },
+      { label: 'Search Papers',          page: 'search',        icon: '🔍' },
+      { label: 'Cross-Field Discovery',  page: 'crossfield',    icon: '🔗' },
+      { label: 'Saved Papers',           page: 'saved',         icon: '🔖' }
     ],
     tagline: "Is this settled science? Find out in seconds."
   },
@@ -177,14 +179,15 @@ const ROLE_CONFIGS = {
     tagline: "Bring the latest research into your classroom."
   },
   curious: {
-    hiddenHubs: ['hub-analyse', 'hub-create', 'hub-team'],
-    hiddenItems: ['nav-trendforecast', 'nav-alerts', 'nav-peerreview'],
+    hiddenHubs: ['hub-create', 'hub-team'],
+    hiddenItems: ['nav-trendforecast', 'nav-alerts', 'nav-peerreview', 'nav-contradiction', 'nav-compare', 'nav-deepdiver'],
     welcomeVerb: 'explore',
     tone: 'plain',
     quickActions: [
-      { label: 'Search Any Topic',    page: 'search',    icon: '🔍' },
-      { label: 'Plain English',       page: 'plainlang', icon: '💬' },
-      { label: 'Saved Papers',        page: 'saved',     icon: '🔖' }
+      { label: 'Search Any Topic',     page: 'search',        icon: '🔍' },
+      { label: 'Is This Settled Science?', page: 'sciencechecker', icon: '✅' },
+      { label: 'Plain English',        page: 'plainlang',     icon: '💬' },
+      { label: 'Saved Papers',         page: 'saved',         icon: '🔖' }
     ],
     tagline: "Understand anything. No PhD required."
   }
