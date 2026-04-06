@@ -73,6 +73,10 @@ async function generateGrant() {
     lastGrantOutput = grantToText(grant, data);
     results.innerHTML = renderGrant(grant, data);
     if (typeof logActivity === 'function') logActivity(`Grant written: "${data.title.substring(0, 50)}"`);
+    // ── Citation Verification (non-blocking) ──────────────────────────────────
+    if (typeof CitationVerifier !== 'undefined') {
+      setTimeout(() => CitationVerifier.scanAndBadge(results), 400);
+    }
   } catch (err) {
     results.innerHTML = `<div class="error-state">⚠ ${escHtml(err.message)}</div>`;
   } finally {
