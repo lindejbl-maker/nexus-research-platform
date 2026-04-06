@@ -77,6 +77,10 @@ async function generateGrant() {
     if (typeof CitationVerifier !== 'undefined') {
       setTimeout(() => CitationVerifier.scanAndBadge(results), 400);
     }
+    // ── Advance pipeline: grant complete ── signals full pipeline completion ──
+    if (typeof NexusPipeline !== 'undefined' && NexusPipeline.getState()) {
+      NexusPipeline.advance('grant', { grant });
+    }
   } catch (err) {
     results.innerHTML = `<div class="error-state">⚠ ${escHtml(err.message)}</div>`;
   } finally {

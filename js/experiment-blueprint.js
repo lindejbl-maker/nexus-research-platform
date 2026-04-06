@@ -49,6 +49,10 @@ async function buildExperimentBlueprint() {
     lastBlueprintMd = blueprintToMarkdown(blueprint, hypothesis);
     results.innerHTML = renderBlueprint(blueprint, hypothesis);
     if (typeof logActivity === 'function') logActivity(`Blueprint: "${hypothesis.substring(0, 50)}"`);
+    // Advance pipeline: experiment blueprint complete
+    if (typeof NexusPipeline !== 'undefined' && NexusPipeline.getState()) {
+      NexusPipeline.advance('experiment', { experiment: blueprint });
+    }
   } catch (err) {
     results.innerHTML = `<div class="error-state">⚠ ${escHtml(err.message)}</div>`;
   } finally {

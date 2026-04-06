@@ -327,6 +327,23 @@
         <div id="recent-activity" class="activity-list"><div class="activity-empty">No activity yet. Start by searching for papers.</div></div>
       </div>
     </div>
+
+      <!-- PIPELINE START CARD -->
+      <div class="dash-card pipeline-start-card" id="pipeline-start-card" style="grid-column: span 2;">
+        <div class="pipeline-start-card-title">🚀 Start Full Research Pipeline</div>
+        <div class="pipeline-start-card-desc">Enter a topic and Nexus will guide you through the complete research workflow — from literature discovery to a ready-to-submit grant application.</div>
+        <div class="pipeline-start-card-steps">
+          <span class="pipeline-start-card-step">🔍 Papers</span>
+          <span class="pipeline-start-card-step">💡 Hypothesis</span>
+          <span class="pipeline-start-card-step">🧪 Experiment</span>
+          <span class="pipeline-start-card-step">📋 Grant</span>
+        </div>
+        <div class="pipeline-start-card-input-row">
+          <input type="text" id="pipeline-topic-input" class="pipeline-start-card-input" placeholder="e.g. CRISPR therapy for pancreatic cancer…" onkeydown="if(event.key==='Enter')startPipeline()" />
+          <button class="pipeline-start-btn" onclick="startPipeline()">Launch Pipeline →</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- PAPER SEARCH -->
@@ -1410,6 +1427,7 @@
 <script src="../js/grant-writer.js"></script>
 <script src="../js/pdf-chat.js"></script>
 <script src="../js/team.js"></script>
+<script src="../js/pipeline.js"></script>
 <script>
 // ── Team helper functions (global scope) ──────────────────────────────────
 function escHtml(str) {

@@ -90,6 +90,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Init research memory — restore active project, show banner, update sidebar
   if (typeof ResearchMemory !== 'undefined') ResearchMemory.init();
+
+  // Init pipeline — restore banner if a pipeline was in progress
+  if (typeof NexusPipeline !== 'undefined') NexusPipeline.init();
 });
 
 function initUser(user) {
@@ -99,6 +102,26 @@ function initUser(user) {
   document.getElementById('greeting-name').textContent = name;
   updateUsageBar();
   updateProfileUI();
+}
+
+// ── runSearch alias (used by pipeline.js auto-trigger) ────────────────────────
+function runSearch() { searchPapers(); }
+
+// ─── PIPELINE ENTRY POINT ─────────────────────────────────────────────────────
+// Called by the "Launch Pipeline" button on the dashboard home card.
+function startPipeline() {
+  const input = document.getElementById('pipeline-topic-input');
+  const topic = input?.value?.trim();
+  if (!topic) {
+    showToast('Enter a research topic to start the pipeline', 'error');
+    input?.focus();
+    return;
+  }
+  if (typeof NexusPipeline === 'undefined') {
+    showToast('Pipeline module not loaded — please refresh', 'error');
+    return;
+  }
+  NexusPipeline.start(topic);
 }
 
 // ═══ PAGE NAVIGATION ══════════════════════════════════════════════════════════
@@ -463,6 +486,10 @@ async function searchPapers() {
     status.style.display = 'none';
     if (!papers.length) { results.innerHTML = '<div class="empty-state">No papers found. Try different keywords or remove filters.</div>'; return; }
     results.innerHTML = papers.map(p => renderPaperCard(p)).join('');
+    // Advance pipeline: paper search complete
+    if (typeof NexusPipeline !== 'undefined' && NexusPipeline.getState()) {
+      NexusPipeline.advance('search', { papers });
+    }
   } catch (err) {
     status.innerHTML = `<span style="color:var(--error)">⚠ ${escHtml(err.message)}</span>`;
   } finally {
@@ -749,6 +776,11 @@ async function generateHypotheses() {
       setTimeout(() => CitationVerifier.scanAndBadge(results), 300);
     }
 
+    // ── Advance pipeline: hypothesis generation complete ───────────────────────
+    if (typeof NexusPipeline !== 'undefined' && NexusPipeline.getState() && verified.length > 0) {
+      NexusPipeline.advance('hypothesis', { hypothesis: verified[0] });
+    }
+
     // Phase 4 — Build Research Gap Map (Item 4: real citation data preferred)
     const tabsEl = document.getElementById('hyp-tabs');
     if (tabsEl) tabsEl.style.display = 'flex';
@@ -918,6 +950,10 @@ async function runCrossFieldDiscovery() {
           <button class="paper-btn" onclick="sendToPlainLang(${JSON.stringify(d.analogy_title + ': ' + d.discovery + ' ' + d.adaptation)})">→ Plain Language</button>
         </div>
       </div>`).join('') + AI_DISCLAIMER;
+    // Citation Verification (non-blocking)
+    if (typeof CitationVerifier !== 'undefined') {
+      setTimeout(() => CitationVerifier.scanAndBadge(results), 400);
+    }
   } catch (err) {
     status.innerHTML = `<span style="color:var(--error)">⚠ ${escHtml(err.message)}</span>`;
     showToast(err.message, 'error');

@@ -77,7 +77,12 @@ async function runDeepDiver() {
     results.innerHTML = renderDeepDiverResult(analysis, paperMeta);
     if (typeof logActivity === 'function') logActivity(`Deep-dived: "${(paperMeta?.title || 'abstract').substring(0, 50)}…"`);
 
-    // ── 4. Save to notebook-compatible format if notebook is loaded ───────────
+    // ── 4. Citation Verification (non-blocking) ───────────────────────────────
+    if (typeof CitationVerifier !== 'undefined') {
+      setTimeout(() => CitationVerifier.scanAndBadge(results), 400);
+    }
+
+    // ── 5. Save to notebook-compatible format if notebook is loaded ───────────
     if (typeof notebookAddEntry === 'function' && paperMeta?.title) {
       notebookAddEntry(`📄 Analysed: "${paperMeta.title}"\n\nKey finding: ${analysis.keyFinding || ''}\nRed flags: ${(analysis.redFlags || []).join('; ') || 'None'}`, ['deep-diver', 'paper-analysis'], false);
     }
