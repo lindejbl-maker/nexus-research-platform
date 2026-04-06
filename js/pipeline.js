@@ -190,10 +190,18 @@ const NexusPipeline = (() => {
     if (!banner) {
       banner = document.createElement('div');
       banner.id = 'pipeline-banner';
-      // Insert after topbar
-      const topbar = document.querySelector('.topbar');
-      if (topbar) topbar.insertAdjacentElement('afterend', banner);
-      else document.body.insertAdjacentElement('afterbegin', banner);
+      // Inject inside main-content, BEFORE the top-bar — keeps sidebar layout intact
+      const mainContent = document.getElementById('main-content');
+      const topBar      = document.getElementById('top-bar');
+      if (mainContent && topBar) {
+        mainContent.insertBefore(banner, topBar);
+      } else if (mainContent) {
+        mainContent.insertAdjacentElement('afterbegin', banner);
+      } else {
+        // Last resort — should never happen with normal dashboard structure
+        const topbar = document.querySelector('.topbar, .top-bar, #top-bar');
+        if (topbar) topbar.insertAdjacentElement('afterend', banner);
+      }
     }
 
     const currentStep = state.currentStep;
