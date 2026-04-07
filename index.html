@@ -1,372 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexus — AI Research Co-Pilot | Find What No One Has Found Yet</title>
-<meta name="description" content="Nexus reads millions of scientific papers and tells you what to test next. AI-powered hypothesis generation, literature reviews, and paper search for researchers, PhD students, and scientists.">
-<meta property="og:title" content="Nexus — AI Research Co-Pilot">
-<meta property="og:description" content="Stop reading. Start discovering. Nexus finds the gaps in science that nobody has explored yet.">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/landing.css?v=2">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus — AI Research Co-Pilot | Find What No One Has Found Yet</title>
+  <meta name="description"
+    content="Nexus reads millions of scientific papers and tells you what to test next. AI-powered hypothesis generation, literature reviews, and paper search for researchers, PhD students, and scientists.">
+  <meta property="og:title" content="Nexus — AI Research Co-Pilot">
+  <meta property="og:description"
+    content="Stop reading. Start discovering. Nexus finds the gaps in science that nobody has explored yet.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/landing.css?v=2">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
 
-<!-- ═══ NAV ═══ -->
-<nav class="nav" id="main-nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">NEX<span>US</span></a>
-    <div class="nav-links">
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#how">How it works</a>
-      <a href="pages/contact.html">Contact</a>
-    </div>
-    <div class="nav-cta">
-      <a href="pages/login.html" class="btn-ghost">Sign in</a>
-      <a href="pages/signup.html" class="btn-nav-cta">Start free</a>
-    </div>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#features" onclick="closeMobileMenu()">Features</a>
-  <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
-  <a href="#how" onclick="closeMobileMenu()">How it works</a>
-  <a href="pages/login.html" class="btn-ghost">Sign in</a>
-  <a href="pages/signup.html" class="btn-primary">Start free</a>
-</div>
-
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-inner">
-    <div class="hero-eyebrow"><span class="dot-pulse"></span>AI Research Co-Pilot — Now in Beta</div>
-    <h1 class="hero-title">Stop reading.<br>Start <em>discovering.</em></h1>
-    <p class="hero-sub">Nexus reads millions of scientific papers and tells you what to test next — not just what already exists.</p>
-    <div class="hero-actions">
-      <a href="pages/signup.html" class="btn-hero" id="hero-cta">Get started free →</a>
-      <a href="#how" class="btn-hero-ghost">See how it works</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-n">200M+</span><span class="stat-l">Papers indexed</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><span class="stat-n">8</span><span class="stat-l">AI features</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><span class="stat-n">80%</span><span class="stat-l">Time saved</span></div>
-      <div class="stat-div"></div>
-      <div class="stat"><span class="stat-n">Free</span><span class="stat-l">To start</span></div>
-    </div>
-  </div>
-  <!-- Hero product screenshot -->
-  <div class="hero-screenshot-wrap">
-    <div class="hero-screenshot-frame">
-      <img src="images/dashboard-hero.png" alt="Nexus Research Gap Map dashboard showing hypothesis cards with novelty scores and a force-directed graph of unexplored research areas" class="hero-screenshot-img" loading="lazy" width="1024" height="1024">
-    </div>
-  </div>
-</section>
-
-<!-- ═══ MARQUEE ═══ -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span>Hypothesis Generator</span><span class="mx">✦</span>
-    <span>Literature Reviews</span><span class="mx">✦</span>
-    <span>Research Gap Map</span><span class="mx">✦</span>
-    <span>Paper Search</span><span class="mx">✦</span>
-    <span>Cross-Field Discovery</span><span class="mx">✦</span>
-    <span>Novelty Verification</span><span class="mx">✦</span>
-    <span>Citation Manager</span><span class="mx">✦</span>
-    <span>Plain Language Builder</span><span class="mx">✦</span>
-    <span>Hypothesis Generator</span><span class="mx">✦</span>
-    <span>Literature Reviews</span><span class="mx">✦</span>
-    <span>Research Gap Map</span><span class="mx">✦</span>
-    <span>Paper Search</span><span class="mx">✦</span>
-    <span>Cross-Field Discovery</span><span class="mx">✦</span>
-    <span>Novelty Verification</span><span class="mx">✦</span>
-    <span>Citation Manager</span><span class="mx">✦</span>
-    <span>Plain Language Builder</span><span class="mx">✦</span>
-  </div>
-</div>
-
-<!-- ═══ TRUSTED BY ═══ -->
-<section class="trusted">
-  <div class="trusted-inner">
-    <div class="trusted-label">BUILT FOR RESEARCHERS AT INSTITUTIONS LIKE</div>
-    <div class="trusted-logos">
-      <div class="trusted-logo">MIT</div>
-      <div class="trusted-logo">Stanford</div>
-      <div class="trusted-logo">Oxford</div>
-      <div class="trusted-logo">Johns Hopkins</div>
-      <div class="trusted-logo">NASA</div>
-      <div class="trusted-logo">Harvard</div>
-      <div class="trusted-logo">Wellcome Trust</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ HOW IT WORKS ═══ -->
-<section class="how" id="how">
-  <div class="section-inner">
-    <div class="section-label">HOW IT WORKS</div>
-    <h2 class="section-title">Three steps to your next breakthrough</h2>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <h3>Search the science</h3>
-        <p>Type your research topic in plain English. Nexus searches 200M+ papers using semantic understanding — not just keywords.</p>
-      </div>
-      <div class="step-connector"><div class="step-connector-line"></div></div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <h3>AI maps the gaps</h3>
-        <p>Nexus reads the literature, builds a coverage map of everything tested, and identifies exactly what hasn't been explored yet.</p>
-      </div>
-      <div class="step-connector"><div class="step-connector-line"></div></div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <h3>Get your hypothesis</h3>
-        <p>Receive ranked hypotheses with novelty scores, supporting evidence, and a full experiment blueprint — ready to run.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FEATURES ═══ -->
-<section class="features" id="features">
-  <div class="section-inner">
-    <div class="section-label">FEATURES</div>
-    <h2 class="section-title">What competitors forgot to build</h2>
-    <div class="features-grid">
-
-      <!-- FLAGSHIP — large card -->
-      <div class="feature-card feature-large">
-        <div class="feature-large-inner">
-          <div class="feature-large-text">
-            <div class="feature-tag">FLAGSHIP</div>
-            <h3>Hypothesis Generator</h3>
-            <p>The only AI tool that tells you what to research next. Nexus maps the entire literature landscape, finds untested gaps, and outputs ranked hypotheses with novelty scores, rationales, and experiment hints.</p>
-            <div class="feature-metric"><span>94%</span> average novelty score on generated hypotheses</div>
-          </div>
-          <div class="feature-large-visual">
-            <div class="fv-row"><span class="fv-score">91% novel</span><span class="fv-text">Unexplored CRISPR off-target effects in aged neural tissue</span></div>
-            <div class="fv-row"><span class="fv-score">88% novel</span><span class="fv-text">Cross-species comparison of CRISPR delivery efficiency in vivo</span></div>
-            <div class="fv-row"><span class="fv-score">85% novel</span><span class="fv-text">CRISPR-mediated modulation of neuroinflammation pathways</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-tag">CORE</div>
-        <h3>Semantic Paper Search</h3>
-        <p>Search 200M+ papers by meaning, not just keywords. Finds exactly what you need even when you don’t know the exact terminology.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-tag">CORE</div>
-        <h3>Literature Review Generator</h3>
-        <p>Input a topic. Get a fully written, cited literature review in minutes. What used to take 4 weeks now takes 4 minutes.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-tag">CORE</div>
-        <h3>Research Gap Map</h3>
-        <p>Visualise your entire field as an interactive network. Studied topics as nodes, unexplored gaps as glowing empty spaces. The most-shared screenshot in academic research.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-tag">CORE</div>
-        <h3>Cross-Field Discovery</h3>
-        <p>The only tool that searches biology, physics, materials science, and 20+ other fields for analogous solutions to your research question. With real published citations.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-tag">COMING SOON</div>
-        <h3>Grant Writer AI</h3>
-        <p>Describe your project. Get a full grant application drafted and matched to open funding calls — NIH, NSF, Wellcome Trust.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-tag">COMING SOON</div>
-        <h3>Contradiction Detector</h3>
-        <p>Scans hundreds of papers and surfaces studies that directly contradict each other — showing where science is still unsettled.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TESTIMONIALS ═══ -->
-<section class="testimonials">
-  <div class="section-inner">
-    <div class="section-label">TESTIMONIALS</div>
-    <h2 class="section-title">What researchers are saying</h2>
-    <div class="testimonials-grid">
-      <div class="testi-card">
-        <div class="testi-quote">Nexus cut my literature review from 3 weeks to 20 minutes. The hypothesis generator found gaps I hadn't considered after two years of reading.</div>
-        <div class="testi-author">
-          <div class="testi-avatar">S</div>
-          <div>
-            <div class="testi-name">Dr. Sarah M.</div>
-            <div class="testi-role">Neuroscience PhD — Stanford University</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-quote">I use Nexus every single day. It's fundamentally changed how I approach literature discovery. The novelty scores are genuinely useful for prioritising what to pursue.</div>
-        <div class="testi-author">
-          <div class="testi-avatar">J</div>
-          <div>
-            <div class="testi-name">James K.</div>
-            <div class="testi-role">Research Scientist — Biotech Startup</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-quote">Our department uses Nexus to onboard new PhD students. They are productive in their first week instead of their third month. It's an extraordinary tool.</div>
-        <div class="testi-author">
-          <div class="testi-avatar">P</div>
-          <div>
-            <div class="testi-name">Prof. Peter A.</div>
-            <div class="testi-role">Department Head — Oxford University</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PRICING ═══ -->
-<section class="pricing" id="pricing">
-  <div class="section-inner">
-    <div class="section-label">PRICING</div>
-    <h2 class="section-title">Simple pricing. Serious value.</h2>
-    <p class="section-sub">Start free. Upgrade when your research demands it. No contracts, cancel anytime.</p>
-    <div class="pricing-grid">
-
-      <div class="price-card">
-        <div class="price-plan">FREE</div>
-        <div class="price-amount">$0<span>/month</span></div>
-        <div class="price-desc">For researchers just getting started</div>
-        <ul class="price-features">
-          <li>5 paper searches per month</li>
-          <li>2 hypothesis generations per month</li>
-          <li>Basic citation generator</li>
-          <li>Save up to 3 projects</li>
-        </ul>
-        <a href="pages/signup.html" class="price-btn price-btn-outline" id="free-plan-cta">Get started free</a>
-      </div>
-
-      <div class="price-card price-card-featured">
-        <div class="price-popular">MOST POPULAR</div>
-        <div class="price-plan">RESEARCHER</div>
-        <div class="price-amount">$29<span>/month</span></div>
-        <div class="price-desc">For active researchers and PhD students</div>
-        <ul class="price-features">
-          <li>Unlimited paper searches</li>
-          <li>Unlimited hypothesis generation</li>
-          <li>Full literature review generator</li>
-          <li>Contradiction detector</li>
-          <li>Export to PDF &amp; DOCX</li>
-          <li>Unlimited projects</li>
-        </ul>
-        <a href="pages/signup.html" class="price-btn price-btn-fill" id="researcher-plan-cta" onclick="handleResearcherCTA(event)">Start free trial</a>
-      </div>
-
-      <div class="price-card">
-        <div class="price-plan">DEPARTMENT</div>
-        <div class="price-amount">$199<span>/month</span></div>
-        <div class="price-desc">For university departments and research teams</div>
-        <ul class="price-features">
-          <li>Everything in Researcher</li>
-          <li>Grant Writer AI</li>
-          <li>Team workspaces</li>
-          <li>Up to 20 members</li>
-          <li>Shared paper libraries</li>
-          <li>Priority support</li>
-        </ul>
-        <a href="pages/contact.html?subject=department-plan" class="price-btn price-btn-outline" id="dept-plan-cta">Contact sales</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ CTA BANNER ═══ -->
-<section class="cta-banner">
-  <div class="section-inner">
-    <h2>Ready to do research differently?</h2>
-    <p>Join researchers, PhD students, and scientists who use Nexus to find what no one else has found yet.</p>
-    <a href="pages/signup.html" class="btn-hero" id="final-cta">Start for free →</a>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-main">
-      <div class="footer-brand">
-        <div class="footer-logo">NEX<span>US</span></div>
-        <div class="footer-tagline">AI research co-pilot. Finds the gaps science hasn't explored yet.</div>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>PRODUCT</h4>
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#how">How it works</a>
-          <a href="pages/dashboard.html">Dashboard</a>
-        </div>
-        <div class="footer-col">
-          <h4>COMPANY</h4>
-          <a href="pages/contact.html">Contact</a>
-          <a href="pages/contact.html?subject=press">Press</a>
-          <a href="pages/contact.html?subject=partnership">Partnerships</a>
-        </div>
-        <div class="footer-col">
-          <h4>LEGAL</h4>
-          <a href="pages/privacy.html">Privacy Policy</a>
-          <a href="pages/terms.html">Terms of Service</a>
-          <a href="pages/contact.html">Contact</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Nexus Research Technologies. All rights reserved.</div>
-      <div class="footer-legal">
-        <a href="pages/privacy.html">Privacy</a>
-        <a href="pages/terms.html">Terms</a>
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" id="main-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">NEX<span>US</span></a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#how">How it works</a>
         <a href="pages/contact.html">Contact</a>
       </div>
+      <div class="nav-cta">
+        <a href="pages/login.html" class="btn-ghost">Sign in</a>
+        <a href="pages/signup.html" class="btn-nav-cta">Start free</a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#features" onclick="closeMobileMenu()">Features</a>
+    <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="#how" onclick="closeMobileMenu()">How it works</a>
+    <a href="pages/login.html" class="btn-ghost">Sign in</a>
+    <a href="pages/signup.html" class="btn-primary">Start free</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><span class="dot-pulse"></span>AI Research Co-Pilot — Now in Beta</div>
+      <h1 class="hero-title">Stop reading.<br>Start <em>discovering.</em></h1>
+      <p class="hero-sub">Nexus reads millions of scientific papers and tells you what to test next — not just what
+        already exists.</p>
+      <div class="hero-actions">
+        <a href="pages/signup.html" class="btn-hero" id="hero-cta">Get started free →</a>
+        <a href="#how" class="btn-hero-ghost">See how it works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-n">200M+</span><span class="stat-l">Papers indexed</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-n">8</span><span class="stat-l">AI features</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-n">80%</span><span class="stat-l">Time saved</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-n">Free</span><span class="stat-l">To start</span></div>
+      </div>
+    </div>
+    <!-- Hero product screenshot -->
+    <div class="hero-screenshot-wrap">
+      <div class="hero-screenshot-frame">
+        <img src="images/dashboard-hero.png"
+          alt="Nexus Research Gap Map dashboard showing hypothesis cards with novelty scores and a force-directed graph of unexplored research areas"
+          class="hero-screenshot-img" loading="lazy" width="1024" height="1024">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Hypothesis Generator</span><span class="mx">✦</span>
+      <span>Literature Reviews</span><span class="mx">✦</span>
+      <span>Research Gap Map</span><span class="mx">✦</span>
+      <span>Paper Search</span><span class="mx">✦</span>
+      <span>Cross-Field Discovery</span><span class="mx">✦</span>
+      <span>Novelty Verification</span><span class="mx">✦</span>
+      <span>Citation Manager</span><span class="mx">✦</span>
+      <span>Plain Language Builder</span><span class="mx">✦</span>
+      <span>Hypothesis Generator</span><span class="mx">✦</span>
+      <span>Literature Reviews</span><span class="mx">✦</span>
+      <span>Research Gap Map</span><span class="mx">✦</span>
+      <span>Paper Search</span><span class="mx">✦</span>
+      <span>Cross-Field Discovery</span><span class="mx">✦</span>
+      <span>Novelty Verification</span><span class="mx">✦</span>
+      <span>Citation Manager</span><span class="mx">✦</span>
+      <span>Plain Language Builder</span><span class="mx">✦</span>
     </div>
   </div>
-</footer>
 
-<script src="js/landing.js"></script>
-<script>
-// ── STRIPE PAYMENT LINK ────────────────────────────────────────────────────
-// 1. Create a Payment Link in your Stripe Dashboard (Products → Payment Links)
-// 2. Set price to $29/month recurring
-// 3. Set success URL to: https://your-site.netlify.app/pages/payment-success.html
-// 4. Replace the URL below with your actual Payment Link
-const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/YOUR_PAYMENT_LINK_HERE';
+  <!-- ═══ TRUSTED BY ═══ -->
+  <section class="trusted">
+    <div class="trusted-inner">
+      <div class="trusted-label">BUILT FOR RESEARCHERS AT INSTITUTIONS LIKE</div>
+      <div class="trusted-logos">
+        <div class="trusted-logo">MIT</div>
+        <div class="trusted-logo">Stanford</div>
+        <div class="trusted-logo">Oxford</div>
+        <div class="trusted-logo">Johns Hopkins</div>
+        <div class="trusted-logo">NASA</div>
+        <div class="trusted-logo">Harvard</div>
+        <div class="trusted-logo">Wellcome Trust</div>
+      </div>
+    </div>
+  </section>
 
-function handleResearcherCTA(e) {
-  // If Stripe link is configured, go straight to Stripe checkout
-  if (!STRIPE_PAYMENT_LINK.includes('YOUR_PAYMENT_LINK_HERE')) {
-    e.preventDefault();
-    window.location.href = STRIPE_PAYMENT_LINK;
-  }
-  // Otherwise fall through to signup page
-}
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how" id="how">
+    <div class="section-inner">
+      <div class="section-label">HOW IT WORKS</div>
+      <h2 class="section-title">Three steps to your next breakthrough</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h3>Search the science</h3>
+          <p>Type your research topic in plain English. Nexus searches 200M+ papers using semantic understanding — not
+            just keywords.</p>
+        </div>
+        <div class="step-connector">
+          <div class="step-connector-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h3>AI maps the gaps</h3>
+          <p>Nexus reads the literature, builds a coverage map of everything tested, and identifies exactly what hasn't
+            been explored yet.</p>
+        </div>
+        <div class="step-connector">
+          <div class="step-connector-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h3>Get your hypothesis</h3>
+          <p>Receive ranked hypotheses with novelty scores, supporting evidence, and a full experiment blueprint — ready
+            to run.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-// Pre-fill contact form subject from URL param
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('subject')) {
-  sessionStorage.setItem('contact_subject', urlParams.get('subject'));
-}
-</script>
+  <!-- ═══ FEATURES ═══ -->
+  <section class="features" id="features">
+    <div class="section-inner">
+      <div class="section-label">FEATURES</div>
+      <h2 class="section-title">What competitors forgot to build</h2>
+      <div class="features-grid">
+
+        <!-- FLAGSHIP — large card -->
+        <div class="feature-card feature-large">
+          <div class="feature-large-inner">
+            <div class="feature-large-text">
+              <div class="feature-tag">FLAGSHIP</div>
+              <h3>Hypothesis Generator</h3>
+              <p>The only AI tool that tells you what to research next. Nexus maps the entire literature landscape,
+                finds untested gaps, and outputs ranked hypotheses with novelty scores, rationales, and experiment
+                hints.</p>
+              <div class="feature-metric"><span>94%</span> average novelty score on generated hypotheses</div>
+            </div>
+            <div class="feature-large-visual">
+              <div class="fv-row"><span class="fv-score">91% novel</span><span class="fv-text">Unexplored CRISPR
+                  off-target effects in aged neural tissue</span></div>
+              <div class="fv-row"><span class="fv-score">88% novel</span><span class="fv-text">Cross-species comparison
+                  of CRISPR delivery efficiency in vivo</span></div>
+              <div class="fv-row"><span class="fv-score">85% novel</span><span class="fv-text">CRISPR-mediated
+                  modulation of neuroinflammation pathways</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-tag">CORE</div>
+          <h3>Semantic Paper Search</h3>
+          <p>Search 200M+ papers by meaning, not just keywords. Finds exactly what you need even when you don’t know the
+            exact terminology.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-tag">CORE</div>
+          <h3>Literature Review Generator</h3>
+          <p>Input a topic. Get a fully written, cited literature review in minutes. What used to take 4 weeks now takes
+            4 minutes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-tag">CORE</div>
+          <h3>Research Gap Map</h3>
+          <p>Visualise your entire field as an interactive network. Studied topics as nodes, unexplored gaps as glowing
+            empty spaces. The most-shared screenshot in academic research.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-tag">CORE</div>
+          <h3>Cross-Field Discovery</h3>
+          <p>The only tool that searches biology, physics, materials science, and 20+ other fields for analogous
+            solutions to your research question. With real published citations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-tag">COMING SOON</div>
+          <h3>Grant Writer AI</h3>
+          <p>Describe your project. Get a full grant application drafted and matched to open funding calls — NIH, NSF,
+            Wellcome Trust.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-tag">COMING SOON</div>
+          <h3>Contradiction Detector</h3>
+          <p>Scans hundreds of papers and surfaces studies that directly contradict each other — showing where science
+            is still unsettled.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="testimonials">
+    <div class="section-inner">
+      <div class="section-label">TESTIMONIALS</div>
+      <h2 class="section-title">What researchers are saying</h2>
+      <div class="testimonials-grid">
+        <div class="testi-card">
+          <div class="testi-quote">Nexus cut my literature review from 3 weeks to 20 minutes. The hypothesis generator
+            found gaps I hadn't considered after two years of reading.</div>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">Dr. Sarah M.</div>
+              <div class="testi-role">Neuroscience PhD — Stanford University</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">I use Nexus every single day. It's fundamentally changed how I approach literature
+            discovery. The novelty scores are genuinely useful for prioritising what to pursue.</div>
+          <div class="testi-author">
+            <div class="testi-avatar">J</div>
+            <div>
+              <div class="testi-name">James K.</div>
+              <div class="testi-role">Research Scientist — Biotech Startup</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-quote">Our department uses Nexus to onboard new PhD students. They are productive in their
+            first week instead of their third month. It's an extraordinary tool.</div>
+          <div class="testi-author">
+            <div class="testi-avatar">P</div>
+            <div>
+              <div class="testi-name">Prof. Peter A.</div>
+              <div class="testi-role">Department Head — Oxford University</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRICING ═══ -->
+  <section class="pricing" id="pricing">
+    <div class="section-inner">
+      <div class="section-label">PRICING</div>
+      <h2 class="section-title">Simple pricing. Serious value.</h2>
+      <p class="section-sub">Start free. Upgrade when your research demands it. No contracts, cancel anytime.</p>
+      <div class="pricing-grid">
+
+        <div class="price-card">
+          <div class="price-plan">FREE</div>
+          <div class="price-amount">$0<span>/month</span></div>
+          <div class="price-desc">For researchers just getting started</div>
+          <ul class="price-features">
+            <li>5 paper searches per month</li>
+            <li>2 hypothesis generations per month</li>
+            <li>Basic citation generator</li>
+            <li>Save up to 3 projects</li>
+          </ul>
+          <a href="pages/signup.html" class="price-btn price-btn-outline" id="free-plan-cta">Get started free</a>
+        </div>
+
+        <div class="price-card price-card-featured">
+          <div class="price-popular">MOST POPULAR</div>
+          <div class="price-plan">RESEARCHER</div>
+          <div class="price-amount">$29<span>/month</span></div>
+          <div class="price-desc">For active researchers and PhD students</div>
+          <ul class="price-features">
+            <li>Unlimited paper searches</li>
+            <li>Unlimited hypothesis generation</li>
+            <li>Full literature review generator</li>
+            <li>Contradiction detector</li>
+            <li>Export to PDF &amp; DOCX</li>
+            <li>Unlimited projects</li>
+          </ul>
+          <a href="https://buy.stripe.com/YOUR_PAYMENT_LINK_HERE" class="price-btn price-btn-fill"
+            id="researcher-plan-cta" target="_blank">Upgrade to Researcher</a>
+        </div>
+
+        <div class="price-card">
+          <div class="price-plan">DEPARTMENT</div>
+          <div class="price-amount">$199<span>/month</span></div>
+          <div class="price-desc">For university departments and research teams</div>
+          <ul class="price-features">
+            <li>Everything in Researcher</li>
+            <li>Grant Writer AI</li>
+            <li>Team workspaces</li>
+            <li>Up to 20 members</li>
+            <li>Shared paper libraries</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="pages/contact.html?subject=department-plan" class="price-btn price-btn-outline"
+            id="dept-plan-cta">Contact sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA BANNER ═══ -->
+  <section class="cta-banner">
+    <div class="section-inner">
+      <h2>Ready to do research differently?</h2>
+      <p>Join researchers, PhD students, and scientists who use Nexus to find what no one else has found yet.</p>
+      <a href="pages/signup.html" class="btn-hero" id="final-cta">Start for free →</a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <div class="footer-logo">NEX<span>US</span></div>
+          <div class="footer-tagline">AI research co-pilot. Finds the gaps science hasn't explored yet.</div>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>PRODUCT</h4>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#how">How it works</a>
+            <a href="pages/dashboard.html">Dashboard</a>
+          </div>
+          <div class="footer-col">
+            <h4>COMPANY</h4>
+            <a href="pages/contact.html">Contact</a>
+            <a href="pages/contact.html?subject=press">Press</a>
+            <a href="pages/contact.html?subject=partnership">Partnerships</a>
+          </div>
+          <div class="footer-col">
+            <h4>LEGAL</h4>
+            <a href="pages/privacy.html">Privacy Policy</a>
+            <a href="pages/terms.html">Terms of Service</a>
+            <a href="pages/contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Nexus Research Technologies. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="pages/privacy.html">Privacy</a>
+          <a href="pages/terms.html">Terms</a>
+          <a href="pages/contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/landing.js"></script>
+  <script>
+    // ── STRIPE PAYMENT LINK ────────────────────────────────────────────────────
+    // 1. Create a Payment Link in your Stripe Dashboard (Products → Payment Links)
+    // 2. Set price to $29/month recurring
+    // 3. Set success URL to: https://your-site.netlify.app/pages/payment-success.html
+    // 4. Replace the URL below with your actual Payment Link
+    const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/YOUR_PAYMENT_LINK_HERE';
+
+    function handleResearcherCTA(e) {
+      // If Stripe link is configured, go straight to Stripe checkout
+      if (!STRIPE_PAYMENT_LINK.includes('YOUR_PAYMENT_LINK_HERE')) {
+        e.preventDefault();
+        window.location.href = STRIPE_PAYMENT_LINK;
+      }
+      // Otherwise fall through to signup page
+    }
+
+    // Pre-fill contact form subject from URL param
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('subject')) {
+      sessionStorage.setItem('contact_subject', urlParams.get('subject'));
+    }
+  </script>
 </body>
+
 </html>

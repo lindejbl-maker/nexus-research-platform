@@ -16,7 +16,7 @@ const AI_COST_RATES = { inputPer1K: 0.000075, outputPer1K: 0.0003 };
 function estimateTokens(text) { return Math.ceil((text || '').length / 4); }
 
 function logApiCost(feature, inputText, outputText) {
-  const inputTokens  = estimateTokens(inputText);
+  const inputTokens = estimateTokens(inputText);
   const outputTokens = estimateTokens(outputText);
   const cost = (inputTokens / 1000 * AI_COST_RATES.inputPer1K) + (outputTokens / 1000 * AI_COST_RATES.outputPer1K);
   const log = JSON.parse(localStorage.getItem('nexus_api_costs') || '[]');
@@ -93,10 +93,10 @@ const PlainLang = (() => {
 // ──────────────────────────────────────────────────────────────────────────────
 const ConfidenceBadge = (() => {
   const LEVELS = {
-    'Supported':    { emoji: '🟢', cls: 'conf-supported',  tip: 'Multiple papers back this claim area — well-supported in the literature' },
-    'Contested':    { emoji: '🟡', cls: 'conf-contested',  tip: 'Papers exist on both sides — treat findings carefully and cross-check' },
-    'Emerging':     { emoji: '🔴', cls: 'conf-emerging',   tip: 'Limited papers on this — speculative and early-stage; needs replication' },
-    'No Evidence':  { emoji: '⬜', cls: 'conf-none',       tip: 'Almost no published evidence — this is a genuine frontier hypothesis' },
+    'Supported': { emoji: '🟢', cls: 'conf-supported', tip: 'Multiple papers back this claim area — well-supported in the literature' },
+    'Contested': { emoji: '🟡', cls: 'conf-contested', tip: 'Papers exist on both sides — treat findings carefully and cross-check' },
+    'Emerging': { emoji: '🔴', cls: 'conf-emerging', tip: 'Limited papers on this — speculative and early-stage; needs replication' },
+    'No Evidence': { emoji: '⬜', cls: 'conf-none', tip: 'Almost no published evidence — this is a genuine frontier hypothesis' },
   };
 
   // Main render — takes the structured fields from hypothesis JSON
@@ -110,9 +110,9 @@ const ConfidenceBadge = (() => {
 
   // Derive confidence from the Contradiction Detector's overallConsensus score
   function fromConsensus(consensusScore) {
-    if (consensusScore >= 75) return render('Supported',   null);
-    if (consensusScore >= 50) return render('Contested',   null);
-    if (consensusScore >= 25) return render('Emerging',    null);
+    if (consensusScore >= 75) return render('Supported', null);
+    if (consensusScore >= 50) return render('Contested', null);
+    if (consensusScore >= 25) return render('Emerging', null);
     return render('No Evidence', null);
   }
 
@@ -131,9 +131,18 @@ const gemini = {
     if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
       throw new Error('Gemini API key not configured. Add your key to js/gemini.js');
     }
+    // ── Role System intercept ───────────────────────────────────────────────
+    let roleInstr = '';
+    if (typeof NexusRole !== 'undefined') {
+      const roleDef = NexusRole.getDefinition();
+      const roleCfg = NexusRole.getConfig();
+      if (roleDef && roleCfg) {
+        roleInstr = `\n\n[USER ROLE: You are currently assisting a ${roleDef.label}. Your central objective with this user is to ${roleCfg.welcomeVerb}. You must write in a highly ${roleCfg.tone} tone and format.]\n`;
+      }
+    }
     // ── Plain Language Mode intercept ─────────────────────────────────────────
     const plainInstr = PlainLang.getInstruction();
-    const effectiveSystem = plainInstr ? (systemPrompt + plainInstr) : systemPrompt;
+    const effectiveSystem = roleInstr + (plainInstr ? (systemPrompt + plainInstr) : systemPrompt);
     // ── Research Memory intercept — prepend project context to user prompt ─────
     const memCtx = (typeof ResearchMemory !== 'undefined') ? ResearchMemory.getContext() : '';
     const effectivePrompt = memCtx ? (memCtx + prompt) : prompt;
@@ -217,10 +226,10 @@ const gemini = {
   // Plain Language Report Builder
   async plainLanguageReport(content, format = 'investor') {
     const formatGuides = {
-      investor:   'a compelling investor brief for startup founders or venture capitalists. Structure: Problem Statement, The Science, Key Evidence, Market Opportunity, Why Now, Call to Action.',
-      press:      'a press release for science journalists and science communicators. Structure: Headline (bold), Lead paragraph (the news), What it means in practice, Expert context, What happens next.',
+      investor: 'a compelling investor brief for startup founders or venture capitalists. Structure: Problem Statement, The Science, Key Evidence, Market Opportunity, Why Now, Call to Action.',
+      press: 'a press release for science journalists and science communicators. Structure: Headline (bold), Lead paragraph (the news), What it means in practice, Expert context, What happens next.',
       government: 'a government policy briefing for senior civil servants and ministers. Structure: Executive Summary (3 bullets), Background, Evidence Base, Policy Implications, Recommendations.',
-      board:      'a board report for non-technical executives and investors. Structure: Summary (3 bullets), Business Relevance, Key Risks, Opportunity Size, Decision Required.'
+      board: 'a board report for non-technical executives and investors. Structure: Summary (3 bullets), Business Relevance, Key Risks, Opportunity Size, Decision Required.'
     };
     const system = `You are an expert science communicator who translates complex research into clear, compelling, jargon-free narratives. When you must use a technical term, immediately explain it in plain English in parentheses.`;
     const prompt = `Transform the following research content into ${formatGuides[format] || formatGuides.investor}\n\nResearch content:\n"${content}"\n\nWrite in clear, engaging, confident language. Maximum 450 words. Use proper paragraphs — avoid bullet soup. Write as if briefing a very smart non-scientist who has limited time.`;
@@ -269,7 +278,7 @@ const gemini = {
     if (!vecA || !vecB || vecA.length !== vecB.length) return 0;
     let dot = 0, magA = 0, magB = 0;
     for (let i = 0; i < vecA.length; i++) {
-      dot  += vecA[i] * vecB[i];
+      dot += vecA[i] * vecB[i];
       magA += vecA[i] * vecA[i];
       magB += vecB[i] * vecB[i];
     }
@@ -424,12 +433,12 @@ const semanticScholar = {
   // ─── Feature 4: BibTeX format ────────────────────────────────────────────
   formatBibtex(paper) {
     const firstAuthor = paper.authors?.[0]?.name?.split(' ').pop() || 'Unknown';
-    const year        = paper.year || 'nd';
-    const key         = `${firstAuthor}${year}`;
-    const authors     = paper.authors?.map(a => a.name).join(' and ') || 'Unknown';
-    const title       = (paper.title || 'Untitled').replace(/[{}]/g, '');
-    const doi         = paper.externalIds?.DOI || '';
-    const journal     = paper.publicationVenue?.name || paper.journal?.name || '';
+    const year = paper.year || 'nd';
+    const key = `${firstAuthor}${year}`;
+    const authors = paper.authors?.map(a => a.name).join(' and ') || 'Unknown';
+    const title = (paper.title || 'Untitled').replace(/[{}]/g, '');
+    const doi = paper.externalIds?.DOI || '';
+    const journal = paper.publicationVenue?.name || paper.journal?.name || '';
     return `@article{${key},\n  author  = {${authors}},\n  title   = {{${title}}},\n  year    = {${year}},\n  journal = {${journal}},\n  doi     = {${doi}}\n}`;
   },
 
@@ -438,9 +447,9 @@ const semanticScholar = {
     const lines = ['TY  - JOUR'];
     (paper.authors || []).forEach(a => lines.push(`AU  - ${a.name}`));
     lines.push(`TI  - ${paper.title || 'Untitled'}`);
-    if (paper.year)   lines.push(`PY  - ${paper.year}`);
+    if (paper.year) lines.push(`PY  - ${paper.year}`);
     if (paper.publicationVenue?.name) lines.push(`JO  - ${paper.publicationVenue.name}`);
-    if (paper.externalIds?.DOI)       lines.push(`DO  - ${paper.externalIds.DOI}`);
+    if (paper.externalIds?.DOI) lines.push(`DO  - ${paper.externalIds.DOI}`);
     if (paper.abstract) lines.push(`AB  - ${paper.abstract.replace(/\n/g, ' ')}`);
     lines.push('ER  -');
     return lines.join('\n');
@@ -450,7 +459,7 @@ const semanticScholar = {
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature 1 — Paper Deep-Diver: structured analysis of any paper
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.analyzePaper = async function(abstractOrText, field = '', paperMeta = null) {
+gemini.analyzePaper = async function (abstractOrText, field = '', paperMeta = null) {
   const context = paperMeta ? `Paper: "${paperMeta.title}" (${paperMeta.year || 'n/a'})
 Authors: ${paperMeta.authors || 'unknown'}
 Citations: ${paperMeta.citations != null ? paperMeta.citations : 'unknown'}
@@ -491,7 +500,7 @@ Return ONLY JSON, no markdown.
 TEXT TO ANALYSE:
 ${abstractOrText.substring(0, 4000)}`;
 
-  const raw    = await this.generate(prompt, '', 0.2, 'deep-diver');
+  const raw = await this.generate(prompt, '', 0.2, 'deep-diver');
   const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); }
   catch { return { keyFinding: cleaned.substring(0, 300), pico: null, statistics: [], redFlags: [], notProven: '', followUps: [] }; }
@@ -500,11 +509,11 @@ ${abstractOrText.substring(0, 4000)}`;
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature 2 — Peer Review Response: generates point-by-point rebuttal letter
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.generatePeerReviewResponse = async function(reviewerComments, abstract, journal = '', tone = 'professional', parsedPoints = []) {
+gemini.generatePeerReviewResponse = async function (reviewerComments, abstract, journal = '', tone = 'professional', parsedPoints = []) {
   const toneGuide = {
     professional: 'firm, polite, and professional. Stand your ground on valid points while accepting genuine improvements',
-    diplomatic:   'very diplomatic and deferential. Always thank reviewers and frame every response positively',
-    assertive:    'confident and direct. Challenge weak reviewer points respectfully but clearly'
+    diplomatic: 'very diplomatic and deferential. Always thank reviewers and frame every response positively',
+    assertive: 'confident and direct. Challenge weak reviewer points respectfully but clearly'
   }[tone] || 'professional';
 
   const prompt = `You are a senior academic helping write a peer review response letter.
@@ -537,7 +546,7 @@ stance must be one of: "accept" (you agree and will change), "decline" (you disa
 Address every separate comment in parsedPoints as a separate item in points[].
 Return ONLY JSON, no markdown.`;
 
-  const raw     = await this.generate(prompt, '', 0.4, 'peer-review');
+  const raw = await this.generate(prompt, '', 0.4, 'peer-review');
   const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); }
   catch { return { opening: '', points: [{ reviewer: 1, originalComment: reviewerComments.substring(0, 80), stance: 'accept', response: raw.substring(0, 600), paperEdit: null, citeSuggestion: null }], closing: '', letter: raw }; }
@@ -546,7 +555,7 @@ Return ONLY JSON, no markdown.`;
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature 3 — Lab Notebook: find connections between an entry and saved papers
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.findNotebookConnections = async function(entryBody, savedPapers = [], otherEntries = []) {
+gemini.findNotebookConnections = async function (entryBody, savedPapers = [], otherEntries = []) {
   const papersContext = savedPapers.slice(0, 20).map((p, i) =>
     `[P${i + 1}] "${p.title}" (${p.year || 'n/a'}) — ${(p.abstract || '').substring(0, 150)}`
   ).join('\n');
@@ -581,7 +590,7 @@ Return JSON:
 type is "paper" or "note". Return an empty array [] if no strong connections exist.
 Return ONLY JSON, no markdown.`;
 
-  const raw     = await this.generate(prompt, '', 0.5, 'lab-notebook');
+  const raw = await this.generate(prompt, '', 0.5, 'lab-notebook');
   const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); }
   catch { return []; }
@@ -590,7 +599,7 @@ Return ONLY JSON, no markdown.`;
 // ─────────────────────────────────────────────────────────────────────────────
 // CONTRADICTION DETECTOR — finds where studies directly disagree
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.detectContradictions = async function(papers, topic, field = '') {
+gemini.detectContradictions = async function (papers, topic, field = '') {
   const abstracts = papers.slice(0, 25).map((p, i) =>
     `[${i + 1}] "${p.title}" (${p.year || 'n/a'}) — ${(p.abstract || '').substring(0, 300)}`
   ).join('\n\n');
@@ -629,7 +638,7 @@ overallConsensus: 0 = complete disagreement, 100 = perfect consensus.
 Return 2-6 contradictions. If none exist, return an empty contradictions array.
 Return ONLY JSON, no markdown.`;
 
-  const raw     = await this.generate(prompt, '', 0.3, 'contradiction-detector');
+  const raw = await this.generate(prompt, '', 0.3, 'contradiction-detector');
   const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); }
   catch { return { overallConsensus: null, overallNote: '', contradictions: [] }; }
@@ -638,7 +647,7 @@ Return ONLY JSON, no markdown.`;
 // ─────────────────────────────────────────────────────────────────────────────
 // EXPERIMENT BLUEPRINT BUILDER
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.buildExperimentBlueprint = async function(hypothesis, field = '', budget = 'standard', timeline = '6 months') {
+gemini.buildExperimentBlueprint = async function (hypothesis, field = '', budget = 'standard', timeline = '6 months') {
   const profile = typeof nexusProfile !== 'undefined' ? nexusProfile.getContext() : '';
   const prompt = `${profile}You are an expert research methodologist. Design a complete, ready-to-run experiment to test this hypothesis:
 
@@ -686,7 +695,7 @@ Return a JSON object with this exact structure:
 Be specific — use real equipment names, real statistical tests, realistic sample sizes.
 Return ONLY JSON, no markdown.`;
 
-  const raw     = await this.generate(prompt, '', 0.3, 'experiment-blueprint');
+  const raw = await this.generate(prompt, '', 0.3, 'experiment-blueprint');
   const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); }
   catch { return { objective: raw.substring(0, 300), variables: {}, equipment: [], procedure: [], statistics: {}, timeline: [], safety: [] }; }
@@ -695,10 +704,10 @@ Return ONLY JSON, no markdown.`;
 // ─────────────────────────────────────────────────────────────────────────────
 // TREND FORECASTER
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.forecastTrends = async function(domain, papers, yearBuckets, topInstitutions, field = '') {
+gemini.forecastTrends = async function (domain, papers, yearBuckets, topInstitutions, field = '') {
   const titles = papers.slice(0, 30).map(p => `"${p.title}" (${p.year || 'n/a'}, ${p.citationCount || 0} citations)`).join('\n');
-  const yearsStr = Object.entries(yearBuckets).sort((a,b) => a[0]-b[0]).map(([y,c]) => `${y}: ${c} papers`).join(', ');
-  const instStr  = topInstitutions.slice(0, 6).join(', ');
+  const yearsStr = Object.entries(yearBuckets).sort((a, b) => a[0] - b[0]).map(([y, c]) => `${y}: ${c} papers`).join(', ');
+  const instStr = topInstitutions.slice(0, 6).join(', ');
 
   const prompt = `You are a science trend analyst. Based on the following data about research on "${domain}", identify the top 5 EMERGING trends that are just starting to accelerate.
 
@@ -733,7 +742,7 @@ Return JSON:
 growthScore: 0-100 (100 = explosive, confirmed). Be realistic — not everything is 90+.
 Return ONLY JSON, no markdown.`;
 
-  const raw     = await this.generate(prompt, '', 0.5, 'trend-forecaster');
+  const raw = await this.generate(prompt, '', 0.5, 'trend-forecaster');
   const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); }
   catch { return { fieldSentiment: '', trends: [] }; }
@@ -742,20 +751,20 @@ Return ONLY JSON, no markdown.`;
 // ─────────────────────────────────────────────────────────────────────────────
 // GRANT WRITER AI
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.generateGrant = async function(data) {
+gemini.generateGrant = async function (data) {
   const funder = data.customFunder || data.funder;
   const budget = parseInt(data.budget).toLocaleString();
 
   const funderGuidance = {
-    'NIH R01':            'Follow NIH R01 structure. Use specific aims page. Focus on significance, innovation, and approach.',
-    'NIH R21':            'Exploratory/developmental grant. Emphasise feasibility and preliminary data.',
-    'NSF':                'Emphasise broader impacts alongside intellectual merit. Use clear objectives.',
-    'Wellcome Trust':     'UK-based. Emphasise global health relevance and interdisciplinary approach.',
-    'NRF':                'South African NRF. Link to national development goals and local capacity building.',
-    'EU Horizon Europe':  'European. Emphasise collaboration, open science, and EU strategic priorities.',
-    'MRC':                'Medical Research Council UK. Emphasise translational impact and patient benefit.',
-    'Gates Foundation':   'Focus on global health equity, scalable solutions, and measurable outcomes.',
-    'ERC':                'European Research Council. Emphasise scientific excellence and PI track record.'
+    'NIH R01': 'Follow NIH R01 structure. Use specific aims page. Focus on significance, innovation, and approach.',
+    'NIH R21': 'Exploratory/developmental grant. Emphasise feasibility and preliminary data.',
+    'NSF': 'Emphasise broader impacts alongside intellectual merit. Use clear objectives.',
+    'Wellcome Trust': 'UK-based. Emphasise global health relevance and interdisciplinary approach.',
+    'NRF': 'South African NRF. Link to national development goals and local capacity building.',
+    'EU Horizon Europe': 'European. Emphasise collaboration, open science, and EU strategic priorities.',
+    'MRC': 'Medical Research Council UK. Emphasise translational impact and patient benefit.',
+    'Gates Foundation': 'Focus on global health equity, scalable solutions, and measurable outcomes.',
+    'ERC': 'European Research Council. Emphasise scientific excellence and PI track record.'
   }[funder] || `Tailor to ${funder}'s known priorities.`;
 
   const prompt = `You are an expert grant writer who has helped researchers win millions in funding. Write a complete, compelling grant application.
@@ -792,7 +801,7 @@ Return ONLY a JSON object with these exact keys (each is a multi-paragraph strin
 Each section should be 2-4 substantial paragraphs. Make it grant-winning quality.
 Return ONLY JSON, no markdown.`;
 
-  const raw     = await this.generate(prompt, '', 0.5, 'grant-writer');
+  const raw = await this.generate(prompt, '', 0.5, 'grant-writer');
   const cleaned = raw.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
   try { return JSON.parse(cleaned); }
   catch {
@@ -804,7 +813,7 @@ Return ONLY JSON, no markdown.`;
 // ─────────────────────────────────────────────────────────────────────────────
 // PDF CHAT — answers questions in context of a full paper
 // ─────────────────────────────────────────────────────────────────────────────
-gemini.chatWithPdf = async function(pdfText, question, history = []) {
+gemini.chatWithPdf = async function (pdfText, question, history = []) {
   const historyStr = history.slice(-6).map(h =>
     `${h.role === 'user' ? 'Researcher' : 'Nexus'}: ${h.text.substring(0, 300)}`
   ).join('\n');

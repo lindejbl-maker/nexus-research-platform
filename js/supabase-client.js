@@ -15,7 +15,7 @@ const DEV_USER = {
 // 1. Go to https://supabase.com → New project
 // 2. Settings → API → copy Project URL and anon/public key
 // 3. Paste them below, then set DEV_MODE = false above
-const SUPABASE_URL      = 'YOUR_SUPABASE_URL';
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
 const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -35,7 +35,13 @@ document.head.appendChild(supabaseScript);
 // ─── AUTH ─────────────────────────────────────────────────────────────────────
 const nexusAuth = {
   async signUp(email, password, metadata = {}) {
-    if (DEV_MODE) return { data: { user: DEV_USER }, error: null };
+    if (DEV_MODE) {
+      if (!email || !password) throw new Error('Email and password are required.');
+      if (localStorage.getItem('nexus_mock_' + email)) throw new Error('An account with this email already exists.');
+      localStorage.setItem('nexus_mock_' + email, password);
+      localStorage.setItem('nexus_mock_active', email);
+      return { data: { user: { ...DEV_USER, email } }, error: null };
+    }
     await waitForSupabase();
     if (!window._supabase) throw new Error('Database not connected. Please configure Supabase.');
     const result = await window._supabase.auth.signUp({
@@ -45,8 +51,8 @@ const nexusAuth = {
     if (result.data?.user && !result.error) {
       await nexusDB.saveProfile(result.data.user.id, {
         first_name: metadata.first_name || '',
-        last_name:  metadata.last_name  || '',
-        field:      metadata.field      || ''
+        last_name: metadata.last_name || '',
+        field: metadata.field || ''
       });
     }
     return result;
@@ -54,8 +60,11 @@ const nexusAuth = {
 
   async signIn(email, password) {
     if (DEV_MODE) {
-      window.location.href = 'dashboard.html';
-      return { data: { user: DEV_USER }, error: null };
+      if (!email || !password) throw new Error('Email and password are required.');
+      const savedPass = localStorage.getItem('nexus_mock_' + email);
+      if (savedPass !== password) throw new Error('Invalid email or password.');
+      localStorage.setItem('nexus_mock_active', email);
+      return { data: { user: { ...DEV_USER, email } }, error: null };
     }
     await waitForSupabase();
     if (!window._supabase) throw new Error('Database not connected. Please configure Supabase.');
@@ -64,6 +73,7 @@ const nexusAuth = {
 
   async signInWithGoogle() {
     if (DEV_MODE) {
+      localStorage.setItem('nexus_mock_active', 'google_user@nexus.ai');
       window.location.href = 'dashboard.html';
       return;
     }
@@ -76,14 +86,21 @@ const nexusAuth = {
   },
 
   async signOut() {
-    if (DEV_MODE) { window.location.href = '../index.html'; return; }
+    if (DEV_MODE) {
+      localStorage.removeItem('nexus_mock_active');
+      window.location.href = '../index.html';
+      return;
+    }
     await waitForSupabase();
     if (window._supabase) await window._supabase.auth.signOut();
     window.location.href = '../index.html';
   },
 
   async getUser() {
-    if (DEV_MODE) return DEV_USER;
+    if (DEV_MODE) {
+      const active = localStorage.getItem('nexus_mock_active');
+      return active ? { ...DEV_USER, email: active } : null;
+    }
     await waitForSupabase();
     if (!window._supabase) return null;
     const { data: { user } } = await window._supabase.auth.getUser();
@@ -91,10 +108,17 @@ const nexusAuth = {
   },
 
   async requireAuth() {
-    if (DEV_MODE) return DEV_USER;
+    if (DEV_MODE) {
+      const active = localStorage.getItem('nexus_mock_active');
+      if (!active) {
+        window.location.href = window.location.pathname.includes('/pages/') ? 'login.html' : 'pages/login.html';
+        throw new Error('Not authenticated');
+      }
+      return { ...DEV_USER, email: active };
+    }
     const user = await this.getUser();
     if (!user) {
-      window.location.href = '/pages/login.html';
+      window.location.href = window.location.pathname.includes('/pages/') ? 'login.html' : 'pages/login.html';
       throw new Error('Not authenticated');
     }
     return user;
@@ -118,17 +142,17 @@ const nexusDB = {
     if (!this._isReal()) return;
     try {
       await window._supabase.from('profiles').upsert({
-        id:           userId,
-        first_name:   data.first_name || data.field || '',
-        last_name:    data.last_name || '',
-        field:        data.field || '',
-        subfield:     data.subfield || '',
-        institution:  data.institution || '',
+        id: userId,
+        first_name: data.first_name || data.field || '',
+        last_name: data.last_name || '',
+        field: data.field || '',
+        subfield: data.subfield || '',
+        institution: data.institution || '',
         career_stage: data.career_stage || '',
-        country:      data.country || '',
-        interests:    data.interests || [],
+        country: data.country || '',
+        interests: data.interests || [],
         grant_bodies: data.grant_bodies || [],
-        updated_at:   new Date().toISOString()
+        updated_at: new Date().toISOString()
       }, { onConflict: 'id' });
     } catch (e) { console.warn('[nexusDB] saveProfile remote failed:', e.message); }
   },
@@ -161,16 +185,16 @@ const nexusDB = {
     if (!this._isReal()) return;
     try {
       await window._supabase.from('saved_papers').upsert({
-        user_id:           userId,
-        paper_id:          paper.paperId,
-        title:             paper.title || '',
-        authors:           paper.authors || [],
-        year:              paper.year || null,
-        abstract:          paper.abstract || '',
-        fields_of_study:   paper.fieldsOfStudy || [],
-        external_ids:      paper.externalIds || {},
-        open_access_pdf:   paper.openAccessPdf || {},
-        citation_count:    paper.citationCount || 0
+        user_id: userId,
+        paper_id: paper.paperId,
+        title: paper.title || '',
+        authors: paper.authors || [],
+        year: paper.year || null,
+        abstract: paper.abstract || '',
+        fields_of_study: paper.fieldsOfStudy || [],
+        external_ids: paper.externalIds || {},
+        open_access_pdf: paper.openAccessPdf || {},
+        citation_count: paper.citationCount || 0
       }, { onConflict: 'user_id,paper_id' });
     } catch (e) { console.warn('[nexusDB] savePaper remote failed:', e.message); }
   },
@@ -194,16 +218,16 @@ const nexusDB = {
         if (!error && data) {
           // Normalise to match Semantic Scholar paper shape
           const normalised = data.map(p => ({
-            paperId:       p.paper_id,
-            title:         p.title,
-            authors:       p.authors,
-            year:          p.year,
-            abstract:      p.abstract,
+            paperId: p.paper_id,
+            title: p.title,
+            authors: p.authors,
+            year: p.year,
+            abstract: p.abstract,
             fieldsOfStudy: p.fields_of_study,
-            externalIds:   p.external_ids,
+            externalIds: p.external_ids,
             openAccessPdf: p.open_access_pdf,
             citationCount: p.citation_count,
-            savedAt:       new Date(p.saved_at).getTime()
+            savedAt: new Date(p.saved_at).getTime()
           }));
           localStorage.setItem('nexus_saved_papers', JSON.stringify(normalised));
           return normalised;
@@ -222,10 +246,10 @@ const nexusDB = {
     if (!this._isReal()) return newProject;
     try {
       const { data } = await window._supabase.from('projects').insert({
-        user_id:     userId,
-        name:        project.name || '',
+        user_id: userId,
+        name: project.name || '',
         description: project.description || '',
-        color:       project.color || '#00d4ff'
+        color: project.color || '#00d4ff'
       }).select().single();
       return data || newProject;
     } catch (e) { console.warn('[nexusDB] createProject remote failed:', e.message); return newProject; }
@@ -264,8 +288,8 @@ const nexusDB = {
     if (!this._isReal()) return newAlert;
     try {
       const { data } = await window._supabase.from('alerts').insert({
-        user_id:   userId,
-        topic:     alert.topic || '',
+        user_id: userId,
+        topic: alert.topic || '',
         frequency: alert.frequency || 'weekly'
       }).select().single();
       return data || newAlert;
@@ -339,8 +363,8 @@ const nexusUsage = {
       .from('usage_logs').select('action').eq('user_id', userId).gte('created_at', monthStart);
     if (error) return { searches: 0, hypotheses: 0 };
     return {
-      searches:    data.filter(r => r.action === 'search').length,
-      hypotheses:  data.filter(r => r.action === 'hypothesis').length
+      searches: data.filter(r => r.action === 'search').length,
+      hypotheses: data.filter(r => r.action === 'hypothesis').length
     };
   },
 
@@ -348,7 +372,7 @@ const nexusUsage = {
     await waitForSupabase();
     if (!window._supabase || userId === 'dev-user' || SUPABASE_URL === 'YOUR_SUPABASE_URL') {
       const local = JSON.parse(localStorage.getItem('nexus_usage_local') || '{"searches":0,"hypotheses":0}');
-      if (action === 'search')     local.searches++;
+      if (action === 'search') local.searches++;
       if (action === 'hypothesis') local.hypotheses++;
       localStorage.setItem('nexus_usage_local', JSON.stringify(local));
       return;

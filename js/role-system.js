@@ -91,7 +91,7 @@ const ROLE_CONFIGS = {
     tagline: "Your AI-powered research co-pilot."
   },
   student: {
-    hiddenHubs: ['hub-team'],
+    hiddenHubs: [],
     hiddenItems: ['nav-grantwriter', 'nav-deepdiver', 'nav-contradiction', 'nav-trendforecast', 'nav-alerts'],
     welcomeVerb: 'study',
     tone: 'educational',
@@ -106,7 +106,7 @@ const ROLE_CONFIGS = {
     tagline: "Understand any topic. Ace your research."
   },
   patient: {
-    hiddenHubs: ['hub-create', 'hub-team'],
+    hiddenHubs: ['hub-create'],
     hiddenItems: ['nav-trendforecast', 'nav-crossfield', 'nav-peerreview', 'nav-contradiction', 'nav-compare', 'nav-deepdiver'],
     welcomeVerb: 'understand',
     tone: 'plain',
@@ -120,7 +120,7 @@ const ROLE_CONFIGS = {
     tagline: "What does science actually say about your condition?"
   },
   investor: {
-    hiddenHubs: ['hub-write', 'hub-team'],
+    hiddenHubs: ['hub-write'],
     hiddenItems: ['nav-peerreview', 'nav-hypothesis', 'nav-litreview', 'nav-experimentblueprint', 'nav-grantwriter', 'nav-alerts', 'nav-deepdiver'],
     welcomeVerb: 'analyse',
     tone: 'executive',
@@ -135,7 +135,7 @@ const ROLE_CONFIGS = {
     tagline: "Validate the science. Spot hype before it costs you."
   },
   journalist: {
-    hiddenHubs: ['hub-create', 'hub-write', 'hub-team'],
+    hiddenHubs: ['hub-create', 'hub-write'],
     hiddenItems: ['nav-experimentblueprint', 'nav-grantwriter', 'nav-trendforecast', 'nav-deepdiver'],
     welcomeVerb: 'verify',
     tone: 'plain',
@@ -149,7 +149,7 @@ const ROLE_CONFIGS = {
     tagline: "Is this settled science? Find out in seconds."
   },
   lawyer: {
-    hiddenHubs: ['hub-write', 'hub-team'],
+    hiddenHubs: ['hub-write'],
     hiddenItems: ['nav-trendforecast', 'nav-alerts', 'nav-grantwriter', 'nav-experimentblueprint', 'nav-peerreview', 'nav-plainlang'],
     welcomeVerb: 'research',
     tone: 'technical',
@@ -164,7 +164,7 @@ const ROLE_CONFIGS = {
     tagline: "Find the gaps in precedent. Ground every claim in evidence."
   },
   teacher: {
-    hiddenHubs: ['hub-team'],
+    hiddenHubs: [],
     hiddenItems: ['nav-grantwriter', 'nav-contradiction', 'nav-deepdiver', 'nav-trendforecast', 'nav-peerreview', 'nav-experimentblueprint'],
     welcomeVerb: 'teach',
     tone: 'educational',
@@ -179,7 +179,7 @@ const ROLE_CONFIGS = {
     tagline: "Bring the latest research into your classroom."
   },
   curious: {
-    hiddenHubs: ['hub-create', 'hub-team'],
+    hiddenHubs: ['hub-create'],
     hiddenItems: ['nav-trendforecast', 'nav-alerts', 'nav-peerreview', 'nav-contradiction', 'nav-compare', 'nav-deepdiver'],
     welcomeVerb: 'explore',
     tone: 'plain',
