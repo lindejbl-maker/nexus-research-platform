@@ -1,0 +1,15 @@
+runtime: nodejs20
+
+env_variables:
+  GEMINI_API_KEY: 'AIzaSyDUtfx0YCMLv4K8Wyge2OsN4Yec29KZb8I'
+
+handlers:
+- url: /api/generate
+  script: auto
+
+- url: /(.*\.(css|js|png|jpg|jpeg|gif|svg|ico))$
+  static_files: \1
+  upload: .*\.(css|js|png|jpg|jpeg|gif|svg|ico)$
+
+- url: /.*
+  script: auto

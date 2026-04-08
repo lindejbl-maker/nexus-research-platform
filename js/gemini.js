@@ -147,17 +147,25 @@ const gemini = {
     const memCtx = (typeof ResearchMemory !== 'undefined') ? ResearchMemory.getContext() : '';
     const effectivePrompt = memCtx ? (memCtx + prompt) : prompt;
     // ─────────────────────────────────────────────────────────────────────────
-    const body = {
-      contents: [{ role: 'user', parts: [{ text: effectivePrompt }] }],
-      generationConfig: { temperature, maxOutputTokens: 4096 }
+    const payload = {
+      prompt: effectivePrompt,
+      systemPrompt: effectiveSystem,
+      temperature: temperature
     };
-    if (effectiveSystem) body.systemInstruction = { parts: [{ text: effectiveSystem }] };
-    const res = await fetch(GEMINI_BASE, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+
+    const res = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
-    if (!res.ok) { const err = await res.json(); throw new Error(err.error?.message || `Gemini API error (${res.status})`); }
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || `Server API error (${res.status})`);
+    }
     const data = await res.json();
-    const output = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const output = data.text || '';
+
     logApiCost(feature, effectivePrompt + effectiveSystem, output);
     return output;
   },
@@ -260,7 +268,7 @@ const gemini = {
   async embedText(text) {
     if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') return null;
     try {
-      const res = await fetch(GEMINI_EMBED_BASE, {
+      const res = await fetch('/api/embed', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: { parts: [{ text: text.substring(0, 2000) }] } })
@@ -343,17 +351,19 @@ const gemini = {
 const semanticScholar = {
   BASE: 'https://api.semanticscholar.org/graph/v1',
   // CORS proxy for local dev — Semantic Scholar blocks browser requests from localhost/file://
-  _proxy(url) {
-    const isLocal = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-    return isLocal ? `https://corsproxy.io/?${encodeURIComponent(url)}` : url;
-  },
-
   async searchPapers(query, { year, field, sort = 'relevance', limit = 10 } = {}) {
     const fields = 'paperId,title,abstract,year,authors,citationCount,externalIds,fieldsOfStudy,openAccessPdf,publicationDate';
     let url = `${this.BASE}/paper/search?query=${encodeURIComponent(query)}&fields=${fields}&limit=${limit}`;
     if (year) url += `&year=${year}-`;
     if (field) url += `&fieldsOfStudy=${encodeURIComponent(field)}`;
-    const res = await fetch(this._proxy(url));
+
+    // Proxy request through our secure backend to avoid CORS/adblock blocks
+    const res = await fetch('/api/scholar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+
     if (!res.ok) {
       if (res.status === 429) throw new Error('Rate limit reached. Please wait a moment and try again.');
       throw new Error(`Paper search failed (${res.status}). Please try again.`);

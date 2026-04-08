@@ -1,337 +1,558 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard — Nexus</title>
-<link rel="stylesheet" href="../css/dashboard.css?v=12">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Nexus</title>
+  <link rel="stylesheet" href="../css/dashboard.css?v=12">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
 
-<button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
-  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-</button>
-<div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  </button>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-<!-- ═══ SIDEBAR ═══ -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-logo">NEX<span>US</span><div class="sidebar-logo-dot"></div></div>
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">NEX<span>US</span>
+      <div class="sidebar-logo-dot"></div>
+    </div>
 
     <nav class="sidebar-nav" aria-label="Main navigation">
 
-    <!-- Dashboard standalone -->
-    <a href="#" class="nav-item active" data-page="dashboard" id="nav-dashboard" onclick="showPage('dashboard',this)">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Dashboard
-    </a>
+      <!-- Dashboard standalone -->
+      <a href="#" class="nav-item active" data-page="dashboard" id="nav-dashboard" onclick="showPage('dashboard',this)">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+        Dashboard
+      </a>
 
-    <!-- HUB: Discover -->
-    <div class="nav-hub" id="hub-discover">
-      <button class="hub-header" onclick="toggleHub('hub-discover')" aria-expanded="false">
-        <div class="hub-left">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <span class="hub-label">Discover</span>
-        </div>
-        <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="hub-children">
-        <a href="#" class="nav-item" data-page="search" id="nav-search" onclick="showPage('search',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          Paper Search
-        </a>
-        <a href="#" class="nav-item" data-page="trendforecast" id="nav-trendforecast" onclick="showPage('trendforecast',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          Trend Forecaster <span class="nav-badge">AI</span>
-        </a>
-        <a href="#" class="nav-item" data-page="crossfield" id="nav-crossfield" onclick="showPage('crossfield',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          Cross-Field Discovery <span class="nav-badge">AI</span>
-        </a>
-        <a href="#" class="nav-item" data-page="alerts" id="nav-alerts" onclick="showPage('alerts',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          Research Alerts
-        </a>
-      </div>
-    </div>
-
-    <!-- HUB: Analyse -->
-    <div class="nav-hub" id="hub-analyse">
-      <button class="hub-header" onclick="toggleHub('hub-analyse')" aria-expanded="false">
-        <div class="hub-left">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
-          <span class="hub-label">Analyse</span>
-        </div>
-        <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="hub-children">
-        <a href="#" class="nav-item" data-page="contradiction" id="nav-contradiction" onclick="showPage('contradiction',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4.5 12h15"/><path d="M4.5 6l7.5 6-7.5 6"/><path d="M19.5 6l-7.5 6 7.5 6"/></svg>
-          Contradiction Detector <span class="nav-badge">AI</span>
-        </a>
-        <a href="#" class="nav-item" data-page="compare" id="nav-compare" onclick="showPage('compare',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/></svg>
-          Compare Papers
-        </a>
-        <a href="#" class="nav-item" data-page="deepdiver" id="nav-deepdiver" onclick="showPage('deepdiver',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-          Paper Deep-Diver
-        </a>
-        <a href="#" class="nav-item" data-page="sciencechecker" id="nav-sciencechecker" onclick="showPage('sciencechecker',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9l-6-6z"/><polyline points="9 3 9 9 15 9"/><line x1="12" y1="12" x2="12" y2="17"/><line x1="9.5" y1="14.5" x2="14.5" y2="14.5"/></svg>
-          Settled Science? <span class="nav-badge" style="background:rgba(52,211,153,0.15);color:#34D399;border-color:rgba(52,211,153,0.25);">NEW</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- HUB: Create -->
-    <div class="nav-hub" id="hub-create">
-      <button class="hub-header" onclick="toggleHub('hub-create')" aria-expanded="false">
-        <div class="hub-left">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span class="hub-label">Create</span>
-        </div>
-        <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="hub-children">
-        <a href="#" class="nav-item" data-page="hypothesis" id="nav-hypothesis" onclick="showPage('hypothesis',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
-          Hypothesis Generator <span class="nav-badge">AI</span>
-        </a>
-        <a href="#" class="nav-item" data-page="litreview" id="nav-litreview" onclick="showPage('litreview',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Literature Review <span class="nav-badge">AI</span>
-        </a>
-        <a href="#" class="nav-item" data-page="experimentblueprint" id="nav-experimentblueprint" onclick="showPage('experimentblueprint',this);initExperimentBlueprint()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/><path d="M12 8v4l3 3"/></svg>
-          Experiment Blueprint <span class="nav-badge">AI</span>
-        </a>
-        <a href="#" class="nav-item" data-page="grantwriter" id="nav-grantwriter" onclick="showPage('grantwriter',this);initGrantWriter()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-          Grant Writer AI <span class="nav-badge">AI</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- HUB: Write -->
-    <div class="nav-hub" id="hub-write">
-      <button class="hub-header" onclick="toggleHub('hub-write')" aria-expanded="false">
-        <div class="hub-left">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          <span class="hub-label">Write</span>
-        </div>
-        <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="hub-children">
-        <a href="#" class="nav-item" data-page="peerreview" id="nav-peerreview" onclick="showPage('peerreview',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Peer Review Response <span class="nav-badge">AI</span>
-        </a>
-        <a href="#" class="nav-item" data-page="plainlang" id="nav-plainlang" onclick="showPage('plainlang',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Plain Language Builder <span class="nav-badge">AI</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- HUB: Library -->
-    <div class="nav-hub" id="hub-library">
-      <button class="hub-header" onclick="toggleHub('hub-library')" aria-expanded="false">
-        <div class="hub-left">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <span class="hub-label">Library</span>
-        </div>
-        <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="hub-children">
-        <a href="#" class="nav-item" data-page="projects" id="nav-projects" onclick="showPage('projects',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          My Projects
-        </a>
-        <a href="#" class="nav-item" data-page="saved" id="nav-saved" onclick="showPage('saved',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-          Saved Papers
-        </a>
-        <a href="#" class="nav-item" data-page="citations" id="nav-citations" onclick="showPage('citations',this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          Citation Manager
-        </a>
-      </div>
-    </div>
-
-    <!-- Team section -->
-    <div class="sidebar-team-block" id="team-nav-indicator" style="display:none;">
-      <div class="sidebar-team-label">ACTIVE WORKSPACE</div>
-      <div class="sidebar-team-name-text" id="sidebar-team-name"></div>
-    </div>
-
-    <!-- HUB: Team -->
-    <div class="nav-hub" id="hub-team">
-      <button class="hub-header" onclick="toggleHub('hub-team')" aria-expanded="false">
-        <div class="hub-left">
-          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span class="hub-label">TEAM</span>
-        </div>
-        <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="hub-children">
-        <a href="#" class="nav-item" data-page="teamhub" id="nav-teamhub" onclick="showPage('teamhub',this);TeamManager.renderTeamHub()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Workspace
-        </a>
-        <a href="#" class="nav-item" data-page="teammembers" id="nav-teammembers" onclick="showPage('teammembers',this);TeamManager.renderMemberList()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Members
-        </a>
-        <a href="#" class="nav-item" data-page="teamlibrary" id="nav-teamlibrary" onclick="showPage('teamlibrary',this);TeamManager.renderSharedLibrary()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Shared Library
-        </a>
-        <a href="#" class="nav-item" data-page="teamprojects" id="nav-teamprojects" onclick="showPage('teamprojects',this);TeamManager.renderSharedProjects()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          Shared Projects
-        </a>
-        <a href="#" class="nav-item" data-page="teamhypotheses" id="nav-teamhypotheses" onclick="showPage('teamhypotheses',this);TeamManager.renderSharedHypotheses()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
-          Team Hypotheses
-        </a>
-        <a href="#" class="nav-item" data-page="teamsettings" id="nav-teamsettings" onclick="showPage('teamsettings',this);TeamManager.renderTeamSettings()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          Settings
-        </a>
-      </div>
-    </div>
-
-    <!-- Analytics & Account -->
-    <div class="nav-section-label" style="margin-top:1.25rem;">ANALYTICS</div>
-    <a href="#" class="nav-item" data-page="costtracker" id="nav-costtracker" onclick="showPage('costtracker',this)">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      AI Cost Tracker
-    </a>
-    <a href="#" class="nav-item" data-page="benchmark" id="nav-benchmark" onclick="showPage('benchmark',this);renderBenchmarkUI()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Validation Tests
-    </a>
-    <a href="#" class="nav-item" data-page="pdfchat" id="nav-pdfchat" onclick="showPage('pdfchat',this);initPdfChat()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15h6"/><path d="M9 11h6"/></svg>
-      PDF Chat
-    </a>
-    <a href="#" class="nav-item" data-page="notebook" id="nav-notebook" onclick="showPage('notebook',this);renderNotebook()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-      Lab Notebook
-    </a>
-
-    <div class="nav-section-label" style="margin-top:1.25rem;">ACCOUNT</div>
-    <a href="#" class="nav-item" id="nav-profile" onclick="showProfile()">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      My Profile
-      <span class="profile-field-badge" id="profile-field-badge" style="display:none;"></span>
-    </a>
-  </nav>
-
-  <div class="sidebar-bottom">
-    <div class="usage-widget">
-      <div class="usage-title">ACCESS</div>
-      <div class="usage-unlimited">&#10022; Unlimited AI Access</div>
-    </div>
-    <div class="usage-widget">
-      <div class="usage-title">FREE PLAN USAGE</div>
-      <div class="usage-row"><span>Searches</span><span id="search-usage-label">0 / 5</span></div>
-      <div class="usage-bar"><div class="usage-fill" id="search-bar" style="width:0%"></div></div>
-      <div class="usage-row" style="margin-top:8px;"><span>Hypotheses</span><span id="hyp-usage-label">0 / 2</span></div>
-      <div class="usage-bar"><div class="usage-fill" id="hyp-bar" style="width:0%"></div></div>
-      <a href="#" class="upgrade-btn" id="upgrade-btn" onclick="showUpgradeModal('Upgrade to get unlimited searches, hypotheses, and literature reviews.')">Upgrade plan →</a>
-    </div>
-    <div class="sidebar-user">
-      <div class="user-avatar" id="user-avatar">?</div>
-      <div class="user-info">
-        <div class="user-name" id="user-name">Loading...</div>
-        <div class="user-plan">Free plan</div>
-      </div>
-      <button class="signout-btn" id="signout-btn" onclick="confirmSignOut()" title="Sign out" aria-label="Sign out">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      </button>
-    </div>
-  </div>
-</aside>
-
-<!-- ═══ MAIN CONTENT ═══ -->
-<main class="main" id="main-content">
-
-  <!-- STICKY TOP BAR -->
-  <div class="top-bar" id="top-bar">
-    <div class="tb-breadcrumb">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="opacity:0.35;flex-shrink:0"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      <span class="tb-page-name" id="tb-page-name">Dashboard</span>
-    </div>
-    <div class="tb-right">
-      <!-- Plain Language Toggle -->
-      <button class="pl-toggle" id="pl-toggle-btn" onclick="PlainLang.toggle()" title="Toggle Plain Language Mode — simplify all AI output">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="pl-toggle-label">Plain</span>
-      </button>
-      <div class="tb-status-pill">
-        <div class="tb-online-dot"></div>
-        <span id="tb-user-label">Researcher</span>
-      </div>
-      <button class="tb-user-btn" id="tb-user-btn" onclick="showProfile()" title="My Profile">R</button>
-    </div>
-  </div>
-
-  <!-- DASHBOARD HOME -->
-  <div class="page active" id="page-dashboard">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Good <span id="time-greeting">morning</span>, <span id="greeting-name">Researcher</span></h1>
-        <p class="page-sub" id="role-tagline">Here's your research workspace.</p>
-      </div>
-      <button class="btn-accent" id="new-hypothesis-btn" onclick="showPage('hypothesis', document.getElementById('nav-hypothesis'))">+ New Hypothesis</button>
-    </div>
-    <div class="stats-row">
-      <div class="stat-card"><div class="sc-label">Searches this month</div><div class="sc-value" id="dash-searches">0</div></div>
-      <div class="stat-card"><div class="sc-label">Hypotheses generated</div><div class="sc-value" id="dash-hyps">0</div></div>
-      <div class="stat-card"><div class="sc-label">Saved papers</div><div class="sc-value" id="dash-papers">0</div></div>
-      <div class="stat-card"><div class="sc-label">Active projects</div><div class="sc-value" id="dash-projects">0</div></div>
-    </div>
-    <div class="dash-grid">
-      <div class="dash-card">
-        <div class="dc-header"><div class="dc-title">Quick Actions</div></div>
-        <div class="quick-actions" id="quick-actions-container">
-          <!-- Populated by renderRoleQuickActions() in role-system integration -->
-          <button class="qa-btn" onclick="showPage('search', document.getElementById('nav-search'))">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search Papers
-          </button>
-          <button class="qa-btn" onclick="showPage('hypothesis', document.getElementById('nav-hypothesis'))">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>Generate Hypothesis
-          </button>
-          <button class="qa-btn" onclick="showPage('crossfield', document.getElementById('nav-crossfield'))">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Cross-Field Discovery
-          </button>
-          <button class="qa-btn" onclick="showPage('compare', document.getElementById('nav-compare'))">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="18" rx="1"/><rect x="13" y="3" width="8" height="18" rx="1"/></svg>Compare Papers
-          </button>
-          <button class="qa-btn" onclick="showPage('litreview', document.getElementById('nav-litreview'))">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Literature Review
-          </button>
-          <button class="qa-btn" onclick="openProjectModal()">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>New Project
-          </button>
+      <!-- HUB: Discover -->
+      <div class="nav-hub" id="hub-discover">
+        <button class="hub-header" onclick="toggleHub('hub-discover')" aria-expanded="false">
+          <div class="hub-left">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <span class="hub-label">Discover</span>
+          </div>
+          <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div class="hub-children">
+          <a href="#" class="nav-item" data-page="search" id="nav-search" onclick="showPage('search',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            Paper Search
+          </a>
+          <a href="#" class="nav-item" data-page="trendforecast" id="nav-trendforecast"
+            onclick="showPage('trendforecast',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+              <polyline points="16 7 22 7 22 13" />
+            </svg>
+            Trend Forecaster <span class="nav-badge">AI</span>
+          </a>
+          <a href="#" class="nav-item" data-page="crossfield" id="nav-crossfield" onclick="showPage('crossfield',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+            Cross-Field Discovery <span class="nav-badge">AI</span>
+          </a>
+          <a href="#" class="nav-item" data-page="alerts" id="nav-alerts" onclick="showPage('alerts',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            Research Alerts
+          </a>
         </div>
       </div>
-      <div class="dash-card">
-        <div class="dc-header">
-          <div class="dc-title">Recent Activity</div>
-          <button class="dc-action" id="clear-activity-btn" onclick="clearActivity()" style="display:none;">Clear</button>
+
+      <!-- HUB: Analyse -->
+      <div class="nav-hub" id="hub-analyse">
+        <button class="hub-header" onclick="toggleHub('hub-analyse')" aria-expanded="false">
+          <div class="hub-left">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path
+                d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18" />
+            </svg>
+            <span class="hub-label">Analyse</span>
+          </div>
+          <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div class="hub-children">
+          <a href="#" class="nav-item" data-page="contradiction" id="nav-contradiction"
+            onclick="showPage('contradiction',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M4.5 12h15" />
+              <path d="M4.5 6l7.5 6-7.5 6" />
+              <path d="M19.5 6l-7.5 6 7.5 6" />
+            </svg>
+            Contradiction Detector <span class="nav-badge">AI</span>
+          </a>
+          <a href="#" class="nav-item" data-page="compare" id="nav-compare" onclick="showPage('compare',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="8" height="18" rx="1" />
+              <rect x="13" y="3" width="8" height="18" rx="1" />
+            </svg>
+            Compare Papers
+          </a>
+          <a href="#" class="nav-item" data-page="deepdiver" id="nav-deepdiver" onclick="showPage('deepdiver',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+              <line x1="11" y1="8" x2="11" y2="14" />
+              <line x1="8" y1="11" x2="14" y2="11" />
+            </svg>
+            Paper Deep-Diver
+          </a>
+          <a href="#" class="nav-item" data-page="sciencechecker" id="nav-sciencechecker"
+            onclick="showPage('sciencechecker',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9l-6-6z" />
+              <polyline points="9 3 9 9 15 9" />
+              <line x1="12" y1="12" x2="12" y2="17" />
+              <line x1="9.5" y1="14.5" x2="14.5" y2="14.5" />
+            </svg>
+            Settled Science? <span class="nav-badge"
+              style="background:rgba(52,211,153,0.15);color:#34D399;border-color:rgba(52,211,153,0.25);">NEW</span>
+          </a>
         </div>
-        <div id="recent-activity" class="activity-list"><div class="activity-empty">No activity yet. Start by searching for papers.</div></div>
+      </div>
+
+      <!-- HUB: Create -->
+      <div class="nav-hub" id="hub-create">
+        <button class="hub-header" onclick="toggleHub('hub-create')" aria-expanded="false">
+          <div class="hub-left">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            <span class="hub-label">Create</span>
+          </div>
+          <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div class="hub-children">
+          <a href="#" class="nav-item" data-page="hypothesis" id="nav-hypothesis" onclick="showPage('hypothesis',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path
+                d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18" />
+            </svg>
+            Hypothesis Generator <span class="nav-badge">AI</span>
+          </a>
+          <a href="#" class="nav-item" data-page="litreview" id="nav-litreview" onclick="showPage('litreview',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            Literature Review <span class="nav-badge">AI</span>
+          </a>
+          <a href="#" class="nav-item" data-page="experimentblueprint" id="nav-experimentblueprint"
+            onclick="showPage('experimentblueprint',this);initExperimentBlueprint()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path
+                d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18" />
+              <path d="M12 8v4l3 3" />
+            </svg>
+            Experiment Blueprint <span class="nav-badge">AI</span>
+          </a>
+          <a href="#" class="nav-item" data-page="grantwriter" id="nav-grantwriter"
+            onclick="showPage('grantwriter',this);initGrantWriter()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="16" />
+              <line x1="8" y1="12" x2="16" y2="12" />
+            </svg>
+            Grant Writer AI <span class="nav-badge">AI</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- HUB: Write -->
+      <div class="nav-hub" id="hub-write">
+        <button class="hub-header" onclick="toggleHub('hub-write')" aria-expanded="false">
+          <div class="hub-left">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            <span class="hub-label">Write</span>
+          </div>
+          <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div class="hub-children">
+          <a href="#" class="nav-item" data-page="peerreview" id="nav-peerreview" onclick="showPage('peerreview',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            Peer Review Response <span class="nav-badge">AI</span>
+          </a>
+          <a href="#" class="nav-item" data-page="plainlang" id="nav-plainlang" onclick="showPage('plainlang',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            Plain Language Builder <span class="nav-badge">AI</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- HUB: Library -->
+      <div class="nav-hub" id="hub-library">
+        <button class="hub-header" onclick="toggleHub('hub-library')" aria-expanded="false">
+          <div class="hub-left">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            <span class="hub-label">Library</span>
+          </div>
+          <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div class="hub-children">
+          <a href="#" class="nav-item" data-page="projects" id="nav-projects" onclick="showPage('projects',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+            My Projects
+          </a>
+          <a href="#" class="nav-item" data-page="saved" id="nav-saved" onclick="showPage('saved',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
+            Saved Papers
+          </a>
+          <a href="#" class="nav-item" data-page="citations" id="nav-citations" onclick="showPage('citations',this)">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+            Citation Manager
+          </a>
+        </div>
+      </div>
+
+      <!-- Team section -->
+      <div class="sidebar-team-block" id="team-nav-indicator" style="display:none;">
+        <div class="sidebar-team-label">ACTIVE WORKSPACE</div>
+        <div class="sidebar-team-name-text" id="sidebar-team-name"></div>
+      </div>
+
+      <!-- HUB: Team -->
+      <div class="nav-hub" id="hub-team">
+        <button class="hub-header" onclick="toggleHub('hub-team')" aria-expanded="false">
+          <div class="hub-left">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span class="hub-label">TEAM</span>
+          </div>
+          <svg class="hub-chevron" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <div class="hub-children">
+          <a href="#" class="nav-item" data-page="teamhub" id="nav-teamhub"
+            onclick="showPage('teamhub',this);TeamManager.renderTeamHub()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            Workspace
+          </a>
+          <a href="#" class="nav-item" data-page="teammembers" id="nav-teammembers"
+            onclick="showPage('teammembers',this);TeamManager.renderMemberList()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            Members
+          </a>
+          <a href="#" class="nav-item" data-page="teamlibrary" id="nav-teamlibrary"
+            onclick="showPage('teamlibrary',this);TeamManager.renderSharedLibrary()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            Shared Library
+          </a>
+          <a href="#" class="nav-item" data-page="teamprojects" id="nav-teamprojects"
+            onclick="showPage('teamprojects',this);TeamManager.renderSharedProjects()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+            Shared Projects
+          </a>
+          <a href="#" class="nav-item" data-page="teamhypotheses" id="nav-teamhypotheses"
+            onclick="showPage('teamhypotheses',this);TeamManager.renderSharedHypotheses()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path
+                d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18" />
+            </svg>
+            Team Hypotheses
+          </a>
+          <a href="#" class="nav-item" data-page="teamsettings" id="nav-teamsettings"
+            onclick="showPage('teamsettings',this);TeamManager.renderTeamSettings()">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            Settings
+          </a>
+        </div>
+      </div>
+
+      <!-- Analytics & Account -->
+      <div class="nav-section-label" style="margin-top:1.25rem;">ANALYTICS</div>
+      <a href="#" class="nav-item" data-page="costtracker" id="nav-costtracker" onclick="showPage('costtracker',this)">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <line x1="12" y1="1" x2="12" y2="23" />
+          <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        </svg>
+        AI Cost Tracker
+      </a>
+      <a href="#" class="nav-item" data-page="benchmark" id="nav-benchmark"
+        onclick="showPage('benchmark',this);renderBenchmarkUI()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+        Validation Tests
+      </a>
+      <a href="#" class="nav-item" data-page="pdfchat" id="nav-pdfchat"
+        onclick="showPage('pdfchat',this);initPdfChat()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <path d="M9 15h6" />
+          <path d="M9 11h6" />
+        </svg>
+        PDF Chat
+      </a>
+      <a href="#" class="nav-item" data-page="notebook" id="nav-notebook"
+        onclick="showPage('notebook',this);renderNotebook()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        </svg>
+        Lab Notebook
+      </a>
+
+      <div class="nav-section-label" style="margin-top:1.25rem;">ACCOUNT</div>
+      <a href="#" class="nav-item" id="nav-profile" onclick="showProfile()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        My Profile
+        <span class="profile-field-badge" id="profile-field-badge" style="display:none;"></span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="usage-widget">
+        <div class="usage-title">ACCESS</div>
+        <div class="usage-unlimited">&#10022; Unlimited AI Access</div>
+      </div>
+      <div class="usage-widget">
+        <div class="usage-title">FREE PLAN USAGE</div>
+        <div class="usage-row"><span>Searches</span><span id="search-usage-label">0 / 5</span></div>
+        <div class="usage-bar">
+          <div class="usage-fill" id="search-bar" style="width:0%"></div>
+        </div>
+        <div class="usage-row" style="margin-top:8px;"><span>Hypotheses</span><span id="hyp-usage-label">0 / 2</span>
+        </div>
+        <div class="usage-bar">
+          <div class="usage-fill" id="hyp-bar" style="width:0%"></div>
+        </div>
+        <a href="#" class="upgrade-btn" id="upgrade-btn"
+          onclick="showUpgradeModal('Upgrade to get unlimited searches, hypotheses, and literature reviews.')">Upgrade
+          plan →</a>
+      </div>
+      <div class="sidebar-user">
+        <div class="user-avatar" id="user-avatar">?</div>
+        <div class="user-info">
+          <div class="user-name" id="user-name">Loading...</div>
+          <div class="user-plan">Free plan</div>
+        </div>
+        <button class="signout-btn" id="signout-btn" onclick="confirmSignOut()" title="Sign out" aria-label="Sign out">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+        </button>
       </div>
     </div>
+  </aside>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main class="main" id="main-content">
+
+    <!-- STICKY TOP BAR -->
+    <div class="top-bar" id="top-bar">
+      <div class="tb-breadcrumb">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+          style="opacity:0.35;flex-shrink:0">
+          <rect x="3" y="3" width="7" height="7" rx="1" />
+          <rect x="14" y="3" width="7" height="7" rx="1" />
+          <rect x="3" y="14" width="7" height="7" rx="1" />
+          <rect x="14" y="14" width="7" height="7" rx="1" />
+        </svg>
+        <span class="tb-page-name" id="tb-page-name">Dashboard</span>
+      </div>
+      <div class="tb-right">
+        <!-- Plain Language Toggle -->
+        <button class="pl-toggle" id="pl-toggle-btn" onclick="PlainLang.toggle()"
+          title="Toggle Plain Language Mode — simplify all AI output">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          <span class="pl-toggle-label">Plain</span>
+        </button>
+        <div class="tb-status-pill">
+          <div class="tb-online-dot"></div>
+          <span id="tb-user-label">Researcher</span>
+        </div>
+        <button class="tb-user-btn" id="tb-user-btn" onclick="showProfile()" title="My Profile">R</button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD HOME -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Good <span id="time-greeting">morning</span>, <span
+              id="greeting-name">Researcher</span></h1>
+          <p class="page-sub" id="role-tagline">Here's your research workspace.</p>
+        </div>
+        <button class="btn-accent" id="new-hypothesis-btn"
+          onclick="showPage('hypothesis', document.getElementById('nav-hypothesis'))">+ New Hypothesis</button>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="sc-label">Searches this month</div>
+          <div class="sc-value" id="dash-searches">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Hypotheses generated</div>
+          <div class="sc-value" id="dash-hyps">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Saved papers</div>
+          <div class="sc-value" id="dash-papers">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Active projects</div>
+          <div class="sc-value" id="dash-projects">0</div>
+        </div>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dc-header">
+            <div class="dc-title">Quick Actions</div>
+          </div>
+          <div class="quick-actions" id="quick-actions-container">
+            <!-- Populated by renderRoleQuickActions() in role-system integration -->
+            <button class="qa-btn" onclick="showPage('search', document.getElementById('nav-search'))">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>Search Papers
+            </button>
+            <button class="qa-btn" onclick="showPage('hypothesis', document.getElementById('nav-hypothesis'))">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path
+                  d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18" />
+              </svg>Generate Hypothesis
+            </button>
+            <button class="qa-btn" onclick="showPage('crossfield', document.getElementById('nav-crossfield'))">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+              </svg>Cross-Field Discovery
+            </button>
+            <button class="qa-btn" onclick="showPage('compare', document.getElementById('nav-compare'))">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="8" height="18" rx="1" />
+                <rect x="13" y="3" width="8" height="18" rx="1" />
+              </svg>Compare Papers
+            </button>
+            <button class="qa-btn" onclick="showPage('litreview', document.getElementById('nav-litreview'))">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>Literature Review
+            </button>
+            <button class="qa-btn" onclick="openProjectModal()">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+              </svg>New Project
+            </button>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dc-header">
+            <div class="dc-title">Recent Activity</div>
+            <button class="dc-action" id="clear-activity-btn" onclick="clearActivity()"
+              style="display:none;">Clear</button>
+          </div>
+          <div id="recent-activity" class="activity-list">
+            <div class="activity-empty">No activity yet. Start by searching for papers.</div>
+          </div>
+        </div>
+      </div>
 
       <!-- PIPELINE START CARD -->
       <div class="dash-card pipeline-start-card" id="pipeline-start-card" style="grid-column: span 2;">
         <div class="pipeline-start-card-title">🚀 Start Full Research Pipeline</div>
-        <div class="pipeline-start-card-desc">Enter a topic and Nexus will guide you through the complete research workflow — from literature discovery to a ready-to-submit grant application.</div>
+        <div class="pipeline-start-card-desc">Enter a topic and Nexus will guide you through the complete research
+          workflow — from literature discovery to a ready-to-submit grant application.</div>
         <div class="pipeline-start-card-steps">
           <span class="pipeline-start-card-step">🔍 Papers</span>
           <span class="pipeline-start-card-step">💡 Hypothesis</span>
@@ -339,1118 +560,1359 @@
           <span class="pipeline-start-card-step">📋 Grant</span>
         </div>
         <div class="pipeline-start-card-input-row">
-          <input type="text" id="pipeline-topic-input" class="pipeline-start-card-input" placeholder="e.g. CRISPR therapy for pancreatic cancer…" onkeydown="if(event.key==='Enter')startPipeline()" />
+          <input type="text" id="pipeline-topic-input" class="pipeline-start-card-input"
+            placeholder="e.g. CRISPR therapy for pancreatic cancer…"
+            onkeydown="if(event.key==='Enter')startPipeline()" />
           <button class="pipeline-start-btn" onclick="startPipeline()">Launch Pipeline →</button>
         </div>
       </div>
     </div>
-  </div>
+    </div>
 
-  <!-- PAPER SEARCH -->
-  <div class="page" id="page-search">
-    <div class="page-header">
-      <div><h1 class="page-title">Paper Search</h1><p class="page-sub">Search 200M+ scientific papers by meaning, not just keywords.</p></div>
-    </div>
-    <div class="search-box-wrap">
-      <div class="search-box">
-        <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="paper-search-input" placeholder="e.g. CRISPR gene editing in neural cells..." aria-label="Search papers" />
-        <button id="paper-search-btn" onclick="searchPapers()">Search →</button>
-      </div>
-      <div class="search-filters">
-        <select id="search-year" aria-label="Filter by year">
-          <option value="">Any year</option><option value="2024">2024+</option><option value="2022">2022+</option><option value="2020">2020+</option><option value="2015">2015+</option>
-        </select>
-        <select id="search-field" aria-label="Filter by field">
-          <option value="">All fields</option><option value="Medicine">Medicine</option><option value="Biology">Biology</option><option value="Chemistry">Chemistry</option><option value="Physics">Physics</option><option value="Computer Science">Computer Science</option><option value="Environmental Science">Environmental Science</option><option value="Materials Science">Materials Science</option>
-        </select>
-        <select id="search-sort" aria-label="Sort by">
-          <option value="relevance">Sort: Relevance</option><option value="citationCount">Sort: Most cited</option><option value="publicationDate">Sort: Most recent</option>
-        </select>
-      </div>
-    </div>
-    <div id="search-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
-    <div id="search-results" class="search-results"></div>
-  </div>
-
-  <!-- HYPOTHESIS GENERATOR -->
-  <div class="page" id="page-hypothesis">
-    <div class="page-header">
-      <div><h1 class="page-title">Hypothesis Generator</h1><p class="page-sub">AI maps the entire literature and finds what no one has tested yet.</p></div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="hyp-input">Research topic or question</label>
-        <textarea id="hyp-input" placeholder="e.g. What are the untested gaps in CRISPR gene editing for neurological diseases?" rows="4"></textarea>
-        <div class="fp-options">
-          <select id="hyp-field" aria-label="Research field">
-            <option value="">All research fields</option><option>Biomedical</option><option>Climate Science</option><option>Materials Science</option><option>Neuroscience</option><option>Drug Discovery</option><option>Computer Science</option><option>Physics</option><option>Chemistry</option>
-          </select>
-          <select id="hyp-depth" aria-label="Number of hypotheses">
-            <option value="3">Generate 3 hypotheses</option><option value="5">Generate 5 hypotheses</option>
-          </select>
+    <!-- PAPER SEARCH -->
+    <div class="page" id="page-search">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Paper Search</h1>
+          <p class="page-sub">Search 200M+ scientific papers by meaning, not just keywords.</p>
         </div>
-        <button class="btn-accent full-width" id="hyp-btn" onclick="generateHypotheses()">Generate Hypotheses →</button>
       </div>
-    </div>
-    <div id="hyp-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
-    <!-- Tab switcher — appears after first generation -->
-    <div class="hyp-tabs" id="hyp-tabs" style="display:none;" role="tablist">
-      <button class="hyp-tab active" id="tab-cards" role="tab" aria-selected="true" onclick="switchHypTab('cards')">Hypotheses</button>
-      <button class="hyp-tab" id="tab-map" role="tab" aria-selected="false" onclick="switchHypTab('map')">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M4 12a8 8 0 1 0 16 0 8 8 0 0 0-16 0"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/></svg>
-        Research Gap Map
-        <span class="nav-badge" style="background:rgba(34,211,238,0.15);color:#22D3EE;border-color:rgba(34,211,238,0.25);">LIVE</span>
-      </button>
-    </div>
-    <!-- Hypothesis cards list -->
-    <div id="hyp-results" class="hyp-results"></div>
-    <!-- Gap Map canvas -->
-    <div id="gap-map-section" style="display:none;">
-      <div class="gap-map-wrap">
-        <canvas id="gap-map-canvas" style="display:block;border-radius:10px;"></canvas>
-      </div>
-      <div class="gap-map-legend">
-        <span class="gap-legend-item studied">● Studied topic</span>
-        <span class="gap-legend-item gap">◉ Unexplored gap</span>
-        <span class="gap-legend-item edge">─ Research relationship</span>
-        <span class="gap-legend-hint">Scroll to zoom · Drag to pan · Click gap to view hypothesis</span>
-      </div>
-      <div id="gap-map-status" class="search-status" style="display:none;"></div>
-    </div>
-  </div>
-
-  <!-- LITERATURE REVIEW -->
-  <div class="page" id="page-litreview">
-    <div class="page-header">
-      <div><h1 class="page-title">Literature Review Generator</h1><p class="page-sub">Full written literature review in minutes, not weeks.</p></div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="lit-topic">Research topic</label>
-        <input type="text" id="lit-topic" placeholder="e.g. Machine learning approaches to protein folding prediction" />
-        <label class="fp-label" style="margin-top:1rem;" for="lit-focus">Specific focus <span style="opacity:0.5;font-weight:400;">(optional)</span></label>
-        <input type="text" id="lit-focus" placeholder="e.g. Focus on transformer-based architectures since 2020" />
-        <div class="fp-options" style="margin-top:1rem;">
-          <select id="lit-depth" aria-label="Review depth">
-            <option value="brief">Brief overview (~500 words)</option><option value="standard" selected>Standard review (~1000 words)</option><option value="deep">Deep review (~2000 words)</option>
-          </select>
-          <select id="lit-style" aria-label="Writing style">
-            <option value="academic">Academic writing</option><option value="plain">Plain language</option>
-          </select>
+      <div class="search-box-wrap">
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"
+            viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input type="text" id="paper-search-input" placeholder="e.g. CRISPR gene editing in neural cells..."
+            aria-label="Search papers" />
+          <button id="paper-search-btn" onclick="searchPapers()">Search →</button>
         </div>
-        <button class="btn-accent full-width" id="lit-btn" onclick="generateLitReview()">Generate Literature Review →</button>
-      </div>
-    </div>
-    <div id="lit-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
-    <div id="lit-results" class="lit-results"></div>
-  </div>
-
-  <!-- CROSS-FIELD DISCOVERY ENGINE -->
-  <div class="page" id="page-crossfield">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Cross-Field Discovery</h1>
-        <p class="page-sub">Find solutions from completely different scientific fields that could solve your research problem.</p>
-      </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="cf-problem">Describe your unsolved research problem</label>
-        <textarea id="cf-problem" placeholder="e.g. We need a biocompatible material that is both flexible and electrically conductive for use in neural implants, but current options are either too rigid or degrade quickly in vivo." rows="4"></textarea>
-        <div class="fp-options">
-          <select id="cf-field" aria-label="Your primary research field">
-            <option value="">Your field (any)</option><option>Biomedical Engineering</option><option>Neuroscience</option><option>Drug Discovery</option><option>Materials Science</option><option>Climate Science</option><option>Computer Science</option><option>Physics</option><option>Chemistry</option><option>Ecology</option><option>Agriculture</option>
+        <div class="search-filters">
+          <select id="search-year" aria-label="Filter by year">
+            <option value="">Any year</option>
+            <option value="2024">2024+</option>
+            <option value="2022">2022+</option>
+            <option value="2020">2020+</option>
+            <option value="2015">2015+</option>
           </select>
-        </div>
-        <button class="btn-accent full-width" id="cf-btn" onclick="runCrossFieldDiscovery()">Discover Cross-Field Solutions →</button>
-      </div>
-    </div>
-    <div id="cf-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
-    <div id="cf-results" class="cf-results"></div>
-  </div>
-
-  <!-- PLAIN LANGUAGE BUILDER -->
-  <div class="page" id="page-plainlang">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Plain Language Builder</h1>
-        <p class="page-sub">Translate technical research into investor briefs, press releases, government briefings, and board reports.</p>
-      </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="pl-input">Paste your technical content</label>
-        <textarea id="pl-input" placeholder="Paste a hypothesis, abstract, literature review section, or any technical research content here..." rows="6"></textarea>
-        <div class="fp-options" style="margin-top:1rem;">
-          <select id="pl-format" aria-label="Output format">
-            <option value="investor">Investor Brief</option>
-            <option value="press">Press Release</option>
-            <option value="government">Government Briefing</option>
-            <option value="board">Board Report</option>
-          </select>
-        </div>
-        <button class="btn-accent full-width" id="pl-btn" onclick="generatePlainLanguage()">Build Report →</button>
-      </div>
-    </div>
-    <div id="pl-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
-    <div id="pl-results" class="lit-results"></div>
-  </div>
-
-  <!-- PAPER COMPARISON -->
-  <div class="page" id="page-compare">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Compare Papers</h1>
-        <p class="page-sub">Select 2–10 papers from your library for a structured side-by-side comparison.</p>
-      </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div id="compare-selector-wrap">
-      <div class="fp-input-area" style="margin-bottom:1rem;">
-        <div class="fp-label" style="margin-bottom:14px;">Select papers to compare (2–10)</div>
-        <div id="compare-paper-list">
-          <!-- Empty state — shown when no saved papers exist -->
-          <div id="compare-empty-state" class="empty-state" style="text-align:center;padding:2rem;">
-            <p style="margin-bottom:1.25rem;">You haven't saved any papers yet. Search for papers first, then save them to your library — they'll appear here for comparison.</p>
-            <button class="btn-accent" onclick="showPage('search', document.getElementById('nav-search'))">Search Papers →</button>
-          </div>
-        </div>
-        <button class="btn-accent" id="compare-btn" onclick="runComparison()" style="margin-top:1.25rem;display:none;" disabled>Compare Selected Papers →</button>
-      </div>
-    </div>
-    <div id="compare-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
-    <div id="compare-results"></div>
-  </div>
-
-  <!-- CITATION MANAGER -->
-  <div class="page" id="page-citations">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Citation Manager</h1>
-        <p class="page-sub">Generate citations for your saved papers in any style. Export to BibTeX, RIS, or plain text.</p>
-      </div>
-    </div>
-    <div class="citation-controls">
-      <div class="citation-format-tabs" id="citation-tabs">
-        <button class="cite-tab active" onclick="setCiteStyle('apa',this)" id="tab-apa">APA</button>
-        <button class="cite-tab" onclick="setCiteStyle('mla',this)" id="tab-mla">MLA</button>
-        <button class="cite-tab" onclick="setCiteStyle('harvard',this)" id="tab-harvard">Harvard</button>
-        <button class="cite-tab" onclick="setCiteStyle('vancouver',this)" id="tab-vancouver">Vancouver</button>
-        <button class="cite-tab" onclick="setCiteStyle('chicago',this)" id="tab-chicago">Chicago</button>
-      </div>
-      <div class="citation-export-btns">
-        <button class="paper-btn" onclick="copyAllCitations()">Copy all</button>
-        <button class="paper-btn" onclick="exportCitations()">Export .txt</button>
-        <button class="paper-btn cite-bibtex-btn" onclick="exportBibtex()" title="Export for LaTeX / Overleaf">Export .bib</button>
-        <button class="paper-btn" onclick="exportRIS()" title="Import into Mendeley, Zotero, or EndNote">Export .ris</button>
-      </div>
-    </div>
-    <div id="citation-list" class="citation-list"></div>
-  </div>
-
-  <!-- MY PROJECTS -->
-  <div class="page" id="page-projects">
-    <div class="page-header">
-      <div><h1 class="page-title">My Projects</h1><p class="page-sub">Organise your research into named projects.</p></div>
-      <button class="btn-accent" id="new-project-btn" onclick="openProjectModal()">+ New Project</button>
-    </div>
-    <div id="projects-grid" class="projects-grid"><div class="empty-state">No projects yet. Create your first project to start organising your research.</div></div>
-  </div>
-
-  <!-- SAVED PAPERS -->
-  <div class="page" id="page-saved">
-    <div class="page-header">
-      <div><h1 class="page-title">Saved Papers</h1><p class="page-sub">Your personal research library.</p></div>
-      <div id="saved-count-badge" class="ai-badge" style="display:none;">0 papers</div>
-    </div>
-    <div id="saved-papers-list" class="search-results"><div class="empty-state">No saved papers yet. Search for papers and click Save to add them here.</div></div>
-  </div>
-
-  <!-- RESEARCH ALERTS -->
-  <div class="page" id="page-alerts">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Research Alerts</h1>
-        <p class="page-sub">Get notified when new papers match your topics. Never miss a publication again.</p>
-      </div>
-      <button class="btn-accent" onclick="openAlertModal()">+ New Alert</button>
-    </div>
-    <div class="info-banner">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Alert preferences are saved. Email delivery activates when Supabase is configured. <a href="../index.html#pricing" style="color:var(--blue);text-decoration:underline;">View setup guide →</a>
-    </div>
-    <div id="alerts-list"></div>
-  </div>
-
-  <!-- AI COST TRACKER -->
-  <div class="page" id="page-costtracker">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">AI Cost Tracker</h1>
-        <p class="page-sub">Track every Gemini API call and its estimated cost. Know exactly what each feature costs to run.</p>
-      </div>
-      <button class="paper-btn" onclick="clearCostLog()">Clear log</button>
-    </div>
-    <div id="cost-summary-row" class="cost-summary-row"></div>
-    <div id="cost-table-wrap"></div>
-  </div>
-
-  <!-- VALIDATION BENCHMARK (Item 5) -->
-  <div class="page" id="page-benchmark">
-    <!-- Populated dynamically by renderBenchmarkUI() in benchmark.js -->
-  </div>
-
-  <!-- ═══ PAPER DEEP-DIVER ═══ -->
-  <div class="page" id="page-deepdiver">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Paper Deep-Diver</h1>
-        <p class="page-sub">Paste a DOI, arXiv ID, PubMed ID, URL, or abstract. Get a structured analysis in 30 seconds.</p>
-      </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="dd-input-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="dd-input">Paper identifier or abstract</label>
-        <textarea id="dd-input" placeholder="Paste a DOI (e.g. 10.1038/nature12345), arXiv ID (e.g. 2301.07041), PubMed ID, full URL, or just paste the abstract text directly…" rows="4"></textarea>
-        <div class="dd-options-row">
-          <select id="dd-field" aria-label="Research field (optional)" class="dd-field-select">
-            <option value="">Any field</option>
+          <select id="search-field" aria-label="Filter by field">
+            <option value="">All fields</option>
             <option value="Medicine">Medicine</option>
-            <option value="Neuroscience">Neuroscience</option>
             <option value="Biology">Biology</option>
             <option value="Chemistry">Chemistry</option>
             <option value="Physics">Physics</option>
             <option value="Computer Science">Computer Science</option>
+            <option value="Environmental Science">Environmental Science</option>
             <option value="Materials Science">Materials Science</option>
-            <option value="Psychology">Psychology</option>
           </select>
-          <button class="btn-accent" id="dd-btn" onclick="runDeepDiver()">Analyse Paper →</button>
+          <select id="search-sort" aria-label="Sort by">
+            <option value="relevance">Sort: Relevance</option>
+            <option value="citationCount">Sort: Most cited</option>
+            <option value="publicationDate">Sort: Most recent</option>
+          </select>
         </div>
       </div>
+      <div id="search-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
+      <div id="search-results" class="search-results"></div>
     </div>
-    <div id="dd-status" class="search-status" style="display:none;" role="status" aria-live="polite">
-      <div class="spinner"></div><span>Fetching paper…</span>
-    </div>
-    <div id="dd-results"></div>
-  </div>
 
-  <!-- ═══ PEER REVIEW RESPONSE ═══ -->
-  <div class="page" id="page-peerreview">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Peer Review Response</h1>
-        <p class="page-sub">Paste reviewer comments and get a complete, professional point-by-point rebuttal letter in minutes.</p>
+    <!-- HYPOTHESIS GENERATOR -->
+    <div class="page" id="page-hypothesis">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Hypothesis Generator</h1>
+          <p class="page-sub">AI maps the entire literature and finds what no one has tested yet.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
       </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <div class="pr-inputs-grid">
-          <div>
-            <label class="fp-label" for="pr-comments">Reviewer comments <span style="color:var(--error);">*</span></label>
-            <textarea id="pr-comments" placeholder="Paste all reviewer comments here. Supports numbered lists (1. 2. 3.), bullet points, or Reviewer 1 / Reviewer 2 headers. Nexus will parse and address each point separately." rows="10"></textarea>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="hyp-input">Research topic or question</label>
+          <textarea id="hyp-input"
+            placeholder="e.g. What are the untested gaps in CRISPR gene editing for neurological diseases?"
+            rows="4"></textarea>
+          <div class="fp-options">
+            <select id="hyp-field" aria-label="Research field">
+              <option value="">All research fields</option>
+              <option>Biomedical</option>
+              <option>Climate Science</option>
+              <option>Materials Science</option>
+              <option>Neuroscience</option>
+              <option>Drug Discovery</option>
+              <option>Computer Science</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+            </select>
+            <select id="hyp-depth" aria-label="Number of hypotheses">
+              <option value="3">Generate 3 hypotheses</option>
+              <option value="5">Generate 5 hypotheses</option>
+            </select>
           </div>
-          <div>
-            <label class="fp-label" for="pr-abstract">Your paper abstract <span style="color:var(--error);">*</span></label>
-            <textarea id="pr-abstract" placeholder="Paste your paper title and abstract so Nexus can generate contextually accurate responses." rows="6"></textarea>
-            <div style="display:flex;gap:10px;margin-top:12px;">
-              <input type="text" id="pr-journal" class="modal-input" placeholder="Journal name (optional)" style="flex:1;">
-              <select id="pr-tone" class="modal-input" style="flex:0 0 160px;cursor:pointer;">
-                <option value="professional">Professional tone</option>
-                <option value="diplomatic">Diplomatic tone</option>
-                <option value="assertive">Assertive tone</option>
-              </select>
+          <button class="btn-accent full-width" id="hyp-btn" onclick="generateHypotheses()">Generate Hypotheses
+            →</button>
+        </div>
+      </div>
+      <div id="hyp-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
+      <!-- Tab switcher — appears after first generation -->
+      <div class="hyp-tabs" id="hyp-tabs" style="display:none;" role="tablist">
+        <button class="hyp-tab active" id="tab-cards" role="tab" aria-selected="true"
+          onclick="switchHypTab('cards')">Hypotheses</button>
+        <button class="hyp-tab" id="tab-map" role="tab" aria-selected="false" onclick="switchHypTab('map')">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M4 12a8 8 0 1 0 16 0 8 8 0 0 0-16 0" />
+            <line x1="12" y1="2" x2="12" y2="6" />
+            <line x1="12" y1="18" x2="12" y2="22" />
+            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+          </svg>
+          Research Gap Map
+          <span class="nav-badge"
+            style="background:rgba(34,211,238,0.15);color:#22D3EE;border-color:rgba(34,211,238,0.25);">LIVE</span>
+        </button>
+      </div>
+      <!-- Hypothesis cards list -->
+      <div id="hyp-results" class="hyp-results"></div>
+      <!-- Gap Map canvas -->
+      <div id="gap-map-section" style="display:none;">
+        <div class="gap-map-wrap">
+          <canvas id="gap-map-canvas" style="display:block;border-radius:10px;"></canvas>
+        </div>
+        <div class="gap-map-legend">
+          <span class="gap-legend-item studied">● Studied topic</span>
+          <span class="gap-legend-item gap">◉ Unexplored gap</span>
+          <span class="gap-legend-item edge">─ Research relationship</span>
+          <span class="gap-legend-hint">Scroll to zoom · Drag to pan · Click gap to view hypothesis</span>
+        </div>
+        <div id="gap-map-status" class="search-status" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- LITERATURE REVIEW -->
+    <div class="page" id="page-litreview">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Literature Review Generator</h1>
+          <p class="page-sub">Full written literature review in minutes, not weeks.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="lit-topic">Research topic</label>
+          <input type="text" id="lit-topic"
+            placeholder="e.g. Machine learning approaches to protein folding prediction" />
+          <label class="fp-label" style="margin-top:1rem;" for="lit-focus">Specific focus <span
+              style="opacity:0.5;font-weight:400;">(optional)</span></label>
+          <input type="text" id="lit-focus" placeholder="e.g. Focus on transformer-based architectures since 2020" />
+          <div class="fp-options" style="margin-top:1rem;">
+            <select id="lit-depth" aria-label="Review depth">
+              <option value="brief">Brief overview (~500 words)</option>
+              <option value="standard" selected>Standard review (~1000 words)</option>
+              <option value="deep">Deep review (~2000 words)</option>
+            </select>
+            <select id="lit-style" aria-label="Writing style">
+              <option value="academic">Academic writing</option>
+              <option value="plain">Plain language</option>
+            </select>
+          </div>
+          <button class="btn-accent full-width" id="lit-btn" onclick="generateLitReview()">Generate Literature Review
+            →</button>
+        </div>
+      </div>
+      <div id="lit-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
+      <div id="lit-results" class="lit-results"></div>
+    </div>
+
+    <!-- CROSS-FIELD DISCOVERY ENGINE -->
+    <div class="page" id="page-crossfield">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Cross-Field Discovery</h1>
+          <p class="page-sub">Find solutions from completely different scientific fields that could solve your research
+            problem.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="cf-problem">Describe your unsolved research problem</label>
+          <textarea id="cf-problem"
+            placeholder="e.g. We need a biocompatible material that is both flexible and electrically conductive for use in neural implants, but current options are either too rigid or degrade quickly in vivo."
+            rows="4"></textarea>
+          <div class="fp-options">
+            <select id="cf-field" aria-label="Your primary research field">
+              <option value="">Your field (any)</option>
+              <option>Biomedical Engineering</option>
+              <option>Neuroscience</option>
+              <option>Drug Discovery</option>
+              <option>Materials Science</option>
+              <option>Climate Science</option>
+              <option>Computer Science</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+              <option>Ecology</option>
+              <option>Agriculture</option>
+            </select>
+          </div>
+          <button class="btn-accent full-width" id="cf-btn" onclick="runCrossFieldDiscovery()">Discover Cross-Field
+            Solutions →</button>
+        </div>
+      </div>
+      <div id="cf-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
+      <div id="cf-results" class="cf-results"></div>
+    </div>
+
+    <!-- PLAIN LANGUAGE BUILDER -->
+    <div class="page" id="page-plainlang">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Plain Language Builder</h1>
+          <p class="page-sub">Translate technical research into investor briefs, press releases, government briefings,
+            and board reports.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="pl-input">Paste your technical content</label>
+          <textarea id="pl-input"
+            placeholder="Paste a hypothesis, abstract, literature review section, or any technical research content here..."
+            rows="6"></textarea>
+          <div class="fp-options" style="margin-top:1rem;">
+            <select id="pl-format" aria-label="Output format">
+              <option value="investor">Investor Brief</option>
+              <option value="press">Press Release</option>
+              <option value="government">Government Briefing</option>
+              <option value="board">Board Report</option>
+            </select>
+          </div>
+          <button class="btn-accent full-width" id="pl-btn" onclick="generatePlainLanguage()">Build Report →</button>
+        </div>
+      </div>
+      <div id="pl-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
+      <div id="pl-results" class="lit-results"></div>
+    </div>
+
+    <!-- PAPER COMPARISON -->
+    <div class="page" id="page-compare">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Compare Papers</h1>
+          <p class="page-sub">Select 2–10 papers from your library for a structured side-by-side comparison.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div id="compare-selector-wrap">
+        <div class="fp-input-area" style="margin-bottom:1rem;">
+          <div class="fp-label" style="margin-bottom:14px;">Select papers to compare (2–10)</div>
+          <div id="compare-paper-list">
+            <!-- Empty state — shown when no saved papers exist -->
+            <div id="compare-empty-state" class="empty-state" style="text-align:center;padding:2rem;">
+              <p style="margin-bottom:1.25rem;">You haven't saved any papers yet. Search for papers first, then save
+                them to your library — they'll appear here for comparison.</p>
+              <button class="btn-accent" onclick="showPage('search', document.getElementById('nav-search'))">Search
+                Papers →</button>
             </div>
-            <button class="btn-accent full-width" id="pr-btn" onclick="generatePeerReview()" style="margin-top:12px;">Generate Response Letter →</button>
           </div>
+          <button class="btn-accent" id="compare-btn" onclick="runComparison()" style="margin-top:1.25rem;display:none;"
+            disabled>Compare Selected Papers →</button>
         </div>
       </div>
-    </div>
-    <div id="pr-status" class="search-status" style="display:none;" role="status" aria-live="polite">
-      <div class="spinner"></div><span>Generating rebuttal…</span>
-    </div>
-    <div id="pr-results" style="margin-top:1.5rem;"></div>
-  </div>
-
-  <!-- ═══ LAB NOTEBOOK ═══ -->
-  <div class="page" id="page-notebook">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Lab Notebook</h1>
-        <p class="page-sub">Your private, AI-connected research journal. Record observations, ideas, and failed experiments.</p>
-      </div>
-      <div style="display:flex;gap:10px;">
-        <button class="paper-btn" onclick="exportNotebook()">⬇ Export .md</button>
-        <button class="btn-accent" onclick="notebookNewEntry()">+ New Entry</button>
-      </div>
-    </div>
-    <div class="nb-layout">
-      <div class="nb-sidebar">
-        <div class="nb-search-wrap">
-          <input type="text" id="nb-search" class="nb-search" placeholder="Search entries…" oninput="notebookSearch(this.value)">
-        </div>
-        <div id="nb-list" class="nb-list"></div>
-      </div>
-      <div id="nb-editor" class="nb-editor"></div>
-    </div>
-  </div>
-
-  <!-- ═══ CONTRADICTION DETECTOR ═══ -->
-  <!-- IS THIS SETTLED SCIENCE? CHECKER -->
-  <div class="page" id="page-sciencechecker">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Is This Settled Science?</h1>
-        <p class="page-sub">Enter any scientific claim and Nexus will check it against the real literature — giving you a structured verdict, consensus score, and the evidence on both sides.</p>
-      </div>
-      <div class="ai-badge">✶ Powered by Gemini AI</div>
+      <div id="compare-status" class="search-status" style="display:none;" role="status" aria-live="polite"></div>
+      <div id="compare-results"></div>
     </div>
 
-    <!-- Example claims chips -->
-    <div class="sc-examples">
-      <span class="sc-examples-label">Try:</span>
-      <button class="sc-chip" onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()" data-claim="Intermittent fasting reduces Alzheimer's risk">Intermittent fasting reduces Alzheimer's risk</button>
-      <button class="sc-chip" onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()" data-claim="SSRIs are effective for mild depression">SSRIs for mild depression</button>
-      <button class="sc-chip" onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()" data-claim="mRNA vaccines cause long-term DNA changes">mRNA vaccines &amp; DNA</button>
-      <button class="sc-chip" onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()" data-claim="Vitamin D supplementation prevents cancer">Vitamin D prevents cancer</button>
-    </div>
-
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="sc-claim">Scientific claim to verify</label>
-        <input type="text" id="sc-claim" class="modal-input" placeholder="e.g. Ozempic causes muscle loss, Nicotine is neuroprotective, Cold showers boost testosterone…" maxlength="200">
-        <div class="fp-row" style="margin-top:12px;">
-          <button id="sc-btn" class="btn-primary" onclick="runScienceChecker()">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            Check the Science
-          </button>
-          <div class="sc-verdict-legend">
-            <span class="sc-legend-item" style="color:#34D399">🟢 Settled</span>
-            <span class="sc-legend-item" style="color:#FBBF24">🟡 Debated</span>
-            <span class="sc-legend-item" style="color:#F87171">🔴 Emerging</span>
-            <span class="sc-legend-item" style="color:#94A3B8">⚫ Contradicted</span>
-          </div>
+    <!-- CITATION MANAGER -->
+    <div class="page" id="page-citations">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Citation Manager</h1>
+          <p class="page-sub">Generate citations for your saved papers in any style. Export to BibTeX, RIS, or plain
+            text.</p>
         </div>
       </div>
-      <div id="sc-status" class="search-status" style="display:none;">
-        <div class="spinner"></div><span>Searching literature…</span>
-      </div>
-      <div id="sc-results"></div>
-    </div>
-  </div>
-
-  <!-- CONTRADICTION DETECTOR -->
-  <div class="page" id="page-contradiction">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Contradiction Detector</h1>
-        <p class="page-sub">Scans the literature and shows where studies directly contradict each other — with consensus scores, both sides, and why the conflict exists.</p>
-      </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="cd-topic">Research topic or claim</label>
-        <input type="text" id="cd-topic" class="modal-input" placeholder="e.g. Ketamine as antidepressant, mRNA vaccines and immunity, Intermittent fasting…" maxlength="120">
-        <div class="dd-options-row" style="margin-top:14px;">
-          <select id="cd-field" class="dd-field-select">
-            <option value="">Any field</option>
-            <option value="Medicine">Medicine</option>
-            <option value="Neuroscience">Neuroscience</option>
-            <option value="Biology">Biology</option>
-            <option value="Psychology">Psychology</option>
-            <option value="Physics">Physics</option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Chemistry">Chemistry</option>
-          </select>
-          <button class="btn-accent" id="cd-btn" onclick="runContradictionDetector()">Detect Contradictions →</button>
+      <div class="citation-controls">
+        <div class="citation-format-tabs" id="citation-tabs">
+          <button class="cite-tab active" onclick="setCiteStyle('apa',this)" id="tab-apa">APA</button>
+          <button class="cite-tab" onclick="setCiteStyle('mla',this)" id="tab-mla">MLA</button>
+          <button class="cite-tab" onclick="setCiteStyle('harvard',this)" id="tab-harvard">Harvard</button>
+          <button class="cite-tab" onclick="setCiteStyle('vancouver',this)" id="tab-vancouver">Vancouver</button>
+          <button class="cite-tab" onclick="setCiteStyle('chicago',this)" id="tab-chicago">Chicago</button>
+        </div>
+        <div class="citation-export-btns">
+          <button class="paper-btn" onclick="copyAllCitations()">Copy all</button>
+          <button class="paper-btn" onclick="exportCitations()">Export .txt</button>
+          <button class="paper-btn cite-bibtex-btn" onclick="exportBibtex()" title="Export for LaTeX / Overleaf">Export
+            .bib</button>
+          <button class="paper-btn" onclick="exportRIS()" title="Import into Mendeley, Zotero, or EndNote">Export
+            .ris</button>
         </div>
       </div>
+      <div id="citation-list" class="citation-list"></div>
     </div>
-    <div id="cd-status" class="search-status" style="display:none;" role="status" aria-live="polite">
-      <div class="spinner"></div><span>Searching literature…</span>
-    </div>
-    <div id="cd-results" style="margin-top:1.5rem;"></div>
-  </div>
 
-  <!-- ═══ EXPERIMENT BLUEPRINT ═══ -->
-  <div class="page" id="page-experimentblueprint">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Experiment Blueprint Builder</h1>
-        <p class="page-sub">Turn any hypothesis into a complete, ready-to-run experiment plan with methodology, equipment, statistics, and timeline.</p>
-      </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <div style="margin-bottom:12px;">
-          <label class="fp-label" for="eb-hyp-select">Or pick from your generated hypotheses</label>
-          <select id="eb-hyp-select" class="dd-field-select" style="width:100%;" onchange="ebSelectHypothesis()">
-            <option value="">— Select a hypothesis —</option>
-          </select>
+    <!-- MY PROJECTS -->
+    <div class="page" id="page-projects">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">My Projects</h1>
+          <p class="page-sub">Organise your research into named projects.</p>
         </div>
-        <label class="fp-label" for="eb-hypothesis">Hypothesis to test <span style="color:var(--error);">*</span></label>
-        <textarea id="eb-hypothesis" placeholder="e.g. Increased BDNF expression in the hippocampus mediates the antidepressant effects of ketamine in treatment-resistant depression" rows="4"></textarea>
-        <div class="pr-inputs-grid" style="margin-top:14px;">
-          <div>
-            <label class="fp-label">Research field</label>
-            <select id="eb-field" class="dd-field-select" style="width:100%;">
+        <button class="btn-accent" id="new-project-btn" onclick="openProjectModal()">+ New Project</button>
+      </div>
+      <div id="projects-grid" class="projects-grid">
+        <div class="empty-state">No projects yet. Create your first project to start organising your research.</div>
+      </div>
+    </div>
+
+    <!-- SAVED PAPERS -->
+    <div class="page" id="page-saved">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Saved Papers</h1>
+          <p class="page-sub">Your personal research library.</p>
+        </div>
+        <div id="saved-count-badge" class="ai-badge" style="display:none;">0 papers</div>
+      </div>
+      <div id="saved-papers-list" class="search-results">
+        <div class="empty-state">No saved papers yet. Search for papers and click Save to add them here.</div>
+      </div>
+    </div>
+
+    <!-- RESEARCH ALERTS -->
+    <div class="page" id="page-alerts">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Research Alerts</h1>
+          <p class="page-sub">Get notified when new papers match your topics. Never miss a publication again.</p>
+        </div>
+        <button class="btn-accent" onclick="openAlertModal()">+ New Alert</button>
+      </div>
+      <div class="info-banner">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        Alert preferences are saved. Email delivery activates when Supabase is configured. <a
+          href="../index.html#pricing" style="color:var(--blue);text-decoration:underline;">View setup guide →</a>
+      </div>
+      <div id="alerts-list"></div>
+    </div>
+
+    <!-- AI COST TRACKER -->
+    <div class="page" id="page-costtracker">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">AI Cost Tracker</h1>
+          <p class="page-sub">Track every Gemini API call and its estimated cost. Know exactly what each feature costs
+            to run.</p>
+        </div>
+        <button class="paper-btn" onclick="clearCostLog()">Clear log</button>
+      </div>
+      <div id="cost-summary-row" class="cost-summary-row"></div>
+      <div id="cost-table-wrap"></div>
+    </div>
+
+    <!-- VALIDATION BENCHMARK (Item 5) -->
+    <div class="page" id="page-benchmark">
+      <!-- Populated dynamically by renderBenchmarkUI() in benchmark.js -->
+    </div>
+
+    <!-- ═══ PAPER DEEP-DIVER ═══ -->
+    <div class="page" id="page-deepdiver">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Paper Deep-Diver</h1>
+          <p class="page-sub">Paste a DOI, arXiv ID, PubMed ID, URL, or abstract. Get a structured analysis in 30
+            seconds.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="dd-input-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="dd-input">Paper identifier or abstract</label>
+          <textarea id="dd-input"
+            placeholder="Paste a DOI (e.g. 10.1038/nature12345), arXiv ID (e.g. 2301.07041), PubMed ID, full URL, or just paste the abstract text directly…"
+            rows="4"></textarea>
+          <div class="dd-options-row">
+            <select id="dd-field" aria-label="Research field (optional)" class="dd-field-select">
               <option value="">Any field</option>
               <option value="Medicine">Medicine</option>
               <option value="Neuroscience">Neuroscience</option>
               <option value="Biology">Biology</option>
               <option value="Chemistry">Chemistry</option>
+              <option value="Physics">Physics</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Materials Science">Materials Science</option>
+              <option value="Psychology">Psychology</option>
+            </select>
+            <button class="btn-accent" id="dd-btn" onclick="runDeepDiver()">Analyse Paper →</button>
+          </div>
+        </div>
+      </div>
+      <div id="dd-status" class="search-status" style="display:none;" role="status" aria-live="polite">
+        <div class="spinner"></div><span>Fetching paper…</span>
+      </div>
+      <div id="dd-results"></div>
+    </div>
+
+    <!-- ═══ PEER REVIEW RESPONSE ═══ -->
+    <div class="page" id="page-peerreview">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Peer Review Response</h1>
+          <p class="page-sub">Paste reviewer comments and get a complete, professional point-by-point rebuttal letter in
+            minutes.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <div class="pr-inputs-grid">
+            <div>
+              <label class="fp-label" for="pr-comments">Reviewer comments <span
+                  style="color:var(--error);">*</span></label>
+              <textarea id="pr-comments"
+                placeholder="Paste all reviewer comments here. Supports numbered lists (1. 2. 3.), bullet points, or Reviewer 1 / Reviewer 2 headers. Nexus will parse and address each point separately."
+                rows="10"></textarea>
+            </div>
+            <div>
+              <label class="fp-label" for="pr-abstract">Your paper abstract <span
+                  style="color:var(--error);">*</span></label>
+              <textarea id="pr-abstract"
+                placeholder="Paste your paper title and abstract so Nexus can generate contextually accurate responses."
+                rows="6"></textarea>
+              <div style="display:flex;gap:10px;margin-top:12px;">
+                <input type="text" id="pr-journal" class="modal-input" placeholder="Journal name (optional)"
+                  style="flex:1;">
+                <select id="pr-tone" class="modal-input" style="flex:0 0 160px;cursor:pointer;">
+                  <option value="professional">Professional tone</option>
+                  <option value="diplomatic">Diplomatic tone</option>
+                  <option value="assertive">Assertive tone</option>
+                </select>
+              </div>
+              <button class="btn-accent full-width" id="pr-btn" onclick="generatePeerReview()"
+                style="margin-top:12px;">Generate Response Letter →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="pr-status" class="search-status" style="display:none;" role="status" aria-live="polite">
+        <div class="spinner"></div><span>Generating rebuttal…</span>
+      </div>
+      <div id="pr-results" style="margin-top:1.5rem;"></div>
+    </div>
+
+    <!-- ═══ LAB NOTEBOOK ═══ -->
+    <div class="page" id="page-notebook">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Lab Notebook</h1>
+          <p class="page-sub">Your private, AI-connected research journal. Record observations, ideas, and failed
+            experiments.</p>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="paper-btn" onclick="exportNotebook()">⬇ Export .md</button>
+          <button class="btn-accent" onclick="notebookNewEntry()">+ New Entry</button>
+        </div>
+      </div>
+      <div class="nb-layout">
+        <div class="nb-sidebar">
+          <div class="nb-search-wrap">
+            <input type="text" id="nb-search" class="nb-search" placeholder="Search entries…"
+              oninput="notebookSearch(this.value)">
+          </div>
+          <div id="nb-list" class="nb-list"></div>
+        </div>
+        <div id="nb-editor" class="nb-editor"></div>
+      </div>
+    </div>
+
+    <!-- ═══ CONTRADICTION DETECTOR ═══ -->
+    <!-- IS THIS SETTLED SCIENCE? CHECKER -->
+    <div class="page" id="page-sciencechecker">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Is This Settled Science?</h1>
+          <p class="page-sub">Enter any scientific claim and Nexus will check it against the real literature — giving
+            you a structured verdict, consensus score, and the evidence on both sides.</p>
+        </div>
+        <div class="ai-badge">✶ Powered by Gemini AI</div>
+      </div>
+
+      <!-- Example claims chips -->
+      <div class="sc-examples">
+        <span class="sc-examples-label">Try:</span>
+        <button class="sc-chip"
+          onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()"
+          data-claim="Intermittent fasting reduces Alzheimer's risk">Intermittent fasting reduces Alzheimer's
+          risk</button>
+        <button class="sc-chip"
+          onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()"
+          data-claim="SSRIs are effective for mild depression">SSRIs for mild depression</button>
+        <button class="sc-chip"
+          onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()"
+          data-claim="mRNA vaccines cause long-term DNA changes">mRNA vaccines &amp; DNA</button>
+        <button class="sc-chip"
+          onclick="document.getElementById('sc-claim').value=this.dataset.claim;runScienceChecker()"
+          data-claim="Vitamin D supplementation prevents cancer">Vitamin D prevents cancer</button>
+      </div>
+
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="sc-claim">Scientific claim to verify</label>
+          <input type="text" id="sc-claim" class="modal-input"
+            placeholder="e.g. Ozempic causes muscle loss, Nicotine is neuroprotective, Cold showers boost testosterone…"
+            maxlength="200">
+          <div class="fp-row" style="margin-top:12px;">
+            <button id="sc-btn" class="btn-primary" onclick="runScienceChecker()">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+              Check the Science
+            </button>
+            <div class="sc-verdict-legend">
+              <span class="sc-legend-item" style="color:#34D399">🟢 Settled</span>
+              <span class="sc-legend-item" style="color:#FBBF24">🟡 Debated</span>
+              <span class="sc-legend-item" style="color:#F87171">🔴 Emerging</span>
+              <span class="sc-legend-item" style="color:#94A3B8">⚫ Contradicted</span>
+            </div>
+          </div>
+        </div>
+        <div id="sc-status" class="search-status" style="display:none;">
+          <div class="spinner"></div><span>Searching literature…</span>
+        </div>
+        <div id="sc-results"></div>
+      </div>
+    </div>
+
+    <!-- CONTRADICTION DETECTOR -->
+    <div class="page" id="page-contradiction">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Contradiction Detector</h1>
+          <p class="page-sub">Scans the literature and shows where studies directly contradict each other — with
+            consensus scores, both sides, and why the conflict exists.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="cd-topic">Research topic or claim</label>
+          <input type="text" id="cd-topic" class="modal-input"
+            placeholder="e.g. Ketamine as antidepressant, mRNA vaccines and immunity, Intermittent fasting…"
+            maxlength="120">
+          <div class="dd-options-row" style="margin-top:14px;">
+            <select id="cd-field" class="dd-field-select">
+              <option value="">Any field</option>
+              <option value="Medicine">Medicine</option>
+              <option value="Neuroscience">Neuroscience</option>
+              <option value="Biology">Biology</option>
               <option value="Psychology">Psychology</option>
               <option value="Physics">Physics</option>
-              <option value="Computer Science">Computer Science / AI</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Chemistry">Chemistry</option>
             </select>
-          </div>
-          <div>
-            <label class="fp-label">Budget level</label>
-            <select id="eb-budget" class="dd-field-select" style="width:100%;">
-              <option value="low">Low (< $5K — minimal equipment)</option>
-              <option value="standard" selected>Standard ($5K–$50K)</option>
-              <option value="high">High ($50K–$500K)</option>
-              <option value="unlimited">Unlimited (multi-million)</option>
-            </select>
-          </div>
-          <div>
-            <label class="fp-label">Target timeline</label>
-            <select id="eb-timeline" class="dd-field-select" style="width:100%;">
-              <option value="3 months">3 months</option>
-              <option value="6 months" selected>6 months</option>
-              <option value="1 year">1 year</option>
-              <option value="2 years">2 years</option>
-              <option value="5 years">5 years (longitudinal)</option>
-            </select>
-          </div>
-          <div style="display:flex;align-items:flex-end;">
-            <button class="btn-accent full-width" id="eb-btn" onclick="buildExperimentBlueprint()">Build Blueprint →</button>
+            <button class="btn-accent" id="cd-btn" onclick="runContradictionDetector()">Detect Contradictions →</button>
           </div>
         </div>
       </div>
+      <div id="cd-status" class="search-status" style="display:none;" role="status" aria-live="polite">
+        <div class="spinner"></div><span>Searching literature…</span>
+      </div>
+      <div id="cd-results" style="margin-top:1.5rem;"></div>
     </div>
-    <div id="eb-status" class="search-status" style="display:none;" role="status" aria-live="polite">
-      <div class="spinner"></div><span>Designing experiment…</span>
+
+    <!-- ═══ EXPERIMENT BLUEPRINT ═══ -->
+    <div class="page" id="page-experimentblueprint">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Experiment Blueprint Builder</h1>
+          <p class="page-sub">Turn any hypothesis into a complete, ready-to-run experiment plan with methodology,
+            equipment, statistics, and timeline.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <div style="margin-bottom:12px;">
+            <label class="fp-label" for="eb-hyp-select">Or pick from your generated hypotheses</label>
+            <select id="eb-hyp-select" class="dd-field-select" style="width:100%;" onchange="ebSelectHypothesis()">
+              <option value="">— Select a hypothesis —</option>
+            </select>
+          </div>
+          <label class="fp-label" for="eb-hypothesis">Hypothesis to test <span
+              style="color:var(--error);">*</span></label>
+          <textarea id="eb-hypothesis"
+            placeholder="e.g. Increased BDNF expression in the hippocampus mediates the antidepressant effects of ketamine in treatment-resistant depression"
+            rows="4"></textarea>
+          <div class="pr-inputs-grid" style="margin-top:14px;">
+            <div>
+              <label class="fp-label">Research field</label>
+              <select id="eb-field" class="dd-field-select" style="width:100%;">
+                <option value="">Any field</option>
+                <option value="Medicine">Medicine</option>
+                <option value="Neuroscience">Neuroscience</option>
+                <option value="Biology">Biology</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Psychology">Psychology</option>
+                <option value="Physics">Physics</option>
+                <option value="Computer Science">Computer Science / AI</option>
+              </select>
+            </div>
+            <div>
+              <label class="fp-label">Budget level</label>
+              <select id="eb-budget" class="dd-field-select" style="width:100%;">
+                <option value="low">Low (< $5K — minimal equipment)</option>
+                <option value="standard" selected>Standard ($5K–$50K)</option>
+                <option value="high">High ($50K–$500K)</option>
+                <option value="unlimited">Unlimited (multi-million)</option>
+              </select>
+            </div>
+            <div>
+              <label class="fp-label">Target timeline</label>
+              <select id="eb-timeline" class="dd-field-select" style="width:100%;">
+                <option value="3 months">3 months</option>
+                <option value="6 months" selected>6 months</option>
+                <option value="1 year">1 year</option>
+                <option value="2 years">2 years</option>
+                <option value="5 years">5 years (longitudinal)</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:flex-end;">
+              <button class="btn-accent full-width" id="eb-btn" onclick="buildExperimentBlueprint()">Build Blueprint
+                →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="eb-status" class="search-status" style="display:none;" role="status" aria-live="polite">
+        <div class="spinner"></div><span>Designing experiment…</span>
+      </div>
+      <div id="eb-results" style="margin-top:1.5rem;"></div>
     </div>
-    <div id="eb-results" style="margin-top:1.5rem;"></div>
+
+    <!-- ═══ TREND FORECASTER ═══ -->
+    <div class="page" id="page-trendforecast">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Trend Forecaster</h1>
+          <p class="page-sub">Find which research areas are about to explode — before everyone else. Ranked by
+            publication velocity, citations, and Gemini analysis.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div class="feature-panel">
+        <div class="fp-input-area">
+          <label class="fp-label" for="tf-domain">Research domain to forecast</label>
+          <input type="text" id="tf-domain" class="modal-input"
+            placeholder="e.g. Alzheimer's disease, Quantum computing, mRNA therapeutics, Microplastics…"
+            maxlength="120">
+          <div class="dd-options-row" style="margin-top:14px;">
+            <select id="tf-field" class="dd-field-select">
+              <option value="">Any field</option>
+              <option value="Medicine">Medicine</option>
+              <option value="Biology">Biology</option>
+              <option value="Neuroscience">Neuroscience</option>
+              <option value="Physics">Physics</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Materials Science">Materials Science</option>
+            </select>
+            <button class="btn-accent" id="tf-btn" onclick="runTrendForecaster()">Forecast Trends →</button>
+          </div>
+        </div>
+      </div>
+      <div id="tf-status" class="search-status" style="display:none;" role="status" aria-live="polite">
+        <div class="spinner"></div><span>Analysing publication velocity…</span>
+      </div>
+      <div id="tf-results" style="margin-top:1.5rem;"></div>
+    </div>
+
+    <!-- ═══ GRANT WRITER AI ═══ -->
+    <div class="page" id="page-grantwriter">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Grant Writer AI</h1>
+          <p class="page-sub">Write a complete, funder-optimised grant application from your project details. Every
+            section, ready to edit and submit.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+
+      <!-- STEP PROGRESS -->
+      <div class="gw-steps-nav">
+        <div class="gw-step-item">
+          <div class="gw-step-dot gw-dot-active" id="gw-dot-1">1</div><span>Project</span>
+        </div>
+        <div class="gw-step-line"></div>
+        <div class="gw-step-item">
+          <div class="gw-step-dot" id="gw-dot-2">2</div><span>Team & Budget</span>
+        </div>
+        <div class="gw-step-line"></div>
+        <div class="gw-step-item">
+          <div class="gw-step-dot" id="gw-dot-3">3</div><span>Generate</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Project details -->
+      <div class="feature-panel" id="gw-step-1">
+        <div class="fp-input-area">
+          <div class="pr-inputs-grid">
+            <div style="grid-column:1/-1;">
+              <label class="fp-label" for="gw-title">Project title <span style="color:var(--error);">*</span></label>
+              <input type="text" id="gw-title" class="modal-input"
+                placeholder="e.g. Novel CRISPR-Cas12 Approach for Early Detection of Pancreatic Cancer Biomarkers"
+                maxlength="150">
+            </div>
+            <div style="grid-column:1/-1;">
+              <label class="fp-label" for="gw-description">Project description <span
+                  style="color:var(--error);">*</span></label>
+              <textarea id="gw-description"
+                placeholder="Describe your project in 3-5 sentences. What problem are you solving? What are your methods? What is the expected impact?"
+                rows="5"></textarea>
+            </div>
+            <div style="grid-column:1/-1;">
+              <label class="fp-label" for="gw-aims">Specific aims <span
+                  style="color:var(--muted);font-weight:400;">(optional — Nexus will generate these if
+                  blank)</span></label>
+              <textarea id="gw-aims" placeholder="List your 2-4 specific research aims if known…" rows="3"></textarea>
+            </div>
+            <div>
+              <label class="fp-label" for="gw-funder">Target funder</label>
+              <select id="gw-funder" class="dd-field-select" style="width:100%;"
+                onchange="document.getElementById('gw-custom-funder-row').style.display=this.value==='custom'?'':'none'">
+                <option value="NIH R01">NIH R01</option>
+                <option value="NIH R21">NIH R21 (Exploratory)</option>
+                <option value="NSF">NSF</option>
+                <option value="Wellcome Trust">Wellcome Trust</option>
+                <option value="NRF">NRF (South Africa)</option>
+                <option value="EU Horizon Europe">EU Horizon Europe</option>
+                <option value="MRC">MRC (UK)</option>
+                <option value="Gates Foundation">Gates Foundation</option>
+                <option value="ERC">ERC (European Research Council)</option>
+                <option value="custom">Other funder…</option>
+              </select>
+            </div>
+            <div id="gw-custom-funder-row" style="display:none;">
+              <label class="fp-label" for="gw-custom-funder">Custom funder name</label>
+              <input type="text" id="gw-custom-funder" class="modal-input"
+                placeholder="e.g. Novo Nordisk Foundation, Cancer Research UK">
+            </div>
+          </div>
+          <button class="btn-accent" onclick="gwNext()" style="margin-top:1.5rem;">Next: Team & Budget →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Team & Budget -->
+      <div class="feature-panel" id="gw-step-2" style="display:none;">
+        <div class="fp-input-area">
+          <div class="pr-inputs-grid">
+            <div>
+              <label class="fp-label" for="gw-team-size">Team size</label>
+              <select id="gw-team-size" class="dd-field-select" style="width:100%;">
+                <option value="1">Solo (PI only)</option>
+                <option value="3">Small (2-3 people)</option>
+                <option value="5" selected>Medium (4-6 people)</option>
+                <option value="10">Large (7-15 people)</option>
+                <option value="20+">Consortium (20+)</option>
+              </select>
+            </div>
+            <div>
+              <label class="fp-label" for="gw-duration">Grant duration</label>
+              <select id="gw-duration" class="dd-field-select" style="width:100%;">
+                <option value="1 year">1 year</option>
+                <option value="2 years">2 years</option>
+                <option value="3 years" selected>3 years</option>
+                <option value="4 years">4 years</option>
+                <option value="5 years">5 years</option>
+              </select>
+            </div>
+            <div>
+              <label class="fp-label" for="gw-budget">Total budget (USD)</label>
+              <select id="gw-budget" class="dd-field-select" style="width:100%;">
+                <option value="50000">$50,000</option>
+                <option value="100000">$100,000</option>
+                <option value="250000" selected>$250,000</option>
+                <option value="500000">$500,000</option>
+                <option value="1000000">$1,000,000</option>
+                <option value="2000000">$2,000,000+</option>
+              </select>
+            </div>
+            <div>
+              <label class="fp-label" for="gw-institution">Institution</label>
+              <input type="text" id="gw-institution" class="modal-input" placeholder="e.g. University of Cape Town">
+            </div>
+            <div style="grid-column:1/-1;">
+              <label class="fp-label" for="gw-pi-experience">Principal Investigator background <span
+                  style="color:var(--muted);font-weight:400;">(optional)</span></label>
+              <textarea id="gw-pi-experience"
+                placeholder="Brief PI bio: years of experience, key publications, relevant expertise…"
+                rows="3"></textarea>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:1.5rem;">
+            <button class="paper-btn" onclick="gwBack()">← Back</button>
+            <button class="btn-accent" id="gw-btn" onclick="generateGrant()" style="flex:1;">Generate Grant Application
+              →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Results -->
+      <div id="gw-step-3" style="display:none;">
+        <div id="gw-status" class="search-status" role="status" aria-live="polite">
+          <div class="spinner"></div><span>Writing your grant application…</span>
+        </div>
+        <div id="gw-results" style="margin-top:1.5rem;"></div>
+      </div>
+    </div>
+
+    <!-- ═══ PDF CHAT ═══ -->
+    <div class="page" id="page-pdfchat">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">PDF Chat</h1>
+          <p class="page-sub">Upload any research paper and have a conversation with it. Ask questions, extract methods,
+            get summaries — all powered by AI.</p>
+        </div>
+        <div class="ai-badge">✦ Powered by Gemini AI</div>
+      </div>
+      <div id="pdf-drop-zone" class="pdf-drop-zone" onclick="openPdfPicker()">
+        <div class="pdf-drop-icon">📄</div>
+        <div class="pdf-drop-title">Drop a PDF here or click to upload</div>
+        <div class="pdf-drop-sub">Works 100% client-side — your paper never leaves your device</div>
+        <div class="pdf-drop-hint">Supports papers up to ~200 pages · Any research field</div>
+      </div>
+      <div id="pdf-loading" style="display:none;" class="search-status">
+        <div class="spinner"></div><span>Reading PDF…</span>
+      </div>
+      <div id="pdf-chat-panel" style="display:none;"></div>
+    </div>
+
+    <!-- ═══ TEAM HUB ═══ -->
+    <div class="page" id="page-teamhub">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Team Workspace</h1>
+          <p class="page-sub">Your department's shared research hub — papers, projects, hypotheses, and activity in one
+            place.</p>
+        </div>
+      </div>
+      <div id="team-hub-content"></div>
+    </div>
+
+    <!-- ═══ TEAM MEMBERS ═══ -->
+    <div class="page" id="page-teammembers">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Team Members</h1>
+          <p class="page-sub">Manage your team, set roles, and invite colleagues.</p>
+        </div>
+      </div>
+      <div class="team-members-header">
+        <div style="font-size:13px;color:var(--text2);" id="team-member-count">–</div>
+        <div style="display:flex;gap:8px;">
+          <button class="paper-btn" onclick="TeamManager.showJoinTeamModal()">Join with Code</button>
+          <button class="btn-accent" onclick="TeamManager.showInviteModal()">+ Invite Member</button>
+        </div>
+      </div>
+      <div id="team-members-list"></div>
+    </div>
+
+    <!-- ═══ SHARED LIBRARY ═══ -->
+    <div class="page" id="page-teamlibrary">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Shared Library</h1>
+          <p class="page-sub">Papers shared by your team. Any member can save a paper and share it with everyone.</p>
+        </div>
+      </div>
+      <div class="team-filter-bar">
+        <span class="team-filter-label">FILTER BY MEMBER:</span>
+        <select id="team-lib-filter" class="dd-field-select" onchange="TeamManager.renderSharedLibrary()">
+          <option value="">All members</option>
+        </select>
+        <span id="team-lib-count" style="font-size:11px;font-family:var(--font-mono);color:var(--muted);"></span>
+      </div>
+      <div id="team-shared-library"></div>
+    </div>
+
+    <!-- ═══ SHARED PROJECTS ═══ -->
+    <div class="page" id="page-teamprojects">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Shared Projects</h1>
+          <p class="page-sub">Collaborative research projects. Each project holds papers, notes, and hypotheses.</p>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;">
+        <button class="btn-accent" onclick="showNewProjectModal()">+ New Shared Project</button>
+      </div>
+      <div id="team-shared-projects"></div>
+    </div>
+
+    <!-- ═══ TEAM HYPOTHESES ═══ -->
+    <div class="page" id="page-teamhypotheses">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Team Hypotheses</h1>
+          <p class="page-sub">Hypotheses shared by team members. React, comment, and build on each other's ideas.</p>
+        </div>
+      </div>
+      <div id="team-shared-hypotheses"></div>
+    </div>
+
+    <!-- ═══ TEAM SETTINGS ═══ -->
+    <div class="page" id="page-teamsettings">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Team Settings</h1>
+          <p class="page-sub">Manage your workspace, join code, and permissions.</p>
+        </div>
+      </div>
+      <div id="team-settings-content"></div>
+    </div>
+
+  </main>
+
+  <!-- ═══ TOAST ═══ -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ═══ CREATE TEAM MODAL ═══ -->
+  <div id="create-team-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:440px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <div>
+          <div
+            style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:var(--blue);letter-spacing:0.12em;margin-bottom:6px;">
+            NEW WORKSPACE</div>
+          <h2 style="margin:0;">Create Team Workspace</h2>
+        </div>
+        <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;"
+          onclick="closeModal('create-team-modal')">✕</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-group-modal">
+          <label class="modal-label" for="ct-name">Team / Lab name <span style="color:var(--error);">*</span></label>
+          <input type="text" id="ct-name" class="modal-input" placeholder="e.g. UCT Neuroscience Lab, Smith Lab"
+            maxlength="80">
+        </div>
+        <div class="form-group-modal">
+          <label class="modal-label" for="ct-institution">Institution</label>
+          <input type="text" id="ct-institution" class="modal-input" placeholder="e.g. University of Cape Town"
+            maxlength="80">
+        </div>
+      </div>
+      <div
+        style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:1.25rem 0;font-size:12.5px;color:var(--text2);">
+        A unique <strong style="color:var(--text);">6-character join code</strong> will be generated automatically.
+        Share it with colleagues so they can join your workspace.
+      </div>
+      <button class="btn-accent" onclick="TeamManager.submitCreateTeam()" style="width:100%;padding:12px;">Create
+        Workspace →</button>
+      <button class="modal-close" onclick="closeModal('create-team-modal')">Cancel</button>
+    </div>
   </div>
 
-  <!-- ═══ TREND FORECASTER ═══ -->
-  <div class="page" id="page-trendforecast">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Trend Forecaster</h1>
-        <p class="page-sub">Find which research areas are about to explode — before everyone else. Ranked by publication velocity, citations, and Gemini analysis.</p>
+  <!-- ═══ JOIN TEAM MODAL ═══ -->
+  <div id="join-team-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:380px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <h2 style="margin:0;">Join a Team</h2>
+        <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;"
+          onclick="closeModal('join-team-modal')">✕</button>
       </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
+      <p style="color:var(--text2);font-size:13px;margin-bottom:1.25rem;">Enter the 6-character code your team leader
+        shared with you.</p>
+      <div class="form-group-modal">
+        <label class="modal-label" for="jt-code">Join Code</label>
+        <input type="text" id="jt-code" class="modal-input" placeholder="e.g. ABC123" maxlength="6"
+          style="text-transform:uppercase;letter-spacing:0.2em;font-size:1.4rem;text-align:center;font-family:var(--font-mono);">
+      </div>
+      <button class="btn-accent" onclick="TeamManager.submitJoinTeam()"
+        style="width:100%;padding:12px;margin-top:1.25rem;">Join Workspace →</button>
+      <button class="modal-close" onclick="closeModal('join-team-modal')">Cancel</button>
     </div>
-    <div class="feature-panel">
-      <div class="fp-input-area">
-        <label class="fp-label" for="tf-domain">Research domain to forecast</label>
-        <input type="text" id="tf-domain" class="modal-input" placeholder="e.g. Alzheimer's disease, Quantum computing, mRNA therapeutics, Microplastics…" maxlength="120">
-        <div class="dd-options-row" style="margin-top:14px;">
-          <select id="tf-field" class="dd-field-select">
-            <option value="">Any field</option>
-            <option value="Medicine">Medicine</option>
-            <option value="Biology">Biology</option>
-            <option value="Neuroscience">Neuroscience</option>
-            <option value="Physics">Physics</option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Materials Science">Materials Science</option>
+  </div>
+
+  <!-- ═══ INVITE MEMBER MODAL ═══ -->
+  <div id="invite-member-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:420px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <h2 style="margin:0;">Invite Team Member</h2>
+        <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;"
+          onclick="closeModal('invite-member-modal')">✕</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-group-modal">
+          <label class="modal-label" for="inv-name">Name</label>
+          <input type="text" id="inv-name" class="modal-input" placeholder="Dr. Jane Smith" maxlength="80">
+        </div>
+        <div class="form-group-modal">
+          <label class="modal-label" for="inv-email">Email address <span style="color:var(--error);">*</span></label>
+          <input type="email" id="inv-email" class="modal-input" placeholder="jane@university.edu">
+        </div>
+        <div class="form-group-modal">
+          <label class="modal-label" for="inv-role">Role</label>
+          <select id="inv-role" class="modal-input">
+            <option value="member">Member — can search, share papers &amp; projects</option>
+            <option value="admin">Admin — can also manage members</option>
+            <option value="viewer">Viewer — read-only access</option>
           </select>
-          <button class="btn-accent" id="tf-btn" onclick="runTrendForecaster()">Forecast Trends →</button>
         </div>
       </div>
+      <button class="btn-accent" onclick="TeamManager.submitInvite()"
+        style="width:100%;padding:12px;margin-top:1.25rem;">Send Invite →</button>
+      <button class="modal-close" onclick="closeModal('invite-member-modal')">Cancel</button>
     </div>
-    <div id="tf-status" class="search-status" style="display:none;" role="status" aria-live="polite">
-      <div class="spinner"></div><span>Analysing publication velocity…</span>
-    </div>
-    <div id="tf-results" style="margin-top:1.5rem;"></div>
   </div>
 
-  <!-- ═══ GRANT WRITER AI ═══ -->
-  <div class="page" id="page-grantwriter">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Grant Writer AI</h1>
-        <p class="page-sub">Write a complete, funder-optimised grant application from your project details. Every section, ready to edit and submit.</p>
+  <!-- ═══ NEW PROJECT MODAL ═══ -->
+  <div id="new-project-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:440px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <h2 style="margin:0;">New Shared Project</h2>
+        <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;"
+          onclick="closeModal('new-project-modal')">✕</button>
       </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
-    </div>
-
-    <!-- STEP PROGRESS -->
-    <div class="gw-steps-nav">
-      <div class="gw-step-item"><div class="gw-step-dot gw-dot-active" id="gw-dot-1">1</div><span>Project</span></div>
-      <div class="gw-step-line"></div>
-      <div class="gw-step-item"><div class="gw-step-dot" id="gw-dot-2">2</div><span>Team & Budget</span></div>
-      <div class="gw-step-line"></div>
-      <div class="gw-step-item"><div class="gw-step-dot" id="gw-dot-3">3</div><span>Generate</span></div>
-    </div>
-
-    <!-- STEP 1: Project details -->
-    <div class="feature-panel" id="gw-step-1">
-      <div class="fp-input-area">
-        <div class="pr-inputs-grid">
-          <div style="grid-column:1/-1;">
-            <label class="fp-label" for="gw-title">Project title <span style="color:var(--error);">*</span></label>
-            <input type="text" id="gw-title" class="modal-input" placeholder="e.g. Novel CRISPR-Cas12 Approach for Early Detection of Pancreatic Cancer Biomarkers" maxlength="150">
-          </div>
-          <div style="grid-column:1/-1;">
-            <label class="fp-label" for="gw-description">Project description <span style="color:var(--error);">*</span></label>
-            <textarea id="gw-description" placeholder="Describe your project in 3-5 sentences. What problem are you solving? What are your methods? What is the expected impact?" rows="5"></textarea>
-          </div>
-          <div style="grid-column:1/-1;">
-            <label class="fp-label" for="gw-aims">Specific aims <span style="color:var(--muted);font-weight:400;">(optional — Nexus will generate these if blank)</span></label>
-            <textarea id="gw-aims" placeholder="List your 2-4 specific research aims if known…" rows="3"></textarea>
-          </div>
-          <div>
-            <label class="fp-label" for="gw-funder">Target funder</label>
-            <select id="gw-funder" class="dd-field-select" style="width:100%;" onchange="document.getElementById('gw-custom-funder-row').style.display=this.value==='custom'?'':'none'">
-              <option value="NIH R01">NIH R01</option>
-              <option value="NIH R21">NIH R21 (Exploratory)</option>
-              <option value="NSF">NSF</option>
-              <option value="Wellcome Trust">Wellcome Trust</option>
-              <option value="NRF">NRF (South Africa)</option>
-              <option value="EU Horizon Europe">EU Horizon Europe</option>
-              <option value="MRC">MRC (UK)</option>
-              <option value="Gates Foundation">Gates Foundation</option>
-              <option value="ERC">ERC (European Research Council)</option>
-              <option value="custom">Other funder…</option>
-            </select>
-          </div>
-          <div id="gw-custom-funder-row" style="display:none;">
-            <label class="fp-label" for="gw-custom-funder">Custom funder name</label>
-            <input type="text" id="gw-custom-funder" class="modal-input" placeholder="e.g. Novo Nordisk Foundation, Cancer Research UK">
-          </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="form-group-modal">
+          <label class="modal-label" for="np-name">Project name <span style="color:var(--error);">*</span></label>
+          <input type="text" id="np-name" class="modal-input" placeholder="e.g. CRISPR Drug Target Discovery"
+            maxlength="80">
         </div>
-        <button class="btn-accent" onclick="gwNext()" style="margin-top:1.5rem;">Next: Team & Budget →</button>
-      </div>
-    </div>
-
-    <!-- STEP 2: Team & Budget -->
-    <div class="feature-panel" id="gw-step-2" style="display:none;">
-      <div class="fp-input-area">
-        <div class="pr-inputs-grid">
-          <div>
-            <label class="fp-label" for="gw-team-size">Team size</label>
-            <select id="gw-team-size" class="dd-field-select" style="width:100%;">
-              <option value="1">Solo (PI only)</option>
-              <option value="3">Small (2-3 people)</option>
-              <option value="5" selected>Medium (4-6 people)</option>
-              <option value="10">Large (7-15 people)</option>
-              <option value="20+">Consortium (20+)</option>
-            </select>
-          </div>
-          <div>
-            <label class="fp-label" for="gw-duration">Grant duration</label>
-            <select id="gw-duration" class="dd-field-select" style="width:100%;">
-              <option value="1 year">1 year</option>
-              <option value="2 years">2 years</option>
-              <option value="3 years" selected>3 years</option>
-              <option value="4 years">4 years</option>
-              <option value="5 years">5 years</option>
-            </select>
-          </div>
-          <div>
-            <label class="fp-label" for="gw-budget">Total budget (USD)</label>
-            <select id="gw-budget" class="dd-field-select" style="width:100%;">
-              <option value="50000">$50,000</option>
-              <option value="100000">$100,000</option>
-              <option value="250000" selected>$250,000</option>
-              <option value="500000">$500,000</option>
-              <option value="1000000">$1,000,000</option>
-              <option value="2000000">$2,000,000+</option>
-            </select>
-          </div>
-          <div>
-            <label class="fp-label" for="gw-institution">Institution</label>
-            <input type="text" id="gw-institution" class="modal-input" placeholder="e.g. University of Cape Town">
-          </div>
-          <div style="grid-column:1/-1;">
-            <label class="fp-label" for="gw-pi-experience">Principal Investigator background <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
-            <textarea id="gw-pi-experience" placeholder="Brief PI bio: years of experience, key publications, relevant expertise…" rows="3"></textarea>
-          </div>
+        <div class="form-group-modal">
+          <label class="modal-label" for="np-desc">Description</label>
+          <textarea id="np-desc" class="modal-input" rows="3" placeholder="What is this project about?"></textarea>
         </div>
-        <div style="display:flex;gap:10px;margin-top:1.5rem;">
-          <button class="paper-btn" onclick="gwBack()">← Back</button>
-          <button class="btn-accent" id="gw-btn" onclick="generateGrant()" style="flex:1;">Generate Grant Application →</button>
+        <div class="form-group-modal">
+          <label class="modal-label" for="np-field">Research field</label>
+          <input type="text" id="np-field" class="modal-input" placeholder="e.g. Neuroscience, Drug Discovery"
+            maxlength="60">
         </div>
       </div>
-    </div>
-
-    <!-- STEP 3: Results -->
-    <div id="gw-step-3" style="display:none;">
-      <div id="gw-status" class="search-status" role="status" aria-live="polite">
-        <div class="spinner"></div><span>Writing your grant application…</span>
-      </div>
-      <div id="gw-results" style="margin-top:1.5rem;"></div>
+      <button class="btn-accent" onclick="submitNewProject()" style="width:100%;padding:12px;margin-top:1.25rem;">Create
+        Project →</button>
+      <button class="modal-close" onclick="closeModal('new-project-modal')">Cancel</button>
     </div>
   </div>
 
-  <!-- ═══ PDF CHAT ═══ -->
-  <div class="page" id="page-pdfchat">
-    <div class="page-header">
+  <!-- ═══ PROJECT DETAIL MODAL ═══ -->
+  <div id="project-detail-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:620px;width:95%;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <h2 id="proj-detail-name" style="margin:0;"></h2>
+        <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;"
+          onclick="closeModal('project-detail-modal')">✕</button>
+      </div>
+      <input type="hidden" id="proj-detail-id">
+      <div style="margin-bottom:1rem;">
+        <div
+          style="font-size:11px;font-family:var(--font-mono);color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">
+          PAPERS IN PROJECT</div>
+        <div id="proj-detail-papers" style="max-height:140px;overflow-y:auto;"></div>
+      </div>
       <div>
-        <h1 class="page-title">PDF Chat</h1>
-        <p class="page-sub">Upload any research paper and have a conversation with it. Ask questions, extract methods, get summaries — all powered by AI.</p>
+        <div
+          style="font-size:11px;font-family:var(--font-mono);color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">
+          SHARED NOTES</div>
+        <textarea id="proj-detail-notes" rows="6"
+          style="width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:12px;color:var(--text);font-family:var(--font-body);font-size:13px;resize:vertical;outline:none;"
+          placeholder="Add shared notes, findings, or next steps for this project…"></textarea>
       </div>
-      <div class="ai-badge">✦ Powered by Gemini AI</div>
+      <div style="display:flex;gap:10px;margin-top:1.25rem;">
+        <button class="paper-btn" onclick="closeModal('project-detail-modal')">Close</button>
+        <button class="btn-accent" onclick="TeamManager.saveProjectNotes()" style="flex:1;">Save Notes</button>
+      </div>
     </div>
-    <div id="pdf-drop-zone" class="pdf-drop-zone" onclick="openPdfPicker()">
-      <div class="pdf-drop-icon">📄</div>
-      <div class="pdf-drop-title">Drop a PDF here or click to upload</div>
-      <div class="pdf-drop-sub">Works 100% client-side — your paper never leaves your device</div>
-      <div class="pdf-drop-hint">Supports papers up to ~200 pages · Any research field</div>
-    </div>
-    <div id="pdf-loading" style="display:none;" class="search-status">
-      <div class="spinner"></div><span>Reading PDF…</span>
-    </div>
-    <div id="pdf-chat-panel" style="display:none;"></div>
   </div>
 
-  <!-- ═══ TEAM HUB ═══ -->
-  <div class="page" id="page-teamhub">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Team Workspace</h1>
-        <p class="page-sub">Your department's shared research hub — papers, projects, hypotheses, and activity in one place.</p>
-      </div>
-    </div>
-    <div id="team-hub-content"></div>
-  </div>
 
-  <!-- ═══ TEAM MEMBERS ═══ -->
-  <div class="page" id="page-teammembers">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Team Members</h1>
-        <p class="page-sub">Manage your team, set roles, and invite colleagues.</p>
+  <!-- ═══ UPGRADE MODAL ═══ -->
+  <div id="upgrade-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:420px;width:90%;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+        <div
+          style="font-size:11px;font-weight:700;font-family:var(--font-mono);color:var(--blue);letter-spacing:0.1em;background:var(--blue-dim);border:1px solid rgba(79,140,234,0.2);padding:3px 12px;border-radius:100px;">
+          UPGRADE TO RESEARCHER</div>
+        <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;"
+          onclick="closeModal('upgrade-modal')">✕</button>
       </div>
-    </div>
-    <div class="team-members-header">
-      <div style="font-size:13px;color:var(--text2);" id="team-member-count">–</div>
-      <div style="display:flex;gap:8px;">
-        <button class="paper-btn" onclick="TeamManager.showJoinTeamModal()">Join with Code</button>
-        <button class="btn-accent" onclick="TeamManager.showInviteModal()">+ Invite Member</button>
-      </div>
-    </div>
-    <div id="team-members-list"></div>
-  </div>
+      <h2 id="upgrade-modal-title" style="margin-bottom:0.5rem;">Unlock everything.</h2>
+      <p id="modal-reason" style="color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:1.5rem;">Upgrade to
+        Researcher plan for unlimited access.</p>
 
-  <!-- ═══ SHARED LIBRARY ═══ -->
-  <div class="page" id="page-teamlibrary">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Shared Library</h1>
-        <p class="page-sub">Papers shared by your team. Any member can save a paper and share it with everyone.</p>
-      </div>
-    </div>
-    <div class="team-filter-bar">
-      <span class="team-filter-label">FILTER BY MEMBER:</span>
-      <select id="team-lib-filter" class="dd-field-select" onchange="TeamManager.renderSharedLibrary()">
-        <option value="">All members</option>
-      </select>
-      <span id="team-lib-count" style="font-size:11px;font-family:var(--font-mono);color:var(--muted);"></span>
-    </div>
-    <div id="team-shared-library"></div>
-  </div>
-
-  <!-- ═══ SHARED PROJECTS ═══ -->
-  <div class="page" id="page-teamprojects">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Shared Projects</h1>
-        <p class="page-sub">Collaborative research projects. Each project holds papers, notes, and hypotheses.</p>
-      </div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;margin-bottom:1rem;">
-      <button class="btn-accent" onclick="showNewProjectModal()">+ New Shared Project</button>
-    </div>
-    <div id="team-shared-projects"></div>
-  </div>
-
-  <!-- ═══ TEAM HYPOTHESES ═══ -->
-  <div class="page" id="page-teamhypotheses">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Team Hypotheses</h1>
-        <p class="page-sub">Hypotheses shared by team members. React, comment, and build on each other's ideas.</p>
-      </div>
-    </div>
-    <div id="team-shared-hypotheses"></div>
-  </div>
-
-  <!-- ═══ TEAM SETTINGS ═══ -->
-  <div class="page" id="page-teamsettings">
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Team Settings</h1>
-        <p class="page-sub">Manage your workspace, join code, and permissions.</p>
-      </div>
-    </div>
-    <div id="team-settings-content"></div>
-  </div>
-
-</main>
-
-<!-- ═══ TOAST ═══ -->
-<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
-
-<!-- ═══ CREATE TEAM MODAL ═══ -->
-<div id="create-team-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:440px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
-      <div>
-        <div style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:var(--blue);letter-spacing:0.12em;margin-bottom:6px;">NEW WORKSPACE</div>
-        <h2 style="margin:0;">Create Team Workspace</h2>
-      </div>
-      <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;" onclick="closeModal('create-team-modal')">✕</button>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <div class="form-group-modal">
-        <label class="modal-label" for="ct-name">Team / Lab name <span style="color:var(--error);">*</span></label>
-        <input type="text" id="ct-name" class="modal-input" placeholder="e.g. UCT Neuroscience Lab, Smith Lab" maxlength="80">
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="ct-institution">Institution</label>
-        <input type="text" id="ct-institution" class="modal-input" placeholder="e.g. University of Cape Town" maxlength="80">
-      </div>
-    </div>
-    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:1.25rem 0;font-size:12.5px;color:var(--text2);">
-      A unique <strong style="color:var(--text);">6-character join code</strong> will be generated automatically. Share it with colleagues so they can join your workspace.
-    </div>
-    <button class="btn-accent" onclick="TeamManager.submitCreateTeam()" style="width:100%;padding:12px;">Create Workspace →</button>
-    <button class="modal-close" onclick="closeModal('create-team-modal')">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ JOIN TEAM MODAL ═══ -->
-<div id="join-team-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:380px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
-      <h2 style="margin:0;">Join a Team</h2>
-      <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;" onclick="closeModal('join-team-modal')">✕</button>
-    </div>
-    <p style="color:var(--text2);font-size:13px;margin-bottom:1.25rem;">Enter the 6-character code your team leader shared with you.</p>
-    <div class="form-group-modal">
-      <label class="modal-label" for="jt-code">Join Code</label>
-      <input type="text" id="jt-code" class="modal-input" placeholder="e.g. ABC123" maxlength="6" style="text-transform:uppercase;letter-spacing:0.2em;font-size:1.4rem;text-align:center;font-family:var(--font-mono);">
-    </div>
-    <button class="btn-accent" onclick="TeamManager.submitJoinTeam()" style="width:100%;padding:12px;margin-top:1.25rem;">Join Workspace →</button>
-    <button class="modal-close" onclick="closeModal('join-team-modal')">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ INVITE MEMBER MODAL ═══ -->
-<div id="invite-member-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:420px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
-      <h2 style="margin:0;">Invite Team Member</h2>
-      <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;" onclick="closeModal('invite-member-modal')">✕</button>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <div class="form-group-modal">
-        <label class="modal-label" for="inv-name">Name</label>
-        <input type="text" id="inv-name" class="modal-input" placeholder="Dr. Jane Smith" maxlength="80">
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="inv-email">Email address <span style="color:var(--error);">*</span></label>
-        <input type="email" id="inv-email" class="modal-input" placeholder="jane@university.edu">
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="inv-role">Role</label>
-        <select id="inv-role" class="modal-input">
-          <option value="member">Member — can search, share papers &amp; projects</option>
-          <option value="admin">Admin — can also manage members</option>
-          <option value="viewer">Viewer — read-only access</option>
-        </select>
-      </div>
-    </div>
-    <button class="btn-accent" onclick="TeamManager.submitInvite()" style="width:100%;padding:12px;margin-top:1.25rem;">Send Invite →</button>
-    <button class="modal-close" onclick="closeModal('invite-member-modal')">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ NEW PROJECT MODAL ═══ -->
-<div id="new-project-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:440px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
-      <h2 style="margin:0;">New Shared Project</h2>
-      <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;" onclick="closeModal('new-project-modal')">✕</button>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <div class="form-group-modal">
-        <label class="modal-label" for="np-name">Project name <span style="color:var(--error);">*</span></label>
-        <input type="text" id="np-name" class="modal-input" placeholder="e.g. CRISPR Drug Target Discovery" maxlength="80">
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="np-desc">Description</label>
-        <textarea id="np-desc" class="modal-input" rows="3" placeholder="What is this project about?"></textarea>
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="np-field">Research field</label>
-        <input type="text" id="np-field" class="modal-input" placeholder="e.g. Neuroscience, Drug Discovery" maxlength="60">
-      </div>
-    </div>
-    <button class="btn-accent" onclick="submitNewProject()" style="width:100%;padding:12px;margin-top:1.25rem;">Create Project →</button>
-    <button class="modal-close" onclick="closeModal('new-project-modal')">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ PROJECT DETAIL MODAL ═══ -->
-<div id="project-detail-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:620px;width:95%;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
-      <h2 id="proj-detail-name" style="margin:0;"></h2>
-      <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;" onclick="closeModal('project-detail-modal')">✕</button>
-    </div>
-    <input type="hidden" id="proj-detail-id">
-    <div style="margin-bottom:1rem;">
-      <div style="font-size:11px;font-family:var(--font-mono);color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">PAPERS IN PROJECT</div>
-      <div id="proj-detail-papers" style="max-height:140px;overflow-y:auto;"></div>
-    </div>
-    <div>
-      <div style="font-size:11px;font-family:var(--font-mono);color:var(--muted);letter-spacing:0.1em;margin-bottom:8px;">SHARED NOTES</div>
-      <textarea id="proj-detail-notes" rows="6" style="width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:12px;color:var(--text);font-family:var(--font-body);font-size:13px;resize:vertical;outline:none;" placeholder="Add shared notes, findings, or next steps for this project…"></textarea>
-    </div>
-    <div style="display:flex;gap:10px;margin-top:1.25rem;">
-      <button class="paper-btn" onclick="closeModal('project-detail-modal')">Close</button>
-      <button class="btn-accent" onclick="TeamManager.saveProjectNotes()" style="flex:1;">Save Notes</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- ═══ UPGRADE MODAL ═══ -->
-<div id="upgrade-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:420px;width:90%;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
-      <div style="font-size:11px;font-weight:700;font-family:var(--font-mono);color:var(--blue);letter-spacing:0.1em;background:var(--blue-dim);border:1px solid rgba(79,140,234,0.2);padding:3px 12px;border-radius:100px;">UPGRADE TO RESEARCHER</div>
-      <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;" onclick="closeModal('upgrade-modal')">✕</button>
-    </div>
-    <h2 id="upgrade-modal-title" style="margin-bottom:0.5rem;">Unlock everything.</h2>
-    <p id="modal-reason" style="color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:1.5rem;">Upgrade to Researcher plan for unlimited access.</p>
-
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;">
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:14px;">
-        <span style="font-family:var(--font-display);font-size:2.5rem;letter-spacing:0.02em;">$29</span>
-        <span style="color:var(--text2);font-size:13px;">/month · cancel anytime</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:7px;">
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span style="color:#34D399;">✓</span>Unlimited searches & hypothesis generation</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span style="color:#34D399;">✓</span>Full literature review generator</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span style="color:#34D399;">✓</span>Cross-Field Discovery Engine</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span style="color:#34D399;">✓</span>Paper comparison & citation manager</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span style="color:#34D399;">✓</span>PDF & DOCX export</div>
-      </div>
-    </div>
-
-    <!-- Stripe CTA (international) -->
-    <a id="upgrade-stripe-btn" href="https://buy.stripe.com/YOUR_PAYMENT_LINK_HERE" target="_blank" class="btn-accent" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;margin-bottom:10px;background:linear-gradient(135deg,var(--blue),var(--indigo));color:#FFF;border:none;cursor:pointer;width:100%;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      Pay with card (Stripe) →
-    </a>
-
-    <!-- PayFast CTA (South Africa) -->
-    <div style="position:relative;text-align:center;margin:14px 0 10px;">
-      <div style="height:1px;background:var(--border);position:absolute;left:0;right:0;top:50%;"></div>
-      <span style="position:relative;background:var(--bg2);padding:0 12px;font-size:11px;color:var(--muted);font-family:var(--font-mono);">OR PAY IN ZAR (SOUTH AFRICA)</span>
-    </div>
-    <form id="payfast-payment-form" action="https://www.payfast.co.za/eng/process" method="post">
-      <!-- Replace merchant_id and merchant_key with your PayFast credentials -->
-      <input type="hidden" name="merchant_id" value="YOUR_PAYFAST_MERCHANT_ID">
-      <input type="hidden" name="merchant_key" value="YOUR_PAYFAST_MERCHANT_KEY">
-      <input type="hidden" name="return_url" id="pf-return-url" value="">
-      <input type="hidden" name="cancel_url" id="pf-cancel-url" value="">
-      <input type="hidden" name="notify_url" value="https://YOUR_SITE.netlify.app/.netlify/functions/payfast-ipn">
-      <input type="hidden" name="email_address" id="pf-email" value="">
-      <input type="hidden" name="amount" value="R499.00">
-      <input type="hidden" name="item_name" value="Nexus Researcher Plan">
-      <input type="hidden" name="item_description" value="Monthly subscription — unlimited AI research features">
-      <input type="hidden" name="subscription_type" value="1">
-      <input type="hidden" name="billing_date" id="pf-billing-date" value="">
-      <input type="hidden" name="recurring_amount" value="R499.00">
-      <input type="hidden" name="frequency" value="3">
-      <input type="hidden" name="cycles" value="0">
-      <button type="submit" style="width:100%;padding:13px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(79,140,234,0.4)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">
-        🇿🇦 Pay R499/month with PayFast (EFT, Card)
-      </button>
-    </form>
-
-    <button class="modal-close" id="upgrade-modal-close" onclick="closeModal('upgrade-modal')" style="width:100%;margin-top:12px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;padding:8px;font-family:var(--font-body);">Maybe later</button>
-  </div>
-</div>
-
-
-
-<!-- ═══ PROJECT MODAL ═══ -->
-<div id="project-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal">
-    <h2 id="project-modal-title">New Project</h2>
-    <p style="margin-bottom:1.5rem;">Give your research project a name and field.</p>
-    <div style="display:flex;flex-direction:column;gap:12px;text-align:left;">
-      <div class="form-group-modal"><label class="modal-label">Project name</label><input type="text" id="project-name-input" placeholder="e.g. CRISPR Alzheimer's Study" class="modal-input" maxlength="60"></div>
-      <div class="form-group-modal"><label class="modal-label">Research field <span style="opacity:0.5;font-weight:400;">(optional)</span></label><input type="text" id="project-field-input" placeholder="e.g. Neuroscience" class="modal-input" maxlength="40"></div>
-    </div>
-    <button class="btn-accent" id="create-project-submit" onclick="submitProject()" style="width:100%;margin-top:1.5rem;padding:12px;">Create Project</button>
-    <button class="modal-close" onclick="closeModal('project-modal')">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ SIGN OUT MODAL ═══ -->
-<div id="signout-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal" style="max-width:320px;">
-    <h2>Sign out?</h2>
-    <p style="margin-bottom:1.5rem;">Your saved papers and projects will still be here when you return.</p>
-    <button class="btn-accent" id="confirm-signout-btn" onclick="handleSignOut()" style="width:100%;padding:12px;margin-bottom:8px;">Sign out</button>
-    <button class="modal-close" onclick="closeModal('signout-modal')">Stay signed in</button>
-  </div>
-</div>
-
-<!-- ═══ ALERT MODAL ═══ -->
-<div id="alert-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
-  <div class="modal">
-    <h2>New Research Alert</h2>
-    <p style="margin-bottom:1.5rem;">Set up an alert and we'll notify you when new papers match your topic.</p>
-    <div style="display:flex;flex-direction:column;gap:12px;text-align:left;">
-      <div class="form-group-modal"><label class="modal-label">Research topic</label><input type="text" id="alert-topic-input" placeholder="e.g. CRISPR off-target effects" class="modal-input" maxlength="80"></div>
-      <div class="form-group-modal"><label class="modal-label">Email (optional)</label><input type="email" id="alert-email-input" placeholder="you@university.edu" class="modal-input"></div>
-      <div class="form-group-modal">
-        <label class="modal-label">Frequency</label>
-        <select id="alert-frequency-input" class="modal-input" style="cursor:pointer;">
-          <option value="daily">Daily digest</option><option value="weekly" selected>Weekly digest</option><option value="monthly">Monthly digest</option>
-        </select>
-      </div>
-    </div>
-    <button class="btn-accent" onclick="submitAlert()" style="width:100%;margin-top:1.5rem;padding:12px;">Create Alert</button>
-    <button class="modal-close" onclick="closeModal('alert-modal')">Cancel</button>
-  </div>
-</div>
-
-<!-- ═══ PROFILE SETUP MODAL ═══ -->
-<div id="profile-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
-  <div class="modal profile-modal-inner">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
-      <div>
-        <div style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:var(--cyan);letter-spacing:0.12em;margin-bottom:6px;">RESEARCHER PROFILE</div>
-        <h2 id="profile-modal-title" style="margin:0;font-size:1.4rem;">Personalise your experience</h2>
-        <p style="color:var(--text2);font-size:12.5px;margin:6px 0 0;">Nexus tailors every AI output to your field, interests, and career stage.</p>
-      </div>
-      <button style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;flex-shrink:0;" onclick="dismissProfile()">✕</button>
-    </div>
-
-    <div class="profile-form-grid">
-      <div class="form-group-modal">
-        <label class="modal-label" for="prof-field">Primary research field <span style="color:var(--error);">*</span></label>
-        <select id="prof-field" class="modal-input">
-          <option value="">Select your field…</option>
-          <option>Neuroscience</option><option>Biomedical</option><option>Biology</option><option>Medicine</option>
-          <option>Chemistry</option><option>Physics</option><option>Computer Science</option>
-          <option>Materials Science</option><option>Climate Science</option><option>Drug Discovery</option>
-          <option>Psychology</option><option>Economics</option><option>Engineering</option><option>Other</option>
-        </select>
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="prof-career">Career stage</label>
-        <select id="prof-career" class="modal-input">
-          <option value="">Select…</option>
-          <option value="undergrad">Undergraduate</option>
-          <option value="masters">Master's student</option>
-          <option value="phd">PhD student</option>
-          <option value="postdoc">Postdoctoral researcher</option>
-          <option value="lecturer">Lecturer / Assistant Professor</option>
-          <option value="professor">Associate / Full Professor</option>
-          <option value="industry">Industry researcher</option>
-        </select>
-      </div>
-      <div class="form-group-modal" style="grid-column:1/-1;">
-        <label class="modal-label" for="prof-subfield">Specific specialisation <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
-        <input type="text" id="prof-subfield" class="modal-input" placeholder="e.g. Synaptic plasticity and memory, CRISPR off-target effects…" maxlength="100">
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="prof-institution">Institution</label>
-        <input type="text" id="prof-institution" class="modal-input" placeholder="e.g. University of Cape Town" maxlength="80">
-      </div>
-      <div class="form-group-modal">
-        <label class="modal-label" for="prof-country">Country</label>
-        <input type="text" id="prof-country" class="modal-input" placeholder="e.g. South Africa" maxlength="60">
-      </div>
-      <div class="form-group-modal" style="grid-column:1/-1;">
-        <label class="modal-label" for="prof-interests-input">Key research interests <span style="color:var(--muted);font-weight:400;">(press Enter to add)</span></label>
-        <div class="profile-tags-wrap" id="profile-tags-wrap">
-          <input type="text" id="prof-interests-input" placeholder="e.g. CRISPR, Alzheimer's, LTP…" maxlength="40" style="background:none;border:none;outline:none;color:var(--text);font-family:var(--font-body);font-size:12.5px;min-width:140px;flex:1;">
+      <div
+        style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:14px;">
+          <span style="font-family:var(--font-display);font-size:2.5rem;letter-spacing:0.02em;">$29</span>
+          <span style="color:var(--text2);font-size:13px;">/month · cancel anytime</span>
         </div>
-        <div id="profile-tags-list" class="profile-tags-list"></div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span
+              style="color:#34D399;">✓</span>Unlimited searches & hypothesis generation</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span
+              style="color:#34D399;">✓</span>Full literature review generator</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span
+              style="color:#34D399;">✓</span>Cross-Field Discovery Engine</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span
+              style="color:#34D399;">✓</span>Paper comparison & citation manager</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);"><span
+              style="color:#34D399;">✓</span>PDF & DOCX export</div>
+        </div>
       </div>
-      <div class="form-group-modal" style="grid-column:1/-1;">
-        <label class="modal-label" for="prof-grants">Relevant funding bodies <span style="color:var(--muted);font-weight:400;">(comma-separated, optional)</span></label>
-        <input type="text" id="prof-grants" class="modal-input" placeholder="e.g. NRF, NIH, Wellcome Trust, MRC" maxlength="200">
+
+      <!-- Stripe CTA (international) -->
+      <a id="upgrade-stripe-btn" href="https://buy.stripe.com/YOUR_PAYMENT_LINK_HERE" target="_blank" class="btn-accent"
+        style="display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;margin-bottom:10px;background:linear-gradient(135deg,var(--blue),var(--indigo));color:#FFF;border:none;cursor:pointer;width:100%;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+          <line x1="1" y1="10" x2="23" y2="10" />
+        </svg>
+        Pay with card (Stripe) →
+      </a>
+
+      <!-- PayFast CTA (South Africa) -->
+      <div style="position:relative;text-align:center;margin:14px 0 10px;">
+        <div style="height:1px;background:var(--border);position:absolute;left:0;right:0;top:50%;"></div>
+        <span
+          style="position:relative;background:var(--bg2);padding:0 12px;font-size:11px;color:var(--muted);font-family:var(--font-mono);">OR
+          PAY IN ZAR (SOUTH AFRICA)</span>
       </div>
+      <form id="payfast-payment-form" action="https://www.payfast.co.za/eng/process" method="post">
+        <!-- Replace merchant_id and merchant_key with your PayFast credentials -->
+        <input type="hidden" name="merchant_id" value="YOUR_PAYFAST_MERCHANT_ID">
+        <input type="hidden" name="merchant_key" value="YOUR_PAYFAST_MERCHANT_KEY">
+        <input type="hidden" name="return_url" id="pf-return-url" value="">
+        <input type="hidden" name="cancel_url" id="pf-cancel-url" value="">
+        <input type="hidden" name="notify_url" value="https://bizpilot-489919.uc.r.appspot.com/api/payfast-ipn">
+        <input type="hidden" name="email_address" id="pf-email" value="">
+        <input type="hidden" name="amount" value="R499.00">
+        <input type="hidden" name="item_name" value="Nexus Researcher Plan">
+        <input type="hidden" name="item_description" value="Monthly subscription — unlimited AI research features">
+        <input type="hidden" name="subscription_type" value="1">
+        <input type="hidden" name="billing_date" id="pf-billing-date" value="">
+        <input type="hidden" name="recurring_amount" value="R499.00">
+        <input type="hidden" name="frequency" value="3">
+        <input type="hidden" name="cycles" value="0">
+        <button type="submit"
+          style="width:100%;padding:13px;border-radius:10px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;gap:10px;transition:all 0.2s;"
+          onmouseover="this.style.borderColor='rgba(79,140,234,0.4)';this.style.color='var(--text)'"
+          onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text2)'">
+          🇿🇦 Pay R499/month with PayFast (EFT, Card)
+        </button>
+      </form>
+
+      <button class="modal-close" id="upgrade-modal-close" onclick="closeModal('upgrade-modal')"
+        style="width:100%;margin-top:12px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;padding:8px;font-family:var(--font-body);">Maybe
+        later</button>
     </div>
-
-    <button class="btn-accent" onclick="saveProfile()" style="width:100%;margin-top:1.5rem;padding:13px;font-size:14px;">Save Profile &amp; Personalise →</button>
-    <button class="modal-close" onclick="dismissProfile()" style="margin-top:8px;">Skip for now</button>
   </div>
-</div>
 
-<!-- ═══ SCRIPTS ═══ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://unpkg.com/html-docx-js@0.3.1/dist/html-docx.js"></script>
-<script src="../js/supabase-client.js"></script>
-<script src="../js/profile.js"></script>
-<!-- D3.js v7 — used by Research Gap Map -->
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" crossorigin="anonymous"></script>
-<script src="../js/gap-map.js"></script>
-<script src="../js/citation-graph.js"></script>
-<script src="../js/cross-domain-db.js"></script>
-<script src="../js/benchmark.js"></script>
-<script src="../js/config.js"></script>
-<script src="../js/research-memory.js"></script>
-<script src="../js/role-system.js"></script>
-<script src="../js/citation-verifier.js"></script>
-<script src="../js/gemini.js"></script>
-<script src="../js/deep-diver.js"></script>
-<script src="../js/peer-review.js"></script>
-<script src="../js/lab-notebook.js"></script>
-<script src="../js/contradiction-detector.js"></script>
-<script src="../js/science-checker.js"></script>
-<script src="../js/experiment-blueprint.js"></script>
-<script src="../js/trend-forecaster.js"></script>
-<script src="../js/grant-writer.js"></script>
-<script src="../js/pdf-chat.js"></script>
-<script src="../js/team.js"></script>
-<script src="../js/pipeline.js?v=2"></script>
-<script>
-// ── Team helper functions (global scope) ──────────────────────────────────
-function escHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function showNewProjectModal() {
-  const el = document.getElementById('new-project-modal');
-  if (el) el.style.display = 'flex';
-}
-function submitNewProject() {
-  const name  = document.getElementById('np-name')?.value?.trim();
-  const desc  = document.getElementById('np-desc')?.value?.trim();
-  const field = document.getElementById('np-field')?.value?.trim();
-  if (!name) { if (typeof showToast === 'function') showToast('Enter a project name', 'error'); return; }
-  if (!TeamManager.getTeam()) { TeamManager.showCreateTeamModal(); return; }
-  TeamManager.createSharedProject(name, desc || '', field || '');
-  closeModal('new-project-modal');
-  document.getElementById('np-name').value = '';
-  document.getElementById('np-desc').value = '';
-  document.getElementById('np-field').value = '';
-}
-</script>
-<script src="../js/dashboard.js"></script>
+
+
+  <!-- ═══ PROJECT MODAL ═══ -->
+  <div id="project-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2 id="project-modal-title">New Project</h2>
+      <p style="margin-bottom:1.5rem;">Give your research project a name and field.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:left;">
+        <div class="form-group-modal"><label class="modal-label">Project name</label><input type="text"
+            id="project-name-input" placeholder="e.g. CRISPR Alzheimer's Study" class="modal-input" maxlength="60">
+        </div>
+        <div class="form-group-modal"><label class="modal-label">Research field <span
+              style="opacity:0.5;font-weight:400;">(optional)</span></label><input type="text" id="project-field-input"
+            placeholder="e.g. Neuroscience" class="modal-input" maxlength="40"></div>
+      </div>
+      <button class="btn-accent" id="create-project-submit" onclick="submitProject()"
+        style="width:100%;margin-top:1.5rem;padding:12px;">Create Project</button>
+      <button class="modal-close" onclick="closeModal('project-modal')">Cancel</button>
+    </div>
+  </div>
+
+  <!-- ═══ SIGN OUT MODAL ═══ -->
+  <div id="signout-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:320px;">
+      <h2>Sign out?</h2>
+      <p style="margin-bottom:1.5rem;">Your saved papers and projects will still be here when you return.</p>
+      <button class="btn-accent" id="confirm-signout-btn" onclick="handleSignOut()"
+        style="width:100%;padding:12px;margin-bottom:8px;">Sign out</button>
+      <button class="modal-close" onclick="closeModal('signout-modal')">Stay signed in</button>
+    </div>
+  </div>
+
+  <!-- ═══ ALERT MODAL ═══ -->
+  <div id="alert-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h2>New Research Alert</h2>
+      <p style="margin-bottom:1.5rem;">Set up an alert and we'll notify you when new papers match your topic.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:left;">
+        <div class="form-group-modal"><label class="modal-label">Research topic</label><input type="text"
+            id="alert-topic-input" placeholder="e.g. CRISPR off-target effects" class="modal-input" maxlength="80">
+        </div>
+        <div class="form-group-modal"><label class="modal-label">Email (optional)</label><input type="email"
+            id="alert-email-input" placeholder="you@university.edu" class="modal-input"></div>
+        <div class="form-group-modal">
+          <label class="modal-label">Frequency</label>
+          <select id="alert-frequency-input" class="modal-input" style="cursor:pointer;">
+            <option value="daily">Daily digest</option>
+            <option value="weekly" selected>Weekly digest</option>
+            <option value="monthly">Monthly digest</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-accent" onclick="submitAlert()" style="width:100%;margin-top:1.5rem;padding:12px;">Create
+        Alert</button>
+      <button class="modal-close" onclick="closeModal('alert-modal')">Cancel</button>
+    </div>
+  </div>
+
+  <!-- ═══ PROFILE SETUP MODAL ═══ -->
+  <div id="profile-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true"
+    aria-labelledby="profile-modal-title">
+    <div class="modal profile-modal-inner">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;">
+        <div>
+          <div
+            style="font-size:10px;font-weight:700;font-family:var(--font-mono);color:var(--cyan);letter-spacing:0.12em;margin-bottom:6px;">
+            RESEARCHER PROFILE</div>
+          <h2 id="profile-modal-title" style="margin:0;font-size:1.4rem;">Personalise your experience</h2>
+          <p style="color:var(--text2);font-size:12.5px;margin:6px 0 0;">Nexus tailors every AI output to your field,
+            interests, and career stage.</p>
+        </div>
+        <button
+          style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;line-height:1;flex-shrink:0;"
+          onclick="dismissProfile()">✕</button>
+      </div>
+
+      <div class="profile-form-grid">
+        <div class="form-group-modal">
+          <label class="modal-label" for="prof-field">Primary research field <span
+              style="color:var(--error);">*</span></label>
+          <select id="prof-field" class="modal-input">
+            <option value="">Select your field…</option>
+            <option>Neuroscience</option>
+            <option>Biomedical</option>
+            <option>Biology</option>
+            <option>Medicine</option>
+            <option>Chemistry</option>
+            <option>Physics</option>
+            <option>Computer Science</option>
+            <option>Materials Science</option>
+            <option>Climate Science</option>
+            <option>Drug Discovery</option>
+            <option>Psychology</option>
+            <option>Economics</option>
+            <option>Engineering</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group-modal">
+          <label class="modal-label" for="prof-career">Career stage</label>
+          <select id="prof-career" class="modal-input">
+            <option value="">Select…</option>
+            <option value="undergrad">Undergraduate</option>
+            <option value="masters">Master's student</option>
+            <option value="phd">PhD student</option>
+            <option value="postdoc">Postdoctoral researcher</option>
+            <option value="lecturer">Lecturer / Assistant Professor</option>
+            <option value="professor">Associate / Full Professor</option>
+            <option value="industry">Industry researcher</option>
+          </select>
+        </div>
+        <div class="form-group-modal" style="grid-column:1/-1;">
+          <label class="modal-label" for="prof-subfield">Specific specialisation <span
+              style="color:var(--muted);font-weight:400;">(optional)</span></label>
+          <input type="text" id="prof-subfield" class="modal-input"
+            placeholder="e.g. Synaptic plasticity and memory, CRISPR off-target effects…" maxlength="100">
+        </div>
+        <div class="form-group-modal">
+          <label class="modal-label" for="prof-institution">Institution</label>
+          <input type="text" id="prof-institution" class="modal-input" placeholder="e.g. University of Cape Town"
+            maxlength="80">
+        </div>
+        <div class="form-group-modal">
+          <label class="modal-label" for="prof-country">Country</label>
+          <input type="text" id="prof-country" class="modal-input" placeholder="e.g. South Africa" maxlength="60">
+        </div>
+        <div class="form-group-modal" style="grid-column:1/-1;">
+          <label class="modal-label" for="prof-interests-input">Key research interests <span
+              style="color:var(--muted);font-weight:400;">(press Enter to add)</span></label>
+          <div class="profile-tags-wrap" id="profile-tags-wrap">
+            <input type="text" id="prof-interests-input" placeholder="e.g. CRISPR, Alzheimer's, LTP…" maxlength="40"
+              style="background:none;border:none;outline:none;color:var(--text);font-family:var(--font-body);font-size:12.5px;min-width:140px;flex:1;">
+          </div>
+          <div id="profile-tags-list" class="profile-tags-list"></div>
+        </div>
+        <div class="form-group-modal" style="grid-column:1/-1;">
+          <label class="modal-label" for="prof-grants">Relevant funding bodies <span
+              style="color:var(--muted);font-weight:400;">(comma-separated, optional)</span></label>
+          <input type="text" id="prof-grants" class="modal-input" placeholder="e.g. NRF, NIH, Wellcome Trust, MRC"
+            maxlength="200">
+        </div>
+      </div>
+
+      <button class="btn-accent" onclick="saveProfile()"
+        style="width:100%;margin-top:1.5rem;padding:13px;font-size:14px;">Save Profile &amp; Personalise →</button>
+      <button class="modal-close" onclick="dismissProfile()" style="margin-top:8px;">Skip for now</button>
+    </div>
+  </div>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://unpkg.com/html-docx-js@0.3.1/dist/html-docx.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/profile.js"></script>
+  <!-- D3.js v7 — used by Research Gap Map -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" crossorigin="anonymous"></script>
+  <script src="../js/gap-map.js"></script>
+  <script src="../js/citation-graph.js"></script>
+  <script src="../js/cross-domain-db.js"></script>
+  <script src="../js/benchmark.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/research-memory.js"></script>
+  <script src="../js/role-system.js"></script>
+  <script src="../js/citation-verifier.js"></script>
+  <script src="../js/gemini.js"></script>
+  <script src="../js/deep-diver.js"></script>
+  <script src="../js/peer-review.js"></script>
+  <script src="../js/lab-notebook.js"></script>
+  <script src="../js/contradiction-detector.js"></script>
+  <script src="../js/science-checker.js"></script>
+  <script src="../js/experiment-blueprint.js"></script>
+  <script src="../js/trend-forecaster.js"></script>
+  <script src="../js/grant-writer.js"></script>
+  <script src="../js/pdf-chat.js"></script>
+  <script src="../js/team.js"></script>
+  <script src="../js/pipeline.js?v=2"></script>
+  <script>
+    // ── Team helper functions (global scope) ──────────────────────────────────
+    function escHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function showNewProjectModal() {
+      const el = document.getElementById('new-project-modal');
+      if (el) el.style.display = 'flex';
+    }
+    function submitNewProject() {
+      const name = document.getElementById('np-name')?.value?.trim();
+      const desc = document.getElementById('np-desc')?.value?.trim();
+      const field = document.getElementById('np-field')?.value?.trim();
+      if (!name) { if (typeof showToast === 'function') showToast('Enter a project name', 'error'); return; }
+      if (!TeamManager.getTeam()) { TeamManager.showCreateTeamModal(); return; }
+      TeamManager.createSharedProject(name, desc || '', field || '');
+      closeModal('new-project-modal');
+      document.getElementById('np-name').value = '';
+      document.getElementById('np-desc').value = '';
+      document.getElementById('np-field').value = '';
+    }
+  </script>
+  <script src="../js/dashboard.js"></script>
 </body>
+
 </html>

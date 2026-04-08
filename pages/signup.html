@@ -1,165 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Account — Nexus</title>
-<meta name="description" content="Sign up for Nexus — the AI research co-pilot that finds gaps in science and generates novel hypotheses.">
-<link rel="stylesheet" href="../css/auth.css">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — Nexus</title>
+  <meta name="description"
+    content="Sign up for Nexus — the AI research co-pilot that finds gaps in science and generates novel hypotheses.">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-<div class="auth-layout">
-  <div class="auth-left">
-    <a href="../index.html" class="auth-logo">NEX<span>US</span></a>
-    <div class="auth-left-content">
-      <div class="auth-tagline">Research that finds what no one has found yet.</div>
-      <div class="auth-features">
-        <div class="af-item"><span class="af-dot"></span>200M+ scientific papers indexed</div>
-        <div class="af-item"><span class="af-dot"></span>AI hypothesis generation</div>
-        <div class="af-item"><span class="af-dot"></span>Literature reviews in minutes</div>
-        <div class="af-item"><span class="af-dot"></span>Free to start — no credit card</div>
+  <div class="auth-layout">
+    <div class="auth-left">
+      <a href="../index.html" class="auth-logo">NEX<span>US</span></a>
+      <div class="auth-left-content">
+        <div class="auth-tagline">Research that finds what no one has found yet.</div>
+        <div class="auth-features">
+          <div class="af-item"><span class="af-dot"></span>200M+ scientific papers indexed</div>
+          <div class="af-item"><span class="af-dot"></span>AI hypothesis generation</div>
+          <div class="af-item"><span class="af-dot"></span>Literature reviews in minutes</div>
+          <div class="af-item"><span class="af-dot"></span>Free to start — no credit card</div>
+        </div>
       </div>
+      <div class="auth-left-quote">"Nexus cut my literature review from 3 weeks to 20 minutes."</div>
     </div>
-    <div class="auth-left-quote">"Nexus cut my literature review from 3 weeks to 20 minutes."</div>
-  </div>
 
-  <div class="auth-right">
-    <div class="auth-card">
-      <h1>Create your account</h1>
-      <p class="auth-sub">Start with 5 free searches and 2 hypothesis generations per month.</p>
+    <div class="auth-right">
+      <div class="auth-card">
+        <h1>Create your account</h1>
+        <p class="auth-sub">Start with 5 free searches and 2 hypothesis generations per month.</p>
 
-      <div id="error-msg" class="error-msg" style="display:none;" role="alert"></div>
-      <div id="success-msg" class="success-msg" style="display:none;" role="status"></div>
+        <div id="error-msg" class="error-msg" style="display:none;" role="alert"></div>
+        <div id="success-msg" class="success-msg" style="display:none;" role="status"></div>
 
-      <form id="signup-form" class="auth-form" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">First name</label>
-            <input type="text" id="fname" placeholder="James" required autocomplete="given-name">
+        <form id="signup-form" class="auth-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First name</label>
+              <input type="text" id="fname" placeholder="James" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="lname">Last name</label>
+              <input type="text" id="lname" placeholder="Smith" required autocomplete="family-name">
+            </div>
           </div>
           <div class="form-group">
-            <label for="lname">Last name</label>
-            <input type="text" id="lname" placeholder="Smith" required autocomplete="family-name">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="name@example.com" required autocomplete="email">
           </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" id="email" placeholder="you@university.edu" required autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <div class="input-wrap">
-            <input type="password" id="password" placeholder="Min. 8 characters" required minlength="8" autocomplete="new-password">
-            <button type="button" class="toggle-pw" onclick="togglePw('password')" id="toggle-pw-btn">Show</button>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="password" placeholder="Min. 8 characters" required minlength="8"
+                autocomplete="new-password">
+              <button type="button" class="toggle-pw" onclick="togglePw('password')" id="toggle-pw-btn">Show</button>
+            </div>
+            <div class="pw-strength">
+              <div class="pw-strength-fill" id="pw-strength-fill"></div>
+            </div>
           </div>
-          <div class="pw-strength"><div class="pw-strength-fill" id="pw-strength-fill"></div></div>
-        </div>
-        <div class="form-group">
-          <label for="field">Research field <span class="optional">(optional)</span></label>
-          <select id="field">
-            <option value="">Select your field...</option>
-            <option>Biomedical / Drug Discovery</option>
-            <option>Climate &amp; Environmental Science</option>
-            <option>Materials Science</option>
-            <option>Computer Science / AI</option>
-            <option>Physics</option>
-            <option>Chemistry</option>
-            <option>Neuroscience</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" id="terms" required>
-          <label for="terms">I agree to the <a href="terms.html" tabindex="-1" target="_blank">Terms of Service</a> and <a href="privacy.html" tabindex="-1" target="_blank">Privacy Policy</a></label>
-        </div>
-        <div class="form-check" style="margin-top: 10px; align-items: flex-start; gap: 10px;">
-          <input type="checkbox" id="ai-ack" required style="margin-top:3px; flex-shrink:0;">
-          <label for="ai-ack" style="font-size:12px; line-height:1.55; color:var(--text2, #8898B8);">I understand that Nexus generates <strong style="color:inherit;">AI-assisted research suggestions</strong> that must be independently verified before use in academic work, publications, or clinical decisions.</label>
-        </div>
-        <button type="submit" class="auth-btn" id="submit-btn">
-          <span id="btn-text">Create account</span>
-          <span id="btn-loader" style="display:none;" class="loader" aria-hidden="true"></span>
+          <div class="form-group">
+            <label for="field">Research field <span class="optional">(optional)</span></label>
+            <select id="field">
+              <option value="">Select your field...</option>
+              <option>Biomedical / Drug Discovery</option>
+              <option>Climate &amp; Environmental Science</option>
+              <option>Materials Science</option>
+              <option>Computer Science / AI</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+              <option>Neuroscience</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">I agree to the <a href="terms.html" tabindex="-1" target="_blank">Terms of Service</a>
+              and <a href="privacy.html" tabindex="-1" target="_blank">Privacy Policy</a></label>
+          </div>
+          <div class="form-check" style="margin-top: 10px; align-items: flex-start; gap: 10px;">
+            <input type="checkbox" id="ai-ack" required style="margin-top:3px; flex-shrink:0;">
+            <label for="ai-ack" style="font-size:12px; line-height:1.55; color:var(--text2, #8898B8);">I understand that
+              Nexus generates <strong style="color:inherit;">AI-assisted research suggestions</strong> that must be
+              independently verified before use in academic work, publications, or clinical decisions.</label>
+          </div>
+          <button type="submit" class="auth-btn" id="submit-btn">
+            <span id="btn-text">Create account</span>
+            <span id="btn-loader" style="display:none;" class="loader" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div class="auth-divider"><span>or</span></div>
+
+        <button class="google-btn" id="google-btn" onclick="handleGoogleAuth()">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+            <path fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+            <path fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+            <path fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+          </svg>
+          Continue with Google
         </button>
-      </form>
 
-      <div class="auth-divider"><span>or</span></div>
-
-      <button class="google-btn" id="google-btn" onclick="handleGoogleAuth()">
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Continue with Google
-      </button>
-
-      <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
-    </div>
-
-    <!-- Step 2: Role Selection (shown after successful signup) -->
-    <div class="auth-card" id="role-step" style="display:none;">
-      <div class="role-step-header">
-        <div class="role-step-emoji">🎯</div>
-        <h1>Who are you?</h1>
-        <p class="auth-sub">Nexus adapts to your role — different tools, different language, same powerful AI.</p>
+        <p class="auth-switch">Already have an account? <a href="login.html">Sign in</a></p>
       </div>
-      <div class="role-grid-signup" id="role-grid-signup"></div>
-      <p class="role-step-skip"><a href="dashboard.html" onclick="NexusRole.set('researcher')">Skip — I'll set this later</a></p>
+
+      <!-- Step 2: Role Selection (shown after successful signup) -->
+      <div class="auth-card" id="role-step" style="display:none;">
+        <div class="role-step-header">
+          <div class="role-step-emoji">🎯</div>
+          <h1>Who are you?</h1>
+          <p class="auth-sub">Nexus adapts to your role — different tools, different language, same powerful AI.</p>
+        </div>
+        <div class="role-grid-signup" id="role-grid-signup"></div>
+        <p class="role-step-skip"><a href="dashboard.html" onclick="NexusRole.set('researcher')">Skip — I'll set this
+            later</a></p>
+      </div>
     </div>
   </div>
-</div>
 
-<script src="../js/supabase-client.js"></script>
-<script src="../js/role-system.js"></script>
-<script src="../js/auth.js"></script>
-<script>
-  // Init password strength bar
-  document.addEventListener('DOMContentLoaded', () => {
-    initPasswordStrength('password', 'pw-strength-fill');
-  });
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/role-system.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    // Init password strength bar
+    document.addEventListener('DOMContentLoaded', () => {
+      initPasswordStrength('password', 'pw-strength-fill');
+    });
 
-  document.getElementById('signup-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btnText = document.getElementById('btn-text');
-    const loader = document.getElementById('btn-loader');
-    const btn = document.getElementById('submit-btn');
-    const errorMsg = document.getElementById('error-msg');
-    const successMsg = document.getElementById('success-msg');
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btnText = document.getElementById('btn-text');
+      const loader = document.getElementById('btn-loader');
+      const btn = document.getElementById('submit-btn');
+      const errorMsg = document.getElementById('error-msg');
+      const successMsg = document.getElementById('success-msg');
 
-    // Reset state
-    errorMsg.style.display = 'none';
-    successMsg.style.display = 'none';
-    btnText.style.display = 'none';
-    loader.style.display = 'inline-block';
-    btn.disabled = true;
+      // Reset state
+      errorMsg.style.display = 'none';
+      successMsg.style.display = 'none';
+      btnText.style.display = 'none';
+      loader.style.display = 'inline-block';
+      btn.disabled = true;
 
-    try {
-      const result = await nexusAuth.signUp(
-        document.getElementById('email').value.trim(),
-        document.getElementById('password').value,
-        {
-          first_name: document.getElementById('fname').value.trim(),
-          last_name: document.getElementById('lname').value.trim(),
-          research_field: document.getElementById('field').value,
-          ai_acknowledged: true,
-          ai_ack_timestamp: new Date().toISOString()
-        }
-      );
-      if (result.error) throw result.error;
+      try {
+        const result = await nexusAuth.signUp(
+          document.getElementById('email').value.trim(),
+          document.getElementById('password').value,
+          {
+            first_name: document.getElementById('fname').value.trim(),
+            last_name: document.getElementById('lname').value.trim(),
+            research_field: document.getElementById('field').value,
+            ai_acknowledged: true,
+            ai_ack_timestamp: new Date().toISOString()
+          }
+        );
+        if (result.error) throw result.error;
 
-      // Step 2: show role picker instead of redirecting immediately
-      document.getElementById('signup-form').closest('.auth-card').style.display = 'none';
-      showRoleStep();
-    } catch (err) {
-      errorMsg.textContent = err.message || 'Something went wrong. Please try again.';
-      errorMsg.style.display = 'block';
-      btnText.style.display = 'inline';
-      loader.style.display = 'none';
-      btn.disabled = false;
-    }
-  });
+        // Step 2: show role picker instead of redirecting immediately
+        document.getElementById('signup-form').closest('.auth-card').style.display = 'none';
+        showRoleStep();
+      } catch (err) {
+        errorMsg.textContent = err.message || 'Something went wrong. Please try again.';
+        errorMsg.style.display = 'block';
+        btnText.style.display = 'inline';
+        loader.style.display = 'none';
+        btn.disabled = false;
+      }
+    });
 
-  function showRoleStep() {
-    document.getElementById('role-step').style.display = '';
-    const grid = document.getElementById('role-grid-signup');
-    grid.innerHTML = ROLE_DEFINITIONS.map(r => `
+    function showRoleStep() {
+      document.getElementById('role-step').style.display = '';
+      const grid = document.getElementById('role-grid-signup');
+      grid.innerHTML = ROLE_DEFINITIONS.map(r => `
       <button class="role-card-signup"
         onclick="selectSignupRole('${r.id}')"
         style="--role-color:${r.color}">
@@ -167,14 +188,15 @@
         <div class="role-card-label">${r.label}</div>
         <div class="role-card-desc">${r.description}</div>
       </button>`).join('');
-  }
+    }
 
-  function selectSignupRole(roleId) {
-    NexusRole.set(roleId);
-    document.querySelectorAll('.role-card-signup').forEach(c => c.classList.remove('selected'));
-    event.currentTarget.classList.add('selected');
-    setTimeout(() => window.location.href = 'dashboard.html', 600);
-  }
-</script>
+    function selectSignupRole(roleId) {
+      NexusRole.set(roleId);
+      document.querySelectorAll('.role-card-signup').forEach(c => c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      setTimeout(() => window.location.href = 'dashboard.html', 600);
+    }
+  </script>
 </body>
+
 </html>

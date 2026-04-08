@@ -1,230 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Nexus AI Research Platform</title>
-<meta name="description" content="Get in touch with the Nexus team. Enterprise inquiries, department plans, press, and general questions.">
-<link rel="stylesheet" href="../css/landing.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 7rem 2rem 6rem; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: flex-start; }
-  .contact-left h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 1rem; }
-  .contact-left p { color: var(--text2); line-height: 1.75; font-size: 15px; max-width: 380px; }
-  .contact-reasons { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 16px; }
-  .cr-item { display: flex; gap: 14px; align-items: flex-start; }
-  .cr-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(79,140,234,0.1); border: 1px solid rgba(79,140,234,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue); }
-  .cr-label { font-weight: 600; font-size: 13px; color: var(--text); margin-bottom: 2px; }
-  .cr-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Nexus AI Research Platform</title>
+  <meta name="description"
+    content="Get in touch with the Nexus team. Enterprise inquiries, department plans, press, and general questions.">
+  <link rel="stylesheet" href="../css/landing.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    .contact-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 7rem 2rem 6rem;
+    }
 
-  .contact-form-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 2.5rem; }
-  .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .cf-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
-  .cf-group label { font-size: 12px; font-weight: 600; color: var(--text2); font-family: var(--font-mono); letter-spacing: 0.04em; }
-  .cf-group input, .cf-group select, .cf-group textarea {
-    background: var(--bg); border: 1px solid var(--border2); border-radius: 8px;
-    padding: 11px 14px; font-size: 14px; color: var(--text); font-family: var(--font-body);
-    outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: vertical;
-  }
-  .cf-group input:focus, .cf-group select:focus, .cf-group textarea:focus {
-    border-color: rgba(79,140,234,0.5); box-shadow: 0 0 0 3px rgba(79,140,234,0.08);
-  }
-  .cf-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236B7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-  .cf-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--blue), var(--indigo)); color: #FFF; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; font-family: var(--font-body); cursor: pointer; transition: all 0.2s; margin-top: 8px; }
-  .cf-submit:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(79,140,234,0.3); }
-  .cf-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-  .cf-success { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.25); border-radius: 10px; padding: 1.25rem; text-align: center; color: #34D399; font-size: 14px; margin-top: 1rem; display: none; }
-  .cf-error { background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.25); border-radius: 10px; padding: 1rem; color: #F87171; font-size: 13px; margin-top: 1rem; display: none; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: flex-start;
+    }
 
-  @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; gap: 3rem; } .cf-row { grid-template-columns: 1fr; } .contact-wrap { padding: 5rem 1.25rem 4rem; } }
-</style>
+    .contact-left h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .contact-left p {
+      color: var(--text2);
+      line-height: 1.75;
+      font-size: 15px;
+      max-width: 380px;
+    }
+
+    .contact-reasons {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cr-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .cr-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(79, 140, 234, 0.1);
+      border: 1px solid rgba(79, 140, 234, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--blue);
+    }
+
+    .cr-label {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .cr-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .contact-form-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.5rem;
+    }
+
+    .cf-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cf-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 16px;
+    }
+
+    .cf-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text2);
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+    }
+
+    .cf-group input,
+    .cf-group select,
+    .cf-group textarea {
+      background: var(--bg);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 14px;
+      color: var(--text);
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+    }
+
+    .cf-group input:focus,
+    .cf-group select:focus,
+    .cf-group textarea:focus {
+      border-color: rgba(79, 140, 234, 0.5);
+      box-shadow: 0 0 0 3px rgba(79, 140, 234, 0.08);
+    }
+
+    .cf-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236B7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    .cf-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--blue), var(--indigo));
+      color: #FFF;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+
+    .cf-submit:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(79, 140, 234, 0.3);
+    }
+
+    .cf-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .cf-success {
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+      color: #34D399;
+      font-size: 14px;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .cf-error {
+      background: rgba(248, 113, 113, 0.08);
+      border: 1px solid rgba(248, 113, 113, 0.25);
+      border-radius: 10px;
+      padding: 1rem;
+      color: #F87171;
+      font-size: 13px;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    @media (max-width: 800px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .cf-row {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-wrap {
+        padding: 5rem 1.25rem 4rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<nav class="nav" id="main-nav">
-  <div class="nav-inner">
-    <a href="../index.html" class="nav-logo">NEX<span>US</span></a>
-    <div class="nav-links">
-      <a href="../index.html#features">Features</a>
-      <a href="../index.html#pricing">Pricing</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="nav-cta">
-      <a href="login.html" class="btn-ghost">Sign in</a>
-      <a href="signup.html" class="btn-nav-cta">Start free</a>
-    </div>
-  </div>
-</nav>
-
-<div class="contact-wrap">
-  <div class="contact-grid">
-
-    <!-- LEFT: info -->
-    <div class="contact-left">
-      <h1>Let's talk research.</h1>
-      <p>Whether you're a solo PhD student, running a department, or evaluating Nexus for an enterprise lab — we want to hear from you.</p>
-
-      <div class="contact-reasons">
-        <div class="cr-item">
-          <div class="cr-icon">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div>
-            <div class="cr-label">Department & Enterprise</div>
-            <div class="cr-desc">$199/mo Department or $999/mo Enterprise plan for your team of researchers</div>
-          </div>
-        </div>
-        <div class="cr-item">
-          <div class="cr-icon">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <div>
-            <div class="cr-label">Support & Questions</div>
-            <div class="cr-desc">Questions about your account, billing, or how features work</div>
-          </div>
-        </div>
-        <div class="cr-item">
-          <div class="cr-icon">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <div>
-            <div class="cr-label">Partnerships & Press</div>
-            <div class="cr-desc">Research institution partnerships, API licensing, and media enquiries</div>
-          </div>
-        </div>
-        <div class="cr-item">
-          <div class="cr-icon">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div class="cr-label">Based in South Africa</div>
-            <div class="cr-desc">UCT, Stellenbosch, Wits pricing available. We accept PayFast for local payments.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: form -->
-    <div>
-      <div class="contact-form-card">
-        <div style="margin-bottom:1.75rem;">
-          <div style="font-family:var(--font-display);font-size:1.6rem;margin-bottom:6px;">Send us a message</div>
-          <div style="color:var(--text2);font-size:13px;">We respond within one business day.</div>
-        </div>
-
-        <form id="contact-form" onsubmit="submitContact(event)">
-          <div class="cf-row">
-            <div class="cf-group">
-              <label for="cf-firstname">FIRST NAME</label>
-              <input type="text" id="cf-firstname" name="firstname" placeholder="Dr. Sarah" required maxlength="50">
-            </div>
-            <div class="cf-group">
-              <label for="cf-lastname">LAST NAME</label>
-              <input type="text" id="cf-lastname" name="lastname" placeholder="Mitchell" required maxlength="50">
-            </div>
-          </div>
-          <div class="cf-group">
-            <label for="cf-email">EMAIL ADDRESS</label>
-            <input type="email" id="cf-email" name="email" placeholder="researcher@university.edu" required maxlength="100">
-          </div>
-          <div class="cf-group">
-            <label for="cf-institution">INSTITUTION / COMPANY</label>
-            <input type="text" id="cf-institution" name="institution" placeholder="UCT, Stellenbosch, or your organisation" maxlength="100">
-          </div>
-          <div class="cf-group">
-            <label for="cf-subject">SUBJECT</label>
-            <select id="cf-subject" name="subject" required>
-              <option value="" disabled selected>Select a topic...</option>
-              <option value="department-plan">Department Plan ($199/month)</option>
-              <option value="enterprise-plan">Enterprise Plan ($999/month)</option>
-              <option value="south-africa">South African University Pricing</option>
-              <option value="billing">Billing & Account</option>
-              <option value="support">Technical Support</option>
-              <option value="partnership">Partnership or API Licensing</option>
-              <option value="press">Press & Media</option>
-              <option value="feedback">Feedback or Feature Request</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="cf-group">
-            <label for="cf-message">MESSAGE</label>
-            <textarea id="cf-message" name="message" placeholder="Tell us about your research, your team size, and what you're trying to accomplish..." rows="5" required maxlength="2000"></textarea>
-          </div>
-          <button class="cf-submit" type="submit" id="cf-submit-btn">Send message →</button>
-        </form>
-
-        <div class="cf-success" id="cf-success">
-          ✓ Message sent! We'll get back to you within one business day.
-        </div>
-        <div class="cf-error" id="cf-error"></div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Nexus Research Technologies. All rights reserved.</div>
-      <div class="footer-legal">
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
+  <nav class="nav" id="main-nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">NEX<span>US</span></a>
+      <div class="nav-links">
+        <a href="../index.html#features">Features</a>
+        <a href="../index.html#pricing">Pricing</a>
+        <a href="../index.html#how">How it works</a>
         <a href="contact.html">Contact</a>
       </div>
+      <div class="nav-cta">
+        <a href="login.html" class="btn-ghost">Sign in</a>
+        <a href="signup.html" class="btn-nav-cta">Start free</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="contact-wrap">
+    <div class="contact-grid">
+
+      <!-- LEFT: info -->
+      <div class="contact-left">
+        <h1>Let's talk research.</h1>
+        <p>Whether you're a solo PhD student, running a department, or evaluating Nexus for an enterprise lab — we want
+          to hear from you.</p>
+
+        <div class="contact-reasons">
+          <div class="cr-item">
+            <div class="cr-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div>
+              <div class="cr-label">Department & Enterprise</div>
+              <div class="cr-desc">$199/mo Department or $999/mo Enterprise plan for your team of researchers</div>
+            </div>
+          </div>
+          <div class="cr-item">
+            <div class="cr-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+            </div>
+            <div>
+              <div class="cr-label">Support & Questions</div>
+              <div class="cr-desc">Questions about your account, billing, or how features work</div>
+            </div>
+          </div>
+          <div class="cr-item">
+            <div class="cr-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <div>
+              <div class="cr-label">Partnerships & Press</div>
+              <div class="cr-desc">Research institution partnerships, API licensing, and media enquiries</div>
+            </div>
+          </div>
+          <div class="cr-item">
+            <div class="cr-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <div class="cr-label">Based in South Africa</div>
+              <div class="cr-desc">UCT, Stellenbosch, Wits pricing available. We accept PayFast for local payments.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div>
+        <div class="contact-form-card">
+          <div style="margin-bottom:1.75rem;">
+            <div style="font-family:var(--font-display);font-size:1.6rem;margin-bottom:6px;">Send us a message</div>
+            <div style="color:var(--text2);font-size:13px;">We respond within one business day.</div>
+          </div>
+
+          <form id="contact-form" onsubmit="submitContact(event)">
+            <div class="cf-row">
+              <div class="cf-group">
+                <label for="cf-firstname">FIRST NAME</label>
+                <input type="text" id="cf-firstname" name="firstname" placeholder="Dr. Sarah" required maxlength="50">
+              </div>
+              <div class="cf-group">
+                <label for="cf-lastname">LAST NAME</label>
+                <input type="text" id="cf-lastname" name="lastname" placeholder="Mitchell" required maxlength="50">
+              </div>
+            </div>
+            <div class="cf-group">
+              <label for="cf-email">EMAIL ADDRESS</label>
+              <input type="email" id="cf-email" name="email" placeholder="researcher@university.edu" required
+                maxlength="100">
+            </div>
+            <div class="cf-group">
+              <label for="cf-institution">INSTITUTION / COMPANY</label>
+              <input type="text" id="cf-institution" name="institution"
+                placeholder="UCT, Stellenbosch, or your organisation" maxlength="100">
+            </div>
+            <div class="cf-group">
+              <label for="cf-subject">SUBJECT</label>
+              <select id="cf-subject" name="subject" required>
+                <option value="" disabled selected>Select a topic...</option>
+                <option value="department-plan">Department Plan ($199/month)</option>
+                <option value="enterprise-plan">Enterprise Plan ($999/month)</option>
+                <option value="south-africa">South African University Pricing</option>
+                <option value="billing">Billing & Account</option>
+                <option value="support">Technical Support</option>
+                <option value="partnership">Partnership or API Licensing</option>
+                <option value="press">Press & Media</option>
+                <option value="feedback">Feedback or Feature Request</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="cf-group">
+              <label for="cf-message">MESSAGE</label>
+              <textarea id="cf-message" name="message"
+                placeholder="Tell us about your research, your team size, and what you're trying to accomplish..."
+                rows="5" required maxlength="2000"></textarea>
+            </div>
+            <button class="cf-submit" type="submit" id="cf-submit-btn">Send message →</button>
+          </form>
+
+          <div class="cf-success" id="cf-success">
+            ✓ Message sent! We'll get back to you within one business day.
+          </div>
+          <div class="cf-error" id="cf-error"></div>
+        </div>
+      </div>
+
     </div>
   </div>
-</footer>
 
-<script>
-async function submitContact(e) {
-  e.preventDefault();
-  const btn = document.getElementById('cf-submit-btn');
-  const successEl = document.getElementById('cf-success');
-  const errorEl = document.getElementById('cf-error');
-  
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  successEl.style.display = 'none';
-  errorEl.style.display = 'none';
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Nexus Research Technologies. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  const data = {
-    firstname: document.getElementById('cf-firstname').value.trim(),
-    lastname: document.getElementById('cf-lastname').value.trim(),
-    email: document.getElementById('cf-email').value.trim(),
-    institution: document.getElementById('cf-institution').value.trim(),
-    subject: document.getElementById('cf-subject').value,
-    message: document.getElementById('cf-message').value.trim()
-  };
+  <script>
+    async function submitContact(e) {
+      e.preventDefault();
+      const btn = document.getElementById('cf-submit-btn');
+      const successEl = document.getElementById('cf-success');
+      const errorEl = document.getElementById('cf-error');
 
-  try {
-    // Send via Netlify function (or fallback to mailto)
-    const res = await fetch('/.netlify/functions/send-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'contact', ...data })
-    });
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      successEl.style.display = 'none';
+      errorEl.style.display = 'none';
 
-    if (res.ok) {
-      document.getElementById('contact-form').style.display = 'none';
-      successEl.style.display = 'block';
-    } else {
-      throw new Error('Server error');
+      const data = {
+        firstname: document.getElementById('cf-firstname').value.trim(),
+        lastname: document.getElementById('cf-lastname').value.trim(),
+        email: document.getElementById('cf-email').value.trim(),
+        institution: document.getElementById('cf-institution').value.trim(),
+        subject: document.getElementById('cf-subject').value,
+        message: document.getElementById('cf-message').value.trim()
+      };
+
+      try {
+        // Send via Netlify function (or fallback to mailto)
+        const res = await fetch('/.netlify/functions/send-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'contact', ...data })
+        });
+
+        if (res.ok) {
+          document.getElementById('contact-form').style.display = 'none';
+          successEl.style.display = 'block';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        // Fallback: open mailto
+        const subject = encodeURIComponent(`Nexus Contact: ${data.subject}`);
+        const body = encodeURIComponent(`From: ${data.firstname} ${data.lastname}\nEmail: ${data.email}\nInstitution: ${data.institution}\n\n${data.message}`);
+        window.location.href = `mailto:hello@nexus.ai?subject=${subject}&body=${body}`;
+        // Show success anyway
+        document.getElementById('contact-form').style.display = 'none';
+        successEl.style.display = 'block';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send message →';
     }
-  } catch (err) {
-    // Fallback: open mailto
-    const subject = encodeURIComponent(`Nexus Contact: ${data.subject}`);
-    const body = encodeURIComponent(`From: ${data.firstname} ${data.lastname}\nEmail: ${data.email}\nInstitution: ${data.institution}\n\n${data.message}`);
-    window.location.href = `mailto:hello@nexus.ai?subject=${subject}&body=${body}`;
-    // Show success anyway
-    document.getElementById('contact-form').style.display = 'none';
-    successEl.style.display = 'block';
-  }
-  btn.disabled = false;
-  btn.textContent = 'Send message →';
-}
-</script>
+  </script>
 </body>
+
 </html>

@@ -1,107 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sign In — Nexus</title>
-<meta name="description" content="Sign in to Nexus — your AI research co-pilot. Continue your research, access saved papers, and generate new hypotheses.">
-<link rel="stylesheet" href="../css/auth.css">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Nexus</title>
+  <meta name="description"
+    content="Sign in to Nexus — your AI research co-pilot. Continue your research, access saved papers, and generate new hypotheses.">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-<div class="auth-layout">
-  <div class="auth-left">
-    <a href="../index.html" class="auth-logo">NEX<span>US</span></a>
-    <div class="auth-left-content">
-      <div class="auth-tagline">Welcome back. Your research awaits.</div>
-      <div class="auth-features">
-        <div class="af-item"><span class="af-dot"></span>Pick up where you left off</div>
-        <div class="af-item"><span class="af-dot"></span>Your saved projects are waiting</div>
-        <div class="af-item"><span class="af-dot"></span>New papers may have been published</div>
+  <div class="auth-layout">
+    <div class="auth-left">
+      <a href="../index.html" class="auth-logo">NEX<span>US</span></a>
+      <div class="auth-left-content">
+        <div class="auth-tagline">Welcome back. Your research awaits.</div>
+        <div class="auth-features">
+          <div class="af-item"><span class="af-dot"></span>Pick up where you left off</div>
+          <div class="af-item"><span class="af-dot"></span>Your saved projects are waiting</div>
+          <div class="af-item"><span class="af-dot"></span>New papers may have been published</div>
+        </div>
+      </div>
+      <div class="auth-left-quote">"I use Nexus every single day. It's changed how I work." — PhD student, MIT</div>
+    </div>
+
+    <div class="auth-right">
+      <div class="auth-card">
+        <h1>Sign in</h1>
+        <p class="auth-sub">Continue your research where you left off.</p>
+
+        <div id="error-msg" class="error-msg" style="display:none;" role="alert"></div>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="name@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="password" placeholder="Your password" required autocomplete="current-password">
+              <button type="button" class="toggle-pw" onclick="togglePw('password')">Show</button>
+            </div>
+          </div>
+          <div class="form-forgot"><a href="#"
+              onclick="document.getElementById('error-msg').textContent = 'Password recovery via email is currently under development. Contact support to reset your account.'; document.getElementById('error-msg').style.display='block'; return false;">Forgot
+              your password?</a></div>
+          <button type="submit" class="auth-btn" id="submit-btn">
+            <span id="btn-text">Sign in</span>
+            <span id="btn-loader" style="display:none;" class="loader" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <div class="auth-divider"><span>or</span></div>
+
+        <button class="google-btn" id="google-btn" onclick="handleGoogleAuth()">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+            <path fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+            <path fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+            <path fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+          </svg>
+          Continue with Google
+        </button>
+
+        <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up free</a></p>
       </div>
     </div>
-    <div class="auth-left-quote">"I use Nexus every single day. It's changed how I work." — PhD student, MIT</div>
   </div>
 
-  <div class="auth-right">
-    <div class="auth-card">
-      <h1>Sign in</h1>
-      <p class="auth-sub">Continue your research where you left off.</p>
+  <script src="../js/supabase-client.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btnText = document.getElementById('btn-text');
+      const loader = document.getElementById('btn-loader');
+      const btn = document.getElementById('submit-btn');
+      const errorMsg = document.getElementById('error-msg');
 
-      <div id="error-msg" class="error-msg" style="display:none;" role="alert"></div>
+      errorMsg.style.display = 'none';
+      btnText.style.display = 'none';
+      loader.style.display = 'inline-block';
+      btn.disabled = true;
 
-      <form id="login-form" class="auth-form" novalidate>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" id="email" placeholder="you@university.edu" required autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <div class="input-wrap">
-            <input type="password" id="password" placeholder="Your password" required autocomplete="current-password">
-            <button type="button" class="toggle-pw" onclick="togglePw('password')">Show</button>
-          </div>
-        </div>
-        <div class="form-forgot"><a href="#">Forgot your password?</a></div>
-        <button type="submit" class="auth-btn" id="submit-btn">
-          <span id="btn-text">Sign in</span>
-          <span id="btn-loader" style="display:none;" class="loader" aria-hidden="true"></span>
-        </button>
-      </form>
+      try {
+        const result = await nexusAuth.signIn(
+          document.getElementById('email').value.trim(),
+          document.getElementById('password').value
+        );
+        if (result.error) throw result.error;
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        errorMsg.textContent = err.message || 'Invalid email or password.';
+        errorMsg.style.display = 'block';
+        btnText.style.display = 'inline';
+        loader.style.display = 'none';
+        btn.disabled = false;
+        // Shake animation
+        document.getElementById('login-form').style.animation = 'none';
+        document.getElementById('login-form').offsetHeight;
+        document.getElementById('login-form').style.animation = 'shake 0.3s ease';
+      }
+    });
+  </script>
+  <style>
+    @keyframes shake {
 
-      <div class="auth-divider"><span>or</span></div>
+      0%,
+      100% {
+        transform: translateX(0);
+      }
 
-      <button class="google-btn" id="google-btn" onclick="handleGoogleAuth()">
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Continue with Google
-      </button>
+      25% {
+        transform: translateX(-6px);
+      }
 
-      <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up free</a></p>
-    </div>
-  </div>
-</div>
-
-<script src="../js/supabase-client.js"></script>
-<script src="../js/auth.js"></script>
-<script>
-  document.getElementById('login-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btnText = document.getElementById('btn-text');
-    const loader = document.getElementById('btn-loader');
-    const btn = document.getElementById('submit-btn');
-    const errorMsg = document.getElementById('error-msg');
-
-    errorMsg.style.display = 'none';
-    btnText.style.display = 'none';
-    loader.style.display = 'inline-block';
-    btn.disabled = true;
-
-    try {
-      const result = await nexusAuth.signIn(
-        document.getElementById('email').value.trim(),
-        document.getElementById('password').value
-      );
-      if (result.error) throw result.error;
-      window.location.href = 'dashboard.html';
-    } catch (err) {
-      errorMsg.textContent = err.message || 'Invalid email or password.';
-      errorMsg.style.display = 'block';
-      btnText.style.display = 'inline';
-      loader.style.display = 'none';
-      btn.disabled = false;
-      // Shake animation
-      document.getElementById('login-form').style.animation = 'none';
-      document.getElementById('login-form').offsetHeight;
-      document.getElementById('login-form').style.animation = 'shake 0.3s ease';
+      75% {
+        transform: translateX(6px);
+      }
     }
-  });
-</script>
-<style>
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-6px); }
-    75% { transform: translateX(6px); }
-  }
-</style>
+  </style>
 </body>
+
 </html>

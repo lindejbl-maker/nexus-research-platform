@@ -1,10 +1,10 @@
 // ═══ STATE ════════════════════════════════════════════════════════════════════
 let currentUser = null;
 let userPlan = 'free';
-let savedPapers  = JSON.parse(localStorage.getItem('nexus_saved_papers') || '[]');
-let projects     = JSON.parse(localStorage.getItem('nexus_projects')     || '[]');
-let activityLog  = JSON.parse(localStorage.getItem('nexus_activity')     || '[]');
-let alerts       = JSON.parse(localStorage.getItem('nexus_alerts')       || '[]');
+let savedPapers = JSON.parse(localStorage.getItem('nexus_saved_papers') || '[]');
+let projects = JSON.parse(localStorage.getItem('nexus_projects') || '[]');
+let activityLog = JSON.parse(localStorage.getItem('nexus_activity') || '[]');
+let alerts = JSON.parse(localStorage.getItem('nexus_alerts') || '[]');
 let currentCiteStyle = 'apa';
 let comparisonSelection = new Set();
 
@@ -126,35 +126,35 @@ function startPipeline() {
 
 // ═══ PAGE NAVIGATION ══════════════════════════════════════════════════════════
 const PAGE_NAMES = {
-  'dashboard':         'Dashboard',
-  'search':            'Paper Search',
-  'hypothesis':        'Hypothesis Generator',
-  'contradiction':     'Contradiction Detector',
-  'trendforecast':     'Trend Forecaster',
-  'litreview':         'Literature Review',
-  'crossfield':        'Cross-Field Discovery',
-  'plainlang':         'Plain Language Builder',
-  'compare':           'Compare Papers',
-  'citations':         'Citation Manager',
-  'projects':          'My Projects',
-  'saved':             'Saved Papers',
-  'alerts':            'Research Alerts',
-  'deepdiver':         'Paper Deep-Diver',
+  'dashboard': 'Dashboard',
+  'search': 'Paper Search',
+  'hypothesis': 'Hypothesis Generator',
+  'contradiction': 'Contradiction Detector',
+  'trendforecast': 'Trend Forecaster',
+  'litreview': 'Literature Review',
+  'crossfield': 'Cross-Field Discovery',
+  'plainlang': 'Plain Language Builder',
+  'compare': 'Compare Papers',
+  'citations': 'Citation Manager',
+  'projects': 'My Projects',
+  'saved': 'Saved Papers',
+  'alerts': 'Research Alerts',
+  'deepdiver': 'Paper Deep-Diver',
   'experimentblueprint': 'Experiment Blueprint',
-  'grantwriter':       'Grant Writer AI',
-  'peerreview':        'Peer Review Response',
-  'pdfchat':           'PDF Chat',
-  'notebook':          'Lab Notebook',
-  'costtracker':       'AI Cost Tracker',
-  'benchmark':         'Validation Tests',
-  'profile':           'My Profile',
-  'admin':             'Admin Panel',
-  'teamhub':           'Team Workspace',
-  'teammembers':       'Members',
-  'teamlibrary':       'Shared Library',
-  'teamprojects':      'Shared Projects',
-  'teamhypotheses':    'Team Hypotheses',
-  'teamsettings':      'Team Settings'
+  'grantwriter': 'Grant Writer AI',
+  'peerreview': 'Peer Review Response',
+  'pdfchat': 'PDF Chat',
+  'notebook': 'Lab Notebook',
+  'costtracker': 'AI Cost Tracker',
+  'benchmark': 'Validation Tests',
+  'profile': 'My Profile',
+  'admin': 'Admin Panel',
+  'teamhub': 'Team Workspace',
+  'teammembers': 'Members',
+  'teamlibrary': 'Shared Library',
+  'teamprojects': 'Shared Projects',
+  'teamhypotheses': 'Team Hypotheses',
+  'teamsettings': 'Team Settings'
 };
 
 // ═══ HUB NAV ══════════════════════════════════════════════════════════════════
@@ -243,7 +243,7 @@ function updateProfileUI() {
 
   // Update sidebar badge
   const badge = document.getElementById('profile-field-badge');
-  const label = p.subfield?.split(' ').slice(0,2).join(' ') || p.field || null;
+  const label = p.subfield?.split(' ').slice(0, 2).join(' ') || p.field || null;
   if (badge && label) { badge.textContent = label; badge.style.display = ''; }
 
   // Update/inject greeting bar on dashboard home
@@ -324,12 +324,12 @@ function saveProfile() {
   const grantBodies = grantsRaw.split(',').map(s => s.trim()).filter(Boolean);
   nexusProfile.save({
     field,
-    career_stage:  document.getElementById('prof-career')?.value || '',
-    subfield:      document.getElementById('prof-subfield')?.value || '',
-    institution:   document.getElementById('prof-institution')?.value || '',
-    country:       document.getElementById('prof-country')?.value || '',
-    interests:     _profileTags,
-    grant_bodies:  grantBodies
+    career_stage: document.getElementById('prof-career')?.value || '',
+    subfield: document.getElementById('prof-subfield')?.value || '',
+    institution: document.getElementById('prof-institution')?.value || '',
+    country: document.getElementById('prof-country')?.value || '',
+    interests: _profileTags,
+    grant_bodies: grantBodies
   });
   closeModal('profile-modal');
   updateProfileUI();
@@ -338,20 +338,20 @@ function saveProfile() {
 
 // ═══ HYPOTHESIS TAB SWITCHER ══════════════════════════════════════════════════
 function switchHypTab(tab) {
-  const cardsTab   = document.getElementById('tab-cards');
-  const mapTab     = document.getElementById('tab-map');
-  const resultsEl  = document.getElementById('hyp-results');
+  const cardsTab = document.getElementById('tab-cards');
+  const mapTab = document.getElementById('tab-map');
+  const resultsEl = document.getElementById('hyp-results');
   const mapSection = document.getElementById('gap-map-section');
 
   if (tab === 'cards') {
-    cardsTab?.classList.add('active');   cardsTab?.setAttribute('aria-selected','true');
-    mapTab?.classList.remove('active');  mapTab?.setAttribute('aria-selected','false');
-    if (resultsEl)  resultsEl.style.display  = '';
+    cardsTab?.classList.add('active'); cardsTab?.setAttribute('aria-selected', 'true');
+    mapTab?.classList.remove('active'); mapTab?.setAttribute('aria-selected', 'false');
+    if (resultsEl) resultsEl.style.display = '';
     if (mapSection) mapSection.style.display = 'none';
   } else {
-    mapTab?.classList.add('active');     mapTab?.setAttribute('aria-selected','true');
-    cardsTab?.classList.remove('active');cardsTab?.setAttribute('aria-selected','false');
-    if (resultsEl)  resultsEl.style.display  = 'none';
+    mapTab?.classList.add('active'); mapTab?.setAttribute('aria-selected', 'true');
+    cardsTab?.classList.remove('active'); cardsTab?.setAttribute('aria-selected', 'false');
+    if (resultsEl) resultsEl.style.display = 'none';
     if (mapSection) mapSection.style.display = '';
   }
 }
@@ -364,7 +364,7 @@ function onGapNodeClick(hypothesisIdx, label) {
   if (!target) return;
   target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   target.style.transition = 'box-shadow 0.3s, border-color 0.3s';
-  target.style.boxShadow  = '0 0 0 2px rgba(34,211,238,0.5)';
+  target.style.boxShadow = '0 0 0 2px rgba(34,211,238,0.5)';
   target.style.borderColor = 'rgba(34,211,238,0.6)';
   setTimeout(() => { target.style.boxShadow = ''; target.style.borderColor = ''; }, 2500);
   showToast(`Viewing hypothesis linked to gap: "${label}"`, 'info');
@@ -374,16 +374,16 @@ function onGapNodeClick(hypothesisIdx, label) {
 async function updateUsageBar() {
   try {
     const usage = await nexusUsage.getUsage(currentUser?.id || 'dev-user');
-    const searchPct = Math.min(Math.round((usage.searches / 5)  * 100), 100);
-    const hypPct    = Math.min(Math.round((usage.hypotheses / 2) * 100), 100);
-    document.getElementById('search-bar').style.width   = `${searchPct}%`;
-    document.getElementById('hyp-bar').style.width      = `${hypPct}%`;
+    const searchPct = Math.min(Math.round((usage.searches / 5) * 100), 100);
+    const hypPct = Math.min(Math.round((usage.hypotheses / 2) * 100), 100);
+    document.getElementById('search-bar').style.width = `${searchPct}%`;
+    document.getElementById('hyp-bar').style.width = `${hypPct}%`;
     document.getElementById('search-usage-label').textContent = `${usage.searches} / 5`;
-    document.getElementById('hyp-usage-label').textContent    = `${usage.hypotheses} / 2`;
+    document.getElementById('hyp-usage-label').textContent = `${usage.hypotheses} / 2`;
     document.getElementById('dash-searches').textContent = usage.searches;
-    document.getElementById('dash-hyps').textContent     = usage.hypotheses;
+    document.getElementById('dash-hyps').textContent = usage.hypotheses;
     const searchBar = document.getElementById('search-bar');
-    const hypBar    = document.getElementById('hyp-bar');
+    const hypBar = document.getElementById('hyp-bar');
     if (searchPct >= 100) searchBar.classList.add('danger');
     else if (searchPct >= 60) searchBar.classList.add('warning');
     if (hypPct >= 100) hypBar.classList.add('danger');
@@ -393,7 +393,7 @@ async function updateUsageBar() {
 
 // ═══ DASHBOARD ════════════════════════════════════════════════════════════════
 function loadDashboard() {
-  document.getElementById('dash-papers').textContent   = savedPapers.length;
+  document.getElementById('dash-papers').textContent = savedPapers.length;
   document.getElementById('dash-projects').textContent = projects.length;
   renderRoleQuickActions();
 }
@@ -434,7 +434,7 @@ function clearActivity() {
 
 function renderActivity() {
   const container = document.getElementById('recent-activity');
-  const clearBtn  = document.getElementById('clear-activity-btn');
+  const clearBtn = document.getElementById('clear-activity-btn');
   if (!activityLog.length) {
     container.innerHTML = '<div class="activity-empty">No activity yet. Start by searching for papers.</div>';
     if (clearBtn) clearBtn.style.display = 'none';
@@ -455,10 +455,10 @@ function renderActivity() {
 function timeAgo(ts) {
   const diff = Date.now() - ts;
   const mins = Math.floor(diff / 60000);
-  if (mins < 1)  return 'just now';
+  if (mins < 1) return 'just now';
   if (mins < 60) return `${mins}m ago`;
   const hrs = Math.floor(mins / 60);
-  if (hrs < 24)  return `${hrs}h ago`;
+  if (hrs < 24) return `${hrs}h ago`;
   return `${Math.floor(hrs / 24)}d ago`;
 }
 
@@ -478,7 +478,7 @@ async function searchPapers() {
   try {
     const year = document.getElementById('search-year').value;
     const field = document.getElementById('search-field').value;
-    const sort  = document.getElementById('search-sort').value;
+    const sort = document.getElementById('search-sort').value;
     const papers = await semanticScholar.searchPapers(query, { year, field, sort, limit: 12 });
     await nexusUsage.logAction(currentUser?.id || 'dev', 'search');
     updateUsageBar();
@@ -498,13 +498,13 @@ async function searchPapers() {
 }
 
 function renderPaperCard(paper) {
-  const isSaved  = savedPapers.some(s => s.paperId === paper.paperId);
-  const authors  = paper.authors?.slice(0, 3).map(a => a.name).join(', ') || 'Unknown authors';
+  const isSaved = savedPapers.some(s => s.paperId === paper.paperId);
+  const authors = paper.authors?.slice(0, 3).map(a => a.name).join(', ') || 'Unknown authors';
   const abstract = paper.abstract ? paper.abstract.substring(0, 240) + '…' : 'No abstract available.';
-  const url      = semanticScholar.getPaperUrl(paper);
-  const fields   = paper.fieldsOfStudy?.slice(0, 2).join(', ') || '';
-  const safeId   = (paper.paperId || Math.random().toString(36).slice(2)).replace(/[^a-zA-Z0-9]/g, '');
-  const apa      = semanticScholar.formatAPA(paper);
+  const url = semanticScholar.getPaperUrl(paper);
+  const fields = paper.fieldsOfStudy?.slice(0, 2).join(', ') || '';
+  const safeId = (paper.paperId || Math.random().toString(36).slice(2)).replace(/[^a-zA-Z0-9]/g, '');
+  const apa = semanticScholar.formatAPA(paper);
   return `
     <div class="paper-card" id="card-${safeId}">
       <div class="paper-title"><a href="${escHtml(url)}" target="_blank" rel="noopener">${escHtml(paper.title || 'Untitled')}</a></div>
@@ -588,8 +588,8 @@ async function verifyNovelty(hypothesis, statusEl, label) {
     );
 
     const recentPapers = papers.filter(p => p.year && p.year >= new Date().getFullYear() - 10);
-    const matchCount   = papers.length;
-    const recentCount  = recentPapers.length;
+    const matchCount = papers.length;
+    const recentCount = recentPapers.length;
 
     // Step 4 — Determine novelty using semantic similarity if available, else keyword count
     let verified, partial, calibratedScore;
@@ -598,20 +598,20 @@ async function verifyNovelty(hypothesis, statusEl, label) {
     if (usingSemantic) {
       const sim = semanticResult.maxSimilarity;
       verified = sim < 0.70;  // < 70% similarity = genuinely novel
-      partial  = sim >= 0.70 && sim < 0.82; // 70-82% = partially explored
+      partial = sim >= 0.70 && sim < 0.82; // 70-82% = partially explored
       // Calibrate novelty score from cosine distance
-      if (sim < 0.60)       calibratedScore = Math.min(99, Math.max(hypothesis.novelty_score, 90));
-      else if (sim < 0.70)  calibratedScore = Math.min(89, Math.max(hypothesis.novelty_score, 78));
-      else if (sim < 0.82)  calibratedScore = Math.min(72, hypothesis.novelty_score);
-      else                  calibratedScore = Math.min(50, hypothesis.novelty_score);
+      if (sim < 0.60) calibratedScore = Math.min(99, Math.max(hypothesis.novelty_score, 90));
+      else if (sim < 0.70) calibratedScore = Math.min(89, Math.max(hypothesis.novelty_score, 78));
+      else if (sim < 0.82) calibratedScore = Math.min(72, hypothesis.novelty_score);
+      else calibratedScore = Math.min(50, hypothesis.novelty_score);
     } else {
       // Fallback: keyword count thresholds
       verified = recentCount <= 1;
-      partial  = recentCount >= 2 && recentCount <= 3;
-      if (recentCount === 0)      calibratedScore = Math.min(99, Math.max(hypothesis.novelty_score, 88));
+      partial = recentCount >= 2 && recentCount <= 3;
+      if (recentCount === 0) calibratedScore = Math.min(99, Math.max(hypothesis.novelty_score, 88));
       else if (recentCount === 1) calibratedScore = Math.min(87, Math.max(hypothesis.novelty_score, 78));
-      else if (recentCount <= 3)  calibratedScore = Math.min(72, hypothesis.novelty_score);
-      else                        calibratedScore = Math.min(55, hypothesis.novelty_score);
+      else if (recentCount <= 3) calibratedScore = Math.min(72, hypothesis.novelty_score);
+      else calibratedScore = Math.min(55, hypothesis.novelty_score);
     }
 
     return {
@@ -690,11 +690,11 @@ async function generateHypotheses() {
   if (!input) { showToast('Please enter a research topic', 'error'); return; }
   const check = await nexusUsage.checkLimit(currentUser?.id || 'dev', 'hypothesis', userPlan);
   if (!check.allowed) { showUpgradeModal(check.reason); return; }
-  const btn     = document.getElementById('hyp-btn');
-  const status  = document.getElementById('hyp-status');
+  const btn = document.getElementById('hyp-btn');
+  const status = document.getElementById('hyp-status');
   const results = document.getElementById('hyp-results');
-  const field   = document.getElementById('hyp-field').value;
-  const count   = parseInt(document.getElementById('hyp-depth').value);
+  const field = document.getElementById('hyp-field').value;
+  const count = parseInt(document.getElementById('hyp-depth').value);
 
   btn.disabled = true;
   btn.textContent = 'Generating & verifying…';
@@ -761,11 +761,11 @@ async function generateHypotheses() {
 
     results.innerHTML = verified.map((h, idx) => {
       const vr = h._verification || {};
-      const isExplored   = vr.verified === false && !vr.partial;
+      const isExplored = vr.verified === false && !vr.partial;
       const isUnverified = vr.matchCount === -1;  // verification failed entirely
 
       // Issue 1 & 4: Label score honestly — 'est.' when AI-only, 'verified' when live-checked
-      const scoreVal   = h.novelty_score;
+      const scoreVal = h.novelty_score;
       const scoreLabel = isUnverified
         ? `est. ${scoreVal}%`              // AI estimate only
         : vr.verified
@@ -850,8 +850,8 @@ async function generateHypotheses() {
         const mapTab = document.getElementById('tab-map');
         if (mapTab) {
           const studiedCount = (mapData.nodes || []).length;
-          const gapCount     = (mapData.gaps  || []).length;
-          const sourceLabel  = mapData._source === 'real' ? ' · from real citations' : ' · AI-generated';
+          const gapCount = (mapData.gaps || []).length;
+          const sourceLabel = mapData._source === 'real' ? ' · from real citations' : ' · AI-generated';
           mapTab.title = `${studiedCount} studied topics · ${gapCount} unexplored gaps${sourceLabel}`;
           if (mapData._source === 'real') {
             mapTab.textContent = `Research Gap Map LIVE (★ Real Data)`;
@@ -943,8 +943,8 @@ function downloadReview(topic) {
 
 function downloadBlob(content, filename, mimeType) {
   const blob = new Blob([content], { type: mimeType });
-  const url  = URL.createObjectURL(blob);
-  const a    = Object.assign(document.createElement('a'), { href: url, download: filename });
+  const url = URL.createObjectURL(blob);
+  const a = Object.assign(document.createElement('a'), { href: url, download: filename });
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -953,9 +953,9 @@ function downloadBlob(content, filename, mimeType) {
 async function runCrossFieldDiscovery() {
   const problem = document.getElementById('cf-problem').value.trim();
   if (!problem) { showToast('Please describe your research problem', 'error'); return; }
-  const field   = document.getElementById('cf-field').value;
-  const btn     = document.getElementById('cf-btn');
-  const status  = document.getElementById('cf-status');
+  const field = document.getElementById('cf-field').value;
+  const btn = document.getElementById('cf-btn');
+  const status = document.getElementById('cf-status');
   const results = document.getElementById('cf-results');
   btn.disabled = true; btn.textContent = 'Scanning all fields…';
   status.style.display = 'flex';
@@ -1007,9 +1007,9 @@ function sendToPlainLang(text) {
 async function generatePlainLanguage() {
   const content = document.getElementById('pl-input').value.trim();
   if (!content) { showToast('Please paste your technical content', 'error'); return; }
-  const format  = document.getElementById('pl-format').value;
-  const btn     = document.getElementById('pl-btn');
-  const status  = document.getElementById('pl-status');
+  const format = document.getElementById('pl-format').value;
+  const btn = document.getElementById('pl-btn');
+  const status = document.getElementById('pl-status');
   const results = document.getElementById('pl-results');
   btn.disabled = true; btn.textContent = 'Building report…';
   status.style.display = 'flex';
@@ -1045,8 +1045,8 @@ async function generatePlainLanguage() {
 // ═══ PAPER COMPARISON ════════════════════════════════════════════════════════
 function loadCompareSelector() {
   const container = document.getElementById('compare-paper-list');
-  const btn       = document.getElementById('compare-btn');
-  const emptyEl   = document.getElementById('compare-empty-state');
+  const btn = document.getElementById('compare-btn');
+  const emptyEl = document.getElementById('compare-empty-state');
   if (!container) return;
 
   if (!savedPapers.length) {
@@ -1070,7 +1070,7 @@ function loadCompareSelector() {
         <input type="checkbox" id="cmp-${sid}" value="${escHtml(p.paperId || '')}" onchange="updateCompareSelection()">
         <div class="cmp-paper-info">
           <div class="cmp-paper-title">${escHtml((p.title || 'Untitled').substring(0, 80))}</div>
-          <div class="cmp-paper-meta">${escHtml(p.authors?.slice(0,2).map(a => a.name).join(', ') || '')}${p.year ? ' · ' + p.year : ''}</div>
+          <div class="cmp-paper-meta">${escHtml(p.authors?.slice(0, 2).map(a => a.name).join(', ') || '')}${p.year ? ' · ' + p.year : ''}</div>
         </div>
       </label>`;
   }).join('');
@@ -1114,7 +1114,7 @@ async function runComparison() {
           <thead>
             <tr>
               <th class="dim-col">Dimension</th>
-              ${papers.map(p => `<th>${escHtml(p.title?.substring(0,40) || 'Paper')} <span class="cmp-year">${escHtml(String(p.year || ''))}</span></th>`).join('')}
+              ${papers.map(p => `<th>${escHtml(p.title?.substring(0, 40) || 'Paper')} <span class="cmp-year">${escHtml(String(p.year || ''))}</span></th>`).join('')}
             </tr>
           </thead>
           <tbody>
@@ -1122,10 +1122,10 @@ async function runComparison() {
               <tr>
                 <td class="dim-label">${escHtml(dim)}</td>
                 ${papers.map(p => {
-                  const val = p[dim] || '—';
-                  const isQuality = dim === 'Evidence Quality';
-                  return `<td ${isQuality ? `style="color:${qColors[val] || 'inherit'};font-weight:600;"` : ''}>${escHtml(String(val))}</td>`;
-                }).join('')}
+      const val = p[dim] || '—';
+      const isQuality = dim === 'Evidence Quality';
+      return `<td ${isQuality ? `style="color:${qColors[val] || 'inherit'};font-weight:600;"` : ''}>${escHtml(String(val))}</td>`;
+    }).join('')}
               </tr>`).join('')}
           </tbody>
         </table>
@@ -1136,7 +1136,8 @@ async function runComparison() {
         <button class="paper-btn" onclick="exportComparisonTable()">Export as CSV</button>
         <button class="paper-btn" onclick="exportToPDF('comparison-output','paper-comparison')">Export PDF</button>
       </div>`;
-    results.innerHTML = `<div id="comparison-output">${tableHtml}</div>${AI_DISCLAIMER}`;  } catch (err) {
+    results.innerHTML = `<div id="comparison-output">${tableHtml}</div>${AI_DISCLAIMER}`;
+  } catch (err) {
     status.innerHTML = `<span style="color:var(--error)">⚠ ${escHtml(err.message)}</span>`;
     showToast(err.message, 'error');
   } finally {
@@ -1163,12 +1164,12 @@ function setCiteStyle(style, tabEl) {
 }
 
 function getCitation(paper, style) {
-  switch(style) {
-    case 'mla':       return semanticScholar.formatMLA(paper);
-    case 'harvard':   return semanticScholar.formatHarvard(paper);
+  switch (style) {
+    case 'mla': return semanticScholar.formatMLA(paper);
+    case 'harvard': return semanticScholar.formatHarvard(paper);
     case 'vancouver': return semanticScholar.formatVancouver(paper);
-    case 'chicago':   return semanticScholar.formatChicago(paper);
-    default:          return semanticScholar.formatAPA(paper);
+    case 'chicago': return semanticScholar.formatChicago(paper);
+    default: return semanticScholar.formatAPA(paper);
   }
 }
 
@@ -1223,7 +1224,7 @@ function exportCitations() {
 function exportBibtex() {
   if (!savedPapers.length) { showToast('No saved papers to export', 'error'); return; }
   const entries = savedPapers.map(p => citations.formatBibtex(p)).join('\n\n');
-  const header  = `% Nexus BibTeX Export — ${new Date().toLocaleDateString()}\n% ${savedPapers.length} reference${savedPapers.length !== 1 ? 's' : ''}\n\n`;
+  const header = `% Nexus BibTeX Export — ${new Date().toLocaleDateString()}\n% ${savedPapers.length} reference${savedPapers.length !== 1 ? 's' : ''}\n\n`;
   downloadBlob(header + entries, 'nexus-references.bib', 'text/plain');
   showToast(`${savedPapers.length} references exported as BibTeX`, 'success');
   logActivity('Exported BibTeX reference list', 'citations');
@@ -1233,7 +1234,7 @@ function exportBibtex() {
 function exportRIS() {
   if (!savedPapers.length) { showToast('No saved papers to export', 'error'); return; }
   const entries = savedPapers.map(p => citations.formatRIS(p)).join('\n\n');
-  const header  = `; Nexus RIS Export — ${new Date().toLocaleDateString()}\n; ${savedPapers.length} reference${savedPapers.length !== 1 ? 's' : ''}\n\n`;
+  const header = `; Nexus RIS Export — ${new Date().toLocaleDateString()}\n; ${savedPapers.length} reference${savedPapers.length !== 1 ? 's' : ''}\n\n`;
   downloadBlob(header + entries, 'nexus-references.ris', 'application/x-research-info-systems');
   showToast(`${savedPapers.length} references exported as RIS (Mendeley/Zotero/EndNote)`, 'success');
   logActivity('Exported RIS reference list', 'citations');
@@ -1241,14 +1242,14 @@ function exportRIS() {
 
 // ═══ PROJECTS ════════════════════════════════════════════════════════════════
 function openProjectModal() {
-  document.getElementById('project-name-input').value  = '';
+  document.getElementById('project-name-input').value = '';
   document.getElementById('project-field-input').value = '';
   showModal('project-modal');
   setTimeout(() => document.getElementById('project-name-input')?.focus(), 50);
 }
 
 function submitProject() {
-  const name  = document.getElementById('project-name-input')?.value.trim();
+  const name = document.getElementById('project-name-input')?.value.trim();
   const field = document.getElementById('project-field-input')?.value.trim() || 'General';
   if (!name) { showToast('Please enter a project name', 'error'); return; }
   const project = { id: Date.now(), name, field, papers: 0, hypotheses: 0, createdAt: Date.now() };
@@ -1365,14 +1366,14 @@ function renderAlerts() {
 // ═══ AI COST TRACKER ══════════════════════════════════════════════════════════
 function renderCostTracker() {
   const summaryContainer = document.getElementById('cost-summary-row');
-  const tableContainer   = document.getElementById('cost-table-wrap');
+  const tableContainer = document.getElementById('cost-table-wrap');
   if (!summaryContainer || !tableContainer) return;
 
   const log = JSON.parse(localStorage.getItem('nexus_api_costs') || '[]');
 
   if (!log.length) {
     summaryContainer.innerHTML = '';
-    tableContainer.innerHTML = '<div class="empty-state" style="padding:3rem 0;">No API calls logged yet. Configure your Gemini API key and start using AI features to see costs here.</div>';
+    tableContainer.innerHTML = '<div class="empty-state" style="padding:3rem 0;">No AI usage logged yet. Start using AI features on the dashboard to see your cost breakdowns here.</div>';
     return;
   }
 
@@ -1400,8 +1401,8 @@ function renderCostTracker() {
   summaryContainer.innerHTML = `
     <div class="cost-card"><div class="cost-card-label">Total spent</div><div class="cost-card-value">$${totalCost.toFixed(4)}</div></div>
     <div class="cost-card"><div class="cost-card-label">Total API calls</div><div class="cost-card-value">${log.length.toLocaleString()}</div></div>
-    <div class="cost-card"><div class="cost-card-label">Input tokens</div><div class="cost-card-value">${(totalIn/1000).toFixed(1)}K</div></div>
-    <div class="cost-card"><div class="cost-card-label">Output tokens</div><div class="cost-card-value">${(totalOut/1000).toFixed(1)}K</div></div>`;
+    <div class="cost-card"><div class="cost-card-label">Input tokens</div><div class="cost-card-value">${(totalIn / 1000).toFixed(1)}K</div></div>
+    <div class="cost-card"><div class="cost-card-label">Output tokens</div><div class="cost-card-value">${(totalOut / 1000).toFixed(1)}K</div></div>`;
 
   const sortedFeatures = Object.entries(byFeature).sort((a, b) => b[1].cost - a[1].cost);
   const maxCost = sortedFeatures[0]?.[1].cost || 1;
