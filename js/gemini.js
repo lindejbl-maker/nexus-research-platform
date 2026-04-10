@@ -1,12 +1,5 @@
 // ─── CONFIGURATION ────────────────────────────────────────────────────────────
-// API key is loaded from js/config.js (gitignored). See js/config.example.js.
-const GEMINI_API_KEY = (typeof NEXUS_CONFIG !== 'undefined' && NEXUS_CONFIG.GEMINI_API_KEY)
-  ? NEXUS_CONFIG.GEMINI_API_KEY
-  : 'YOUR_GEMINI_API_KEY';
-const GEMINI_MODEL = 'gemini-2.5-flash';
-
-const GEMINI_BASE = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
-const GEMINI_EMBED_BASE = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${GEMINI_API_KEY}`;
+// API key is securely loaded on the backend in server.js. No frontend keys used.
 // ─────────────────────────────────────────────────────────────────────────────
 
 // ─── COST TRACKING ────────────────────────────────────────────────────────────
@@ -128,9 +121,8 @@ const ConfidenceBadge = (() => {
 
 const gemini = {
   async generate(prompt, systemPrompt = '', temperature = 0.7, feature = 'general') {
-    if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
-      throw new Error('Gemini API key not configured. Add your key to js/gemini.js');
-    }
+    // Verification is handled by server.js
+
     // ── Role System intercept ───────────────────────────────────────────────
     let roleInstr = '';
     if (typeof NexusRole !== 'undefined') {
@@ -266,7 +258,6 @@ const gemini = {
   // Uses Gemini text-embedding-004 to embed hypothesis + paper abstracts,
   // then computes cosine similarity. Far more accurate than keyword counting.
   async embedText(text) {
-    if (GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') return null;
     try {
       const res = await fetch('/api/embed', {
         method: 'POST',
@@ -298,7 +289,7 @@ const gemini = {
   // Returns { maxSimilarity, closestPaper, method: 'semantic' | 'keyword' }
   async semanticNoveltyCheck(hypothesisText, papers) {
     // Require at least 1 paper and a real API key
-    if (!papers.length || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY') {
+    if (!papers.length) {
       return { maxSimilarity: 0, closestPaper: null, method: 'keyword' };
     }
     try {
