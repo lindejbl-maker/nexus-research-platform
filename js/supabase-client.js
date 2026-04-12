@@ -381,7 +381,10 @@ const nexusUsage = {
   },
 
   async checkLimit(userId, action, plan = 'free') {
-    // All limits removed — unlimited access for all users
+    if (plan !== 'free') return { allowed: true };
+    const usage = await this.getUsage(userId);
+    if (action === 'search' && usage.searches >= 3) return { allowed: false };
+    if (action === 'hypothesis' && usage.hypotheses >= 2) return { allowed: false };
     return { allowed: true };
   }
 };
