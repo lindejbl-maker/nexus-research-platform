@@ -1,7 +1,7 @@
 runtime: nodejs20
 
 env_variables:
-  GEMINI_API_KEY: 'AIzaSyDUtfx0YCMLv4K8Wyge2OsN4Yec29KZb8I'
+  GEMINI_API_KEY: 'AIzaSyAZaiXjFpj9dtcxR4kKt7DuQBeszLm9ZMw'
 
 handlers:
 - url: /api/generate

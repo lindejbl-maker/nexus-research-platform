@@ -11,7 +11,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.static(__dirname));
 
 // The exact Gemini endpoint URL
-const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent';
+const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
 app.post('/api/generate', async (req, res) => {
     try {
@@ -25,7 +25,7 @@ app.post('/api/generate', async (req, res) => {
         const payload = {
             contents: [{ role: 'user', parts: [{ text: prompt }] }],
             generationConfig: { temperature: temperature || 0.7 },
-            systemInstruction: systemPrompt ? { role: 'system', parts: [{ text: systemPrompt }] } : undefined
+            systemInstruction: systemPrompt ? { parts: [{ text: systemPrompt }] } : undefined
         };
 
         const response = await fetch(`${GEMINI_URL}?key=${apiKey}`, {

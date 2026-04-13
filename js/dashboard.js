@@ -783,8 +783,8 @@ async function generateHypotheses() {
         : `<span class="rag-badge rag-badge--training" title="No live papers were retrieved — hypotheses are based on AI training data, not real-time literature. Treat with caution.">&#128218; Training data only</span>`;
 
       // ── Confidence Badge ──────────────────────────────────────────────────
-      const confBadge = (typeof ConfidenceBadge !== 'undefined' && h.confidence_level)
-        ? ConfidenceBadge.render(h.confidence_level, h.evidence_count ?? null)
+      const confBadge = h.confidence_tier
+        ? `<span class="conf-badge conf-badge--tier" style="margin-right: 8px; padding: 4px 8px; background: rgba(255,255,255,0.05); border-radius: 4px; font-size: 0.8em;">${escHtml(h.confidence_tier)}</span>`
         : '';
       return `
       <div class="hyp-card${isExplored ? ' hyp-card--explored' : ''}${isUnverified ? ' hyp-card--unverified' : ''}" style="animation-delay:${idx * 0.1}s">
@@ -793,9 +793,11 @@ async function generateHypotheses() {
           ${renderVerifiedBadge(vr)}
         </div>
         <div class="hyp-title">${escHtml(h.title)}</div>
-        ${confBadge ? `<div class="hyp-conf-row">${confBadge}${ragBadge}${assumptionBadge}</div>` : `<div class="hyp-conf-row">${ragBadge}${assumptionBadge}</div>`}
+        <div class="hyp-conf-row">${confBadge}${ragBadge}${assumptionBadge}</div>
         <div class="hyp-body">${escHtml(h.hypothesis)}</div>
+        ${h.mechanism_details ? `<div class="hyp-body"><strong style="color:var(--text)">Mechanism & Grounding:</strong> ${escHtml(h.mechanism_details)}</div>` : ''}
         <div class="hyp-body"><strong style="color:var(--text)">Why this gap exists:</strong> ${escHtml(h.rationale)}</div>
+        ${h.expert_critique && h.expert_critique.toLowerCase() !== 'empty' ? `<div class="hyp-body" style="color:#f87171;"><strong style="color:#ef4444;">Expert Critique:</strong> ${escHtml(h.expert_critique)}</div>` : ''}
         ${h.experiment_hint ? `<div class="hyp-body"><strong style="color:var(--text)">How to test it:</strong> ${escHtml(h.experiment_hint)}</div>` : ''}
         ${renderVerificationEvidence(vr)}
         <div class="hyp-footer">
